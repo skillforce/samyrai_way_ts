@@ -1,27 +1,57 @@
 import React from 'react';
 import s from './Navbar.module.css';
+import {NavLink} from 'react-router-dom';
+import SideBar from './SideBar/SideBar';
+import {FriendsPropsType, FriendsType} from './SideBar/Friends/Friends';
 
-const{nav,item,active}=s;
 
-const NavBar = () =>{
-    return(<nav className={nav}>
-    <div className={item}>
-        <a> Profile</a>
-        </div>
-        <div className={`${item} ${active}`}>
-    <a>Messages</a>
-    </div>
-    <div className={item}>
-        <a>News</a>
-        </div>
-        <div className={item}>
-        <a>Music</a>
-        </div>
-        <div className={item}>
-        <a>Settings</a>
-        </div>
+export type NavBarType = {
+    id: number
+    link: string
+    class: string
+    name: string
+}
+
+export type NavBarPageType = {
+    navBarLink: NavBarType[]
+}
+
+export type NavBarPropsType = {
+    state: NavBarPageType
+    sideBar:FriendsPropsType
+}
+
+
+const {nav, item, setting, active} = s;
+
+const NavBar = (pr: NavBarPropsType) => {
+
+    const {state,sideBar} = pr;
+
+    const {navBarLink} = state;
+
+
+
+
+
+
+    const navBarLinks = navBarLink.map((t: NavBarType) => (<div key={t.id} className={item}>
+        <NavLink to={t.link} activeClassName={active}>{t.name}</NavLink>
+    </div>))
+
+
+
+    return (
+        <nav className={nav}>
+            {navBarLinks}
+            <div className={setting}>
+                <NavLink to={'/settings'} activeClassName={active}>Настройки</NavLink>
+            </div>
+            <div>
+              <SideBar sideBar={sideBar} />
+            </div>
         </nav>
-)
+    )
 }
 
 

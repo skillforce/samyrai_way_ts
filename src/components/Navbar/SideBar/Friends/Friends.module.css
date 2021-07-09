@@ -1,0 +1,24 @@
+.photoBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 5px 15px 8px;
+}
+
+.photoBlock_photo img {
+    width: 45px;
+    height: 45px;
+    border: 2px solid darkslategrey;
+    border-radius: 50%;
+}
+
+.photoBlock_name {
+    text-align: center;
+
+}
+
+.titlePhoto {
+    display: flex;
+    justify-content: center;
+
+
+}

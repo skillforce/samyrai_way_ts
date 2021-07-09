@@ -1,22 +1,31 @@
 import React from 'react';
 import s from './Post.module.css';
+import heart from './heart.png';
 
-const {item} = s;
+const {item, wrapper, userName, messages, times, like} = s;
 
-type MessageLikesType = {
+export type PostType = {
+    avatar: string
+    name: string
     message: string
+    time: string
     likes: number
+    id: number
 }
 
 
-const Post: React.FC<MessageLikesType> = ({message, likes}) => {
-    return (<div className={item}>
-        <img src="https://wl-adme.cf.tsp.li/resize/728x/jpg/d8f/395/cf4c0d577d815b936cc1fb36db.jpg"/>
-        {message}
-        <div>
-            <span>like : {likes}</span>
+const Post: React.FC<PostType> = ({avatar, name, message, time, likes, id}) => {
+    return (
+        <div key={id} className={item}>
+            <img src={avatar} alt={'avatar'}/>
+            <div className={wrapper}>
+                <div className={userName}>{name}</div>
+                <div className={messages}>{message}</div>
+                <div className={times}>{time}</div>
+                <div className={like}><img src={heart} alt="heart"/>{likes}</div>
+            </div>
         </div>
-    </div>)
-}
+    )
 
+}
 export default Post;

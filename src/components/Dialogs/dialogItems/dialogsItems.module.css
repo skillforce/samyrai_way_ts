@@ -1,0 +1,26 @@
+.dialog {
+    display: flex;
+    border: 2px solid darkslategrey;
+    padding: 10px;
+    margin: 5px 0px 10px 10px;
+    border-radius: 10px;
+    background-color: #bbbbbb;
+    justify-content: space-between;
+
+}
+
+.dialog .activeDialog {
+    color: #eeeeee;
+}
+
+.dialog a {
+    text-decoration: none;
+    color: black;
+}
+
+.dialogPhoto img{
+    width:45px;
+    height:45px;
+    border-radius: 50%;
+    margin-left: 10px;
+}

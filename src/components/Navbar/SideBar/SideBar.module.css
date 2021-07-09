@@ -1,0 +1,17 @@
+.title {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #bbbbbb;
+    font-weight: 600;
+    border: 1px solid darkslategrey;
+}
+
+.titleName {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #dddddd;
+    font-weight: 600;
+}

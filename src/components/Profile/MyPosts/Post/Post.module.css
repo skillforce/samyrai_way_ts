@@ -1,9 +1,89 @@
-.item{
-    color:greenyellow;
+.item {
+    display: flex;
+    padding: 45px 0px 25px 5px;
+    margin-right: 30%;
+    width:350px;
 }
 
-.item img{
-    width: 50px;
-    height: 50px;
+.wrapper {
+
+    font-weight: 600;
+    position: relative;
+    padding: 45px 120px;
+    background-color: purple ;
+    border-radius: 10px;
+    left:25px;
+    top: -5px;
+}
+.wrapper::before{
+    position: absolute;
+    content: '';
+    width: 20px;
+    height:20px;
+    background-color: purple;
+    left: -12px;
+    top: 70px;
+    z-index:1;
+}
+.wrapper::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: rgb(173, 173, 173);
+    left: -20px;
+    top: 70px;
+    border-radius: 0 0 40px 0 ;
+    z-index: 2;
+
+}
+
+.times {
+    position: absolute;
+    top:65px;
+    left:190px;
+    color: white;
+    opacity: 30%;
+}
+
+.userName {
+    color: mediumpurple;
+    position: absolute;
+    top:10px;
+    left:25px;
+}
+
+.messages {
+    opacity: 75%;
+    position: absolute;
+    top: 30px;
+    left:25px;
+    display: inline;
+    white-space: nowrap;
+    color:white;
+
+}
+
+
+.item img {
+    width: 65px;
+    height: 65px;
     border-radius: 30px;
+    margin-top: 17px;
+}
+
+.like{
+
+    color:white;
+    z-index: 2;
+    position: absolute;
+    top:47px;
+    left:25px;
+    font-size: 12px;
+}
+
+.like img{
+    width:20px;
+    height: 20px;
+
 }

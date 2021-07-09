@@ -1,0 +1,83 @@
+.message {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 10px;
+}
+
+.inputMess {
+    display: flex;
+}
+
+.inputMess_mess {
+    text-align: center;
+    border: 1px solid black;
+    padding: 25px;
+    border-radius: 40px 40px 40px 0px;
+    background-color: darkseagreen;
+    width:200px;
+    height: 35px;
+}
+
+.inputMess_img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 45px;
+    margin-right: 15px;
+
+}
+
+.outputMess {
+    display: flex;
+    margin-top: 120px;
+}
+
+.outputMess_mess {
+    text-align: center;
+    border: 1px solid black;
+    padding: 25px;
+    border-radius: 40px 40px 0px 40px;
+    background-color: darkseagreen;
+    width:200px;
+    height: 35px;
+}
+
+.outputMess_img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 45px 5px 0px 15px;
+
+}
+
+/*.inputMess {*/
+/*    text-align: center;*/
+/*    margin-left: 60%;*/
+/*    */
+/*
+/*    margin-bottom: 25px;*/
+/*    margin-top: 45px;*/
+
+/*}*/
+
+
+.outputMess {
+
+}
+
+.input_img img {
+
+    position: absolute;
+
+    left: 79%;
+
+
+}
+
+.output_img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+
+}

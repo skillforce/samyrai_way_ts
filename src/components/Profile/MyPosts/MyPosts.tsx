@@ -1,23 +1,41 @@
 import React from 'react';
+import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
 
-const{content,item}=s;
+const {postsBlock, posts} = s;
+export type MyPostsPropsType = {
+    postData: PostType[]
+}
 
 
-const MyPosts =()=>{
-    return(
-        <div>
-            My post
-    <div>
-    New post
-    </div>
-    <div className='posts'>
-    <Post message={'Hi, how are you?'} likes ={15} />
-    <Post message={'It\'s my first message'} likes={21} />
-    </div>
-    </div>
-)
+const MyPosts = (pr: MyPostsPropsType) => {
+
+    const {postData} = pr;
+
+
+    const postComponents = postData.map((t: PostType) => (<Post avatar={t.avatar}
+                                                                name={t.name}
+                                                                message={t.message}
+                                                                time={t.time}
+                                                                likes={t.likes}
+                                                                id={t.id}
+    />))
+    return (
+        <div className={postsBlock}>
+            <h3> My post </h3>
+            <div>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>New post</button>
+                </div>
+            </div>
+            <div className={posts}>
+                {postComponents}
+            </div>
+        </div>
+    )
 }
 
 export default MyPosts;
