@@ -13,6 +13,8 @@ export type MessageType = {
 
 const Message = (props: MessageType) => {
     const {messages, id} = props;
+
+
     return (
         <div key={id} className={message}>
             <div className={inputMess}>

@@ -1,0 +1,16 @@
+.inputTitle {
+    margin: 20px 0 10px 5px;
+    display: flex;
+}
+
+.textInput textarea {
+    padding: 20px 95px;
+}
+
+.btn button {
+    padding: 10px 20px;
+    margin-top: 32px;
+    border-radius: 10%;
+    margin-left: 5px;
+
+}

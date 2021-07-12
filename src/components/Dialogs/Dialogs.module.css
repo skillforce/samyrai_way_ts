@@ -1,19 +1,29 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-areas: 'name dialogs'
+    'btn none';
+    grid-template-columns: 0.7fr 3fr;
+    grid-template-rows: 1fr 0.1fr;
 }
 
 .dialogsItems {
+    grid-area: name;
     padding: 10px;
 
 }
-.messages {
-    padding: 15px;
-    border: 3px  solid white;
-    border-top: none;
-    border-bottom: none;
-    border-right: none;
 
+.messages {
+    grid-area: dialogs;
+    padding: 15px;
+    border: 3px solid white;
+    border-top: none;
+
+    border-right: none;
+}
+
+
+.inputTitle {
+    grid-area: btn;
 }
 
 

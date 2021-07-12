@@ -3,6 +3,7 @@ import {NavBarPageType} from '../components/Navbar/Navbar';
 import {PostDataType} from '../components/Profile/Profile';
 import {FriendsPropsType, FriendsType} from '../components/Navbar/SideBar/Friends/Friends';
 import {SideBarPropsType} from '../components/Navbar/SideBar/SideBar';
+import {rerenderEntireTree} from '../render';
 
 export type StateType = {
     profilePage: PostDataType
@@ -36,16 +37,21 @@ let state: StateType = {
                 likes: 7,
                 id: 3
             }
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
-            {id: 1, name: 'Denis', photo:'https://i.pinimg.com/736x/fe/af/c4/feafc4441c41294d5922590a49afea41.jpg'},
-            {id: 2, name: 'Max', photo:'https://wiki.jcdn.ru/w/images/thumb/7/78/NarutoSageMode.jpg/170px-NarutoSageMode.jpg'},
+            {id: 1, name: 'Denis', photo: 'https://i.pinimg.com/736x/fe/af/c4/feafc4441c41294d5922590a49afea41.jpg'},
+            {
+                id: 2,
+                name: 'Max',
+                photo: 'https://wiki.jcdn.ru/w/images/thumb/7/78/NarutoSageMode.jpg/170px-NarutoSageMode.jpg'
+            },
             {id: 3, name: 'Olga', photo: 'https://naruhina.ru/pics/full/43/u_150615141333719.jpg'},
-            {id: 4, name: 'Ann', photo:'https://i.pinimg.com/originals/a7/4f/e9/a74fe9ee87190d4722f33c4088dd84ec.jpg'},
-            {id: 5, name: 'Andrey', photo:'https://99px.ru/sstorage/56/2013/08/image_561408130108304153706.jpg'},
-            {id: 6, name: 'Artem', photo:'https://pp.userapi.com/c836334/v836334838/4fd0e/ROZ9MDUx9j0.jpg'}
+            {id: 4, name: 'Ann', photo: 'https://i.pinimg.com/originals/a7/4f/e9/a74fe9ee87190d4722f33c4088dd84ec.jpg'},
+            {id: 5, name: 'Andrey', photo: 'https://99px.ru/sstorage/56/2013/08/image_561408130108304153706.jpg'},
+            {id: 6, name: 'Artem', photo: 'https://pp.userapi.com/c836334/v836334838/4fd0e/ROZ9MDUx9j0.jpg'}
         ],
         messagesData: [
             {id: 1, messages: 'Hello'},
@@ -64,13 +70,36 @@ let state: StateType = {
             {id: 4, link: '/music', class: 'item', name: 'Музыка'},
         ]
     },
-    sideBar:{
+    sideBar: {
         friendsData: [
-    {id: 1, name: 'Pein', src: 'https://www.ninjaturtles.ru/forum/pic/22077.jpg'},
-    {id: 2, name: 'Kakashi', src: 'https://99px.ru/sstorage/56/2017/04/mid_275722_9456.jpg'},
-    {id: 3, name: 'Naruto', src: 'https://klike.net/uploads/posts/2018-09/1536741383_6.jpg'},
-]
+            {id: 1, name: 'Pein', src: 'https://www.ninjaturtles.ru/forum/pic/22077.jpg'},
+            {id: 2, name: 'Kakashi', src: 'https://99px.ru/sstorage/56/2017/04/mid_275722_9456.jpg'},
+            {id: 3, name: 'Naruto', src: 'https://klike.net/uploads/posts/2018-09/1536741383_6.jpg'},
+        ]
     }
+}
+
+
+export const addPost = () => {
+
+    let newPost = {
+        avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
+        name: 'Indra',
+        message: state.profilePage.newPostText,
+        time: '12:00',
+        likes: 0,
+        id: 3
+    };
+
+    state.profilePage.postData.unshift(newPost);
+    state.profilePage.newPostText = '';
+
+    rerenderEntireTree(state);
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state)
 }
 
 
