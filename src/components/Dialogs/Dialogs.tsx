@@ -6,11 +6,14 @@ import EnterMessage from './message/EnterMess/EnterMessage';
 
 export type DialogsType = {
     dialogsData: DialogsNamesType[]
-    messagesData: MessageType[]
+    messagesData: MessageType
+    newOutputMsgText:string
 }
 
 export type DialogsPropsType = {
     state: DialogsType
+    dispatch:(action: any) => any
+
 }
 
 const {dialogs, messages, dialogsItems, inputTitle} = s;
@@ -18,13 +21,12 @@ const {dialogs, messages, dialogsItems, inputTitle} = s;
 
 const Dialogs = (pr: DialogsPropsType) => {
 
-    const {state} = pr;
+    const {state,dispatch} = pr;
 
-    const {dialogsData, messagesData} = state;
+    const {dialogsData, messagesData,newOutputMsgText} = state;
+    const {inputMessage, outputMessage} = messagesData;
     const dialogComponents = dialogsData.map((t: DialogsNamesType) => (
         <DialogItem photo={t.photo} id={t.id} name={t.name}/>))
-    const messageComponents = messagesData.map((t: MessageType) => (<Message id={t.id} messages={t.messages}/>))
-
 
     return (
         <div className={dialogs}>
@@ -32,10 +34,10 @@ const Dialogs = (pr: DialogsPropsType) => {
                 {dialogComponents}
             </div>
             <div className={messages}>
-                {messageComponents}
+                <Message inputMessage={inputMessage} outputMessage={outputMessage}/>
             </div>
-            <div className={inputTitle}></div>
-            <EnterMessage/>
+            <div className={inputTitle}/>
+            <EnterMessage newOutputMsgText={newOutputMsgText} dispatch={dispatch}/>
         </div>
     )
 }

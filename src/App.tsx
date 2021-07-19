@@ -17,16 +17,14 @@ export type FuncAddPostType = {
 
 type AppPropsType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch:(action: any) => void
 }
 
 
 const App = (pr: AppPropsType) => {
 
     const {dialogsPage, profilePage, navBarPage, sideBar} = pr.state;
-    const {addPost} = pr;
-    const {updateNewPostText} = pr;
+    const {dispatch} = pr;
 
 
     return (
@@ -34,11 +32,10 @@ const App = (pr: AppPropsType) => {
             <Header/>
             <NavBar state={navBarPage} sideBar={sideBar}/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile updateNewPostText={updateNewPostText}
-                                                                addPost={addPost}
+                <Route path={'/profile'} render={() => <Profile dispatch ={dispatch}
                                                                 profilePage={profilePage}/>}/>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs state={dialogsPage}/>}/>
+                       render={()=> <Dialogs dispatch={dispatch} state={dialogsPage}/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>

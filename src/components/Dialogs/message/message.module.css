@@ -1,11 +1,12 @@
 .message {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     margin: 20px 10px;
 }
 
 .inputMess {
     display: flex;
+    margin-bottom: 90px;
 }
 
 .inputMess_mess {
@@ -16,6 +17,7 @@
     background-color: darkseagreen;
     width:200px;
     height: 35px;
+    margin-right: 75px;
 }
 
 .inputMess_img img {
@@ -29,7 +31,8 @@
 
 .outputMess {
     display: flex;
-    margin-top: 120px;
+    margin-top: 90px;
+
 }
 
 .outputMess_mess {
@@ -40,6 +43,7 @@
     background-color: darkseagreen;
     width:200px;
     height: 35px;
+    margin-left: 75px;
 }
 
 .outputMess_img img {
@@ -49,17 +53,6 @@
     margin: 45px 5px 0px 15px;
 
 }
-
-/*.inputMess {*/
-/*    text-align: center;*/
-/*    margin-left: 60%;*/
-/*    */
-/*
-/*    margin-bottom: 25px;*/
-/*    margin-top: 45px;*/
-
-/*}*/
-
 
 .outputMess {
 
@@ -80,4 +73,9 @@
     border-radius: 50%;
 
 
+}
+
+.allMess{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }

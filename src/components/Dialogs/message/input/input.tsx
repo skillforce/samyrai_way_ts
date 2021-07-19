@@ -10,7 +10,7 @@ export type InputPropsType = {
 const Input = (props: InputPropsType) => {
     const {messages} = props;
     return (
-            <div>{messages}</div>
+        <div>{messages}</div>
     )
 }
 
