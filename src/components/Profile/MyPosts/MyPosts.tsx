@@ -1,13 +1,14 @@
-import React, {LegacyRef, RefObject, SyntheticEvent} from 'react';
+import React, {RefObject} from 'react';
 import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
-import {FuncAddPostType} from '../../../App';
+import {ActionsDispatchType, addPostActionCreator, UpdateNewPostTextActionCreator} from '../../../Redux/state';
+
 
 const {postsBlock, posts} = s;
 export type MyPostsPropsType = {
     postData: PostType[]
     newPostText: string
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsDispatchType) => void
 }
 
 
@@ -28,16 +29,17 @@ const MyPosts = (pr: MyPostsPropsType) => {
 
     let onPostChange = () => {
         if (newPostElement?.current?.value) {
-            let newText = newPostElement.current.value
-            let action = {type: 'UPDATE-NEW-POST-TEXT', text: newText};
-            dispatch(action);
+            let newText = newPostElement.current.value;
+            dispatch(UpdateNewPostTextActionCreator(newText));
+        } else {
+            dispatch(UpdateNewPostTextActionCreator(''));
         }
 
     }
 
     let newPost = () => {
         if (newPostText) {
-            dispatch({type: 'ADD-POST'});
+            dispatch(addPostActionCreator());
         }
     }
 

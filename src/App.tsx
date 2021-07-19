@@ -7,17 +7,13 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import React from 'react';
-import {StateType} from './Redux/state';
+import React, {MouseEventHandler} from 'react';
+import {ActionsDispatchType, StateType} from './Redux/state';
 
-
-export type FuncAddPostType = {
-    addPost: (postMess: string) => void
-}
 
 type AppPropsType = {
     state: StateType
-    dispatch:(action: any) => void
+    dispatch: (action: ActionsDispatchType) => void
 }
 
 
@@ -32,10 +28,10 @@ const App = (pr: AppPropsType) => {
             <Header/>
             <NavBar state={navBarPage} sideBar={sideBar}/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile dispatch ={dispatch}
+                <Route path={'/profile'} render={() => <Profile dispatch={dispatch}
                                                                 profilePage={profilePage}/>}/>
                 <Route path={'/dialogs'}
-                       render={()=> <Dialogs dispatch={dispatch} state={dialogsPage}/>}/>
+                       render={() => <Dialogs dispatch={dispatch} state={dialogsPage}/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>

@@ -1,14 +1,16 @@
 import React, {ChangeEvent, RefObject} from 'react';
 import s from './EnterMessage.module.css';
+import {AddOutputMsgActionType, UpdateNewOutputMsgActionType} from '../../../../Redux/state';
 
 
 const {inputTitle, btn, textInput} = s;
 
 
 type EnterMessagePropsType = {
-    dispatch:(action: any) =>  React.MouseEventHandler<HTMLButtonElement> | undefined
+    dispatch: (action: any) => void
     newOutputMsgText: string
 }
+
 
 const EnterMessage = (pr: EnterMessagePropsType) => {
 
@@ -18,11 +20,13 @@ const EnterMessage = (pr: EnterMessagePropsType) => {
 
 
     const NewOutputMsgTexts = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch({type:"UPDATE-NEW-OUTPUT-MSG", text:e.currentTarget.value});
-    }
+
+            dispatch(UpdateNewOutputMsgActionType(e.currentTarget.value));
+
+        }
     let newMSG = () => {
         if (newOutputMsgText) {
-            dispatch({type: 'ADD-OUTPUT-MSG'});
+            dispatch(AddOutputMsgActionType());
         }
     }
 

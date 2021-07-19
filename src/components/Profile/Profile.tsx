@@ -1,9 +1,9 @@
 import React from 'react';
-import MyPosts, {MyPostsPropsType} from './MyPosts/MyPosts';
+import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import s from './Profile.module.css';
 import {PostType} from './MyPosts/Post/Post';
-import {FuncAddPostType} from '../../App';
+import {ActionsDispatchType} from '../../Redux/state';
 
 export type PostDataType = {
     postData: PostType[]
@@ -12,16 +12,14 @@ export type PostDataType = {
 
 
 export type ProfilePropsType = {
-    // addPost: () => void
     profilePage: PostDataType
-    // updateNewPostText: (newText: string) => void
-    dispatch:(action: any) => void
+    dispatch: (action: ActionsDispatchType) => void
 
 }
 
 
 const Profile = (pr: ProfilePropsType) => {
-    const {profilePage,dispatch} = pr;
+    const {profilePage, dispatch} = pr;
     const {postData, newPostText} = profilePage;
 
     return (

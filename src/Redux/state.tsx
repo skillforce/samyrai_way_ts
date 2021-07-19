@@ -10,6 +10,11 @@ export type StateType = {
     sideBar: FriendsPropsType
 }
 
+export type ActionsDispatchType = {
+    type: string
+    text?: string
+}
+
 type StoreType = {
     _state: StateType
     _callSubscriber: (state: StateType) => void
@@ -19,8 +24,13 @@ type StoreType = {
     _updateNewOutputMsgText: (newText: string) => void
     subscribe: (observer: (_state: StateType) => void) => void
     getState: () => StateType
-    dispatch: (action: any) => void;
+    dispatch: (action: ActionsDispatchType) => void;
 }
+
+const AddPost = 'ADD-POST';
+const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
+const AddOutputMsg = 'ADD-OUTPUT-MSG';
 
 
 let store: StoreType = {
@@ -181,18 +191,29 @@ let store: StoreType = {
             this._state.profilePage.postData.unshift(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.text;
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            if (action.text) {
+                this._state.profilePage.newPostText = action.text;
+
+            }
+            if (action.text === '') {
+                this._state.profilePage.newPostText = '';
+            }
             this._callSubscriber(this._state);
-        }
-        else if (action.type === 'ADD-OUTPUT-MSG') {
-           this._addOutputMsg();
-        }
-        else if (action.type === 'UPDATE-NEW-OUTPUT-MSG') {
-            this._updateNewOutputMsgText(action.text);
+        } else if (action.type === 'ADD-OUTPUT-MSG') {
+            this._addOutputMsg();
+        } else if (action.type === 'UPDATE-NEW-OUTPUT-MSG') {
+            {
+                action.text && this._updateNewOutputMsgText(action.text)
+            }
         }
     }
 }
+
+
+export const addPostActionCreator = () => ({type: AddPost});
+export const UpdateNewPostTextActionCreator = (text: string) => ({type: UpdateNewPostText, text: text});
+export const UpdateNewOutputMsgActionType = (text: string) => ({type: UpdateNewOutputMsg, text: text});
+export const AddOutputMsgActionType = () => ({type: AddOutputMsg});
 
 export default store;
