@@ -16,24 +16,24 @@ const EnterMessage = (pr: EnterMessagePropsType) => {
 
     const {dispatch, newOutputMsgText} = pr;
 
-    const textAreaRef: RefObject<HTMLTextAreaElement> | undefined = React.createRef();
-
 
     const NewOutputMsgTexts = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let newMSG = e.target.value;
+        dispatch(UpdateNewOutputMsgActionType(newMSG));
+    }
 
-            dispatch(UpdateNewOutputMsgActionType(e.currentTarget.value));
 
-        }
     let newMSG = () => {
         if (newOutputMsgText) {
             dispatch(AddOutputMsgActionType());
         }
+
     }
 
     return (
         <div className={inputTitle}>
             <div className={textInput}>
-                <textarea onChange={NewOutputMsgTexts} ref={textAreaRef} value={newOutputMsgText}/>
+                <textarea onChange={NewOutputMsgTexts} value={newOutputMsgText}/>
             </div>
             <div className={btn}>
                 <button onClick={newMSG}>Отправить</button>

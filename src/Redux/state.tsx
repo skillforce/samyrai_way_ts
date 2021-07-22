@@ -29,6 +29,8 @@ type StoreType = {
 
 const AddPost = 'ADD-POST';
 const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+
+
 const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
 const AddOutputMsg = 'ADD-OUTPUT-MSG';
 
@@ -169,7 +171,11 @@ let store: StoreType = {
         this._callSubscriber(this._state);
     },
     _updateNewOutputMsgText(newText: string) {
-        this._state.dialogsPage.newOutputMsgText = newText;
+        if(newText) {
+            this._state.dialogsPage.newOutputMsgText = newText;
+        }else{
+            this._state.dialogsPage.newOutputMsgText = '';
+        }
         this._callSubscriber(this._state);
     },
     subscribe(observer: (_state: StateType) => void) {
@@ -191,7 +197,8 @@ let store: StoreType = {
             this._state.profilePage.postData.unshift(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        }
+        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             if (action.text) {
                 this._state.profilePage.newPostText = action.text;
 
@@ -200,11 +207,17 @@ let store: StoreType = {
                 this._state.profilePage.newPostText = '';
             }
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-OUTPUT-MSG') {
+        }
+        else if (action.type === 'ADD-OUTPUT-MSG') {
             this._addOutputMsg();
-        } else if (action.type === 'UPDATE-NEW-OUTPUT-MSG') {
+        }
+        else if (action.type === 'UPDATE-NEW-OUTPUT-MSG') {
             {
-                action.text && this._updateNewOutputMsgText(action.text)
+                if(action.text) {
+                    this._updateNewOutputMsgText(action.text)
+                }else{
+                    this._updateNewOutputMsgText('')
+                }
             }
         }
     }
