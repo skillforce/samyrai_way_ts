@@ -2,6 +2,10 @@ import {DialogsType} from '../components/Dialogs/Dialogs';
 import {NavBarPageType} from '../components/Navbar/Navbar';
 import {PostDataType} from '../components/Profile/Profile';
 import {FriendsPropsType} from '../components/Navbar/SideBar/Friends/Friends';
+import ProfilePageReducer from './ProfilePage-reducer';
+import DialogsPageReducer from './DialogsPage-reducer';
+import SideBarReducer from './SideBar-reducer';
+import NavBarPageReducer from './NavBarPage-reducer';
 
 export type StateType = {
     profilePage: PostDataType
@@ -18,21 +22,10 @@ export type ActionsDispatchType = {
 type StoreType = {
     _state: StateType
     _callSubscriber: (state: StateType) => void
-    _addPost: () => void
-    _updateNewPostText: (newText: string) => void
-    _addOutputMsg: () => void
-    _updateNewOutputMsgText: (newText: string) => void
     subscribe: (observer: (_state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionsDispatchType) => void;
 }
-
-const AddPost = 'ADD-POST';
-const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
-
-
-const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
-const AddOutputMsg = 'ADD-OUTPUT-MSG';
 
 
 let store: StoreType = {
@@ -127,8 +120,7 @@ let store: StoreType = {
                 {id: 3, link: '/news', class: 'item', name: 'Новости'},
                 {id: 4, link: '/music', class: 'item', name: 'Музыка'},
             ]
-        }
-        ,
+        },
         sideBar: {
             friendsData: [
                 {id: 1, name: 'Pein', src: 'https://www.ninjaturtles.ru/forum/pic/22077.jpg'},
@@ -139,45 +131,6 @@ let store: StoreType = {
     },
     _callSubscriber: (state: StateType) => {
     },
-    _addPost() {
-
-        let newPost = {
-            avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
-            name: 'Indra',
-            message: this._state.profilePage.newPostText,
-            time: '12:00',
-            likes: 0,
-            id: 3
-        };
-
-        this._state.profilePage.postData.unshift(newPost);
-        this._state.profilePage.newPostText = '';
-
-        this._callSubscriber(this._state);
-    },
-    _updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    _addOutputMsg() {
-        let newPost = {
-            id: 1,
-            messages: this._state.dialogsPage.newOutputMsgText
-        }
-        this._state.dialogsPage.messagesData.outputMessage =
-            [...this._state.dialogsPage.messagesData.outputMessage, newPost];
-        this._state.dialogsPage.newOutputMsgText = '';
-
-        this._callSubscriber(this._state);
-    },
-    _updateNewOutputMsgText(newText: string) {
-        if(newText) {
-            this._state.dialogsPage.newOutputMsgText = newText;
-        }else{
-            this._state.dialogsPage.newOutputMsgText = '';
-        }
-        this._callSubscriber(this._state);
-    },
     subscribe(observer: (_state: StateType) => void) {
         this._callSubscriber = observer
     },
@@ -185,48 +138,13 @@ let store: StoreType = {
         return this._state;
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
-                name: 'Indra',
-                message: this._state.profilePage.newPostText,
-                time: '12:00',
-                likes: 0,
-                id: 3
-            };
-            this._state.profilePage.postData.unshift(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            if (action.text) {
-                this._state.profilePage.newPostText = action.text;
-
-            }
-            if (action.text === '') {
-                this._state.profilePage.newPostText = '';
-            }
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === 'ADD-OUTPUT-MSG') {
-            this._addOutputMsg();
-        }
-        else if (action.type === 'UPDATE-NEW-OUTPUT-MSG') {
-            {
-                if(action.text) {
-                    this._updateNewOutputMsgText(action.text)
-                }else{
-                    this._updateNewOutputMsgText('')
-                }
-            }
-        }
+        this._state.profilePage = ProfilePageReducer(this._state.profilePage, action);
+        this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action);
+        this._state.sideBar = SideBarReducer(this._state.sideBar, action);
+        this._state.navBarPage = NavBarPageReducer(this._state.navBarPage, action);
+        this._callSubscriber(this._state);
     }
 }
 
-
-export const addPostActionCreator = () => ({type: AddPost});
-export const UpdateNewPostTextActionCreator = (text: string) => ({type: UpdateNewPostText, text: text});
-export const UpdateNewOutputMsgActionType = (text: string) => ({type: UpdateNewOutputMsg, text: text});
-export const AddOutputMsgActionType = () => ({type: AddOutputMsg});
 
 export default store;

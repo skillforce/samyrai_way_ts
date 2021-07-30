@@ -1,7 +1,8 @@
 import React, {RefObject} from 'react';
 import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
-import {ActionsDispatchType, addPostActionCreator, UpdateNewPostTextActionCreator} from '../../../Redux/state';
+import {addPostActionCreator, UpdateNewPostTextActionCreator} from '../../../Redux/ProfilePage-reducer';
+import {ActionsDispatchType} from '../../../Redux/state';
 
 
 const {postsBlock, posts} = s;

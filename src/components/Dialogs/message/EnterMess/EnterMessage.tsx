@@ -1,6 +1,6 @@
 import React, {ChangeEvent, RefObject} from 'react';
 import s from './EnterMessage.module.css';
-import {AddOutputMsgActionType, UpdateNewOutputMsgActionType} from '../../../../Redux/state';
+import {AddOutputMsgActionType, UpdateNewOutputMsgActionType} from '../../../../Redux/DialogsPage-reducer';
 
 
 const {inputTitle, btn, textInput} = s;
@@ -33,7 +33,7 @@ const EnterMessage = (pr: EnterMessagePropsType) => {
     return (
         <div className={inputTitle}>
             <div className={textInput}>
-                <textarea onChange={NewOutputMsgTexts} value={newOutputMsgText}/>
+                <textarea onChange={NewOutputMsgTexts} value={newOutputMsgText} placeholder={'Enter your message'}/>
             </div>
             <div className={btn}>
                 <button onClick={newMSG}>Отправить</button>
