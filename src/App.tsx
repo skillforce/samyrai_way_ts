@@ -7,31 +7,27 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import React, {MouseEventHandler} from 'react';
-import {ActionsDispatchType, StateType} from './Redux/state';
+import React from 'react';
+
+//
+// type AppPropsType = {
+//     store: any
+// }
 
 
-type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionsDispatchType) => void
-}
-
-
-const App = (pr: AppPropsType) => {
-
-    const {dialogsPage, profilePage, navBarPage, sideBar} = pr.state;
-    const {dispatch} = pr;
-
+const App = () => {
+    // const {store} = pr;
+    // const {sideBar, navBarPage} = store.getState();
+    //
 
     return (
         <div className="app-wrapper">
             <Header/>
-            <NavBar state={navBarPage} sideBar={sideBar}/>
+            <NavBar/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile dispatch={dispatch}
-                                                                profilePage={profilePage}/>}/>
+                <Route path={'/profile'} render={() => <Profile/>}/>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs dispatch={dispatch} state={dialogsPage}/>}/>
+                       render={() => <Dialogs/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>

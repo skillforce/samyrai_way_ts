@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import SideBar from './SideBar/SideBar';
+import SideBar, {SideBarPropsType} from './SideBar/SideBar';
 import {FriendsPropsType, FriendsType} from './SideBar/Friends/Friends';
+import StoreContext from '../../StoreContext';
 
 
 export type NavBarType = {
@@ -18,39 +19,40 @@ export type NavBarPageType = {
 
 export type NavBarPropsType = {
     state: NavBarPageType
-    sideBar:FriendsPropsType
+    sideBar: FriendsPropsType
 }
 
 
 const {nav, item, setting, active} = s;
 
-const NavBar = (pr: NavBarPropsType) => {
+const NavBar = () => {
 
-    const {state,sideBar} = pr;
-
-    const {navBarLink} = state;
-
-
-
-
-
-
-    const navBarLinks = navBarLink.map((t: NavBarType) => (<div key={t.id} className={item}>
-        <NavLink to={t.link} activeClassName={active}>{t.name}</NavLink>
-    </div>))
-
+    // const {state,sideBar} = pr;
 
 
     return (
-        <nav className={nav}>
-            {navBarLinks}
-            <div className={setting}>
-                <NavLink to={'/settings'} activeClassName={active}>Настройки</NavLink>
-            </div>
-            <div>
-              <SideBar sideBar={sideBar} />
-            </div>
-        </nav>
+        <StoreContext.Consumer>
+            {(store: any) => {
+                let state = store.getState();
+                let navBarLink = state.navBarPage.navBarLink;
+                let sideBar: FriendsPropsType = state.sideBar;
+
+                const navBarLinks = navBarLink.map((t: NavBarType) => (<div key={t.id} className={item}>
+                    <NavLink to={t.link} activeClassName={active}>{t.name}</NavLink>
+                </div>));
+
+                return <nav className={nav}>
+                    {navBarLinks}
+                    <div className={setting}>
+                        <NavLink to={'/settings'} activeClassName={active}>Настройки</NavLink>
+                    </div>
+                    <div>
+                        <SideBar sideBar={sideBar}/>
+                    </div>
+                </nav>
+            }
+            }
+        </StoreContext.Consumer>
     )
 }
 

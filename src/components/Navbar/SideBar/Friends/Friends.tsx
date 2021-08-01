@@ -24,7 +24,7 @@ const Friends = (pr:FriendsPropsType) => {
     const{friendsData}=pr;
 
 
-    const friends = friendsData.map((t:FriendsType) => (
+    const friends = friendsData? friendsData.map((t:FriendsType) => (
         <div className={photoBlock}>
             <div className={photoBlock_photo}>
                 <img src={t.src}/>
@@ -34,7 +34,7 @@ const Friends = (pr:FriendsPropsType) => {
             </div>
         </div>
 
-    ))
+    )):''
 
     return (<div className={titlePhoto}>
             {friends}

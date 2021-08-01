@@ -2,45 +2,45 @@ import React, {RefObject} from 'react';
 import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
 import {addPostActionCreator, UpdateNewPostTextActionCreator} from '../../../Redux/ProfilePage-reducer';
-import {ActionsDispatchType} from '../../../Redux/state';
+import {ActionsDispatchType} from '../../../Redux/store';
 
 
 const {postsBlock, posts} = s;
 export type MyPostsPropsType = {
     postData: PostType[]
     newPostText: string
-    dispatch: (action: ActionsDispatchType) => void
+    updateNewPostText:(text:string)=>void
+    addPost:()=>void
 }
-
 
 const MyPosts = (pr: MyPostsPropsType) => {
 
-    const {postData, newPostText, dispatch} = pr;
+    const {postData, newPostText,updateNewPostText,addPost} = pr;
 
 
-    const postComponents = postData.map((t: PostType) => (<Post avatar={t.avatar}
+    const postComponents = postData? postData.map((t: PostType) => (<Post avatar={t.avatar}
                                                                 name={t.name}
                                                                 message={t.message}
                                                                 time={t.time}
                                                                 likes={t.likes}
                                                                 id={t.id}
-    />))
+    />)): ''
 
     let newPostElement: RefObject<HTMLTextAreaElement> | undefined = React.createRef();
 
     let onPostChange = () => {
         if (newPostElement?.current?.value) {
             let newText = newPostElement.current.value;
-            dispatch(UpdateNewPostTextActionCreator(newText));
+            updateNewPostText(newText);
         } else {
-            dispatch(UpdateNewPostTextActionCreator(''));
+            updateNewPostText('');
         }
 
     }
 
     let newPost = () => {
         if (newPostText) {
-            dispatch(addPostActionCreator());
+            addPost();
         }
     }
 
