@@ -50,16 +50,16 @@ const ProfilePageReducer = (state: PostDataType = InitialState, action: ActionsD
                 likes: 0,
                 id: 3
             };
-            state.postData.unshift(newPost);
+            state = {...state, postData: [newPost, ...state.postData]};
             state.newPostText = '';
             return state;
         case UpdateNewPostText :
             if (action.text) {
-                state.newPostText = action.text;
+                state = {...state, newPostText: action.text};
                 return state;
             }
             if (action.text === '') {
-                state.newPostText = '';
+                state = {...state, newPostText: ''};
                 return state;
             }
     }

@@ -9,7 +9,7 @@ const {inputTitle, btn, textInput} = s;
 type EnterMessagePropsType = {
     OnNewOutputMsgText:(e:ChangeEvent<HTMLTextAreaElement>)=>void
     OnNewMSG:()=>void
-    newOutputMsgText?: string
+    newOutputMsgText: string|''
 }
 
 

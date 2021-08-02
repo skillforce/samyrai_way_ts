@@ -64,26 +64,27 @@ let InitialState = {
 }
 
 
-
-const DialogsPageReducer = (state: DialogsType=InitialState, action: ActionsDispatchType) => {
+const DialogsPageReducer = (state: DialogsType = InitialState, action: ActionsDispatchType) => {
     switch (action.type) {
         default:
             return state;
         case AddOutputMsg:
-            let newPost = {
-                id: 1,
-                messages: state.newOutputMsgText
+            if (state.newOutputMsgText) {
+                let newPost = {
+                    id: 1,
+                    messages: state.newOutputMsgText
+                }
+                let newOutputMess = [...state.messagesData.outputMessage, newPost];
+                let newMessData = {...state.messagesData, outputMessage: newOutputMess}
+                state = {...state, messagesData: newMessData, newOutputMsgText: ''}
             }
-            state.messagesData.outputMessage =
-                [...state.messagesData.outputMessage, newPost];
-            state.newOutputMsgText = '';
             return state;
         case UpdateNewOutputMsg:
             if (action.text) {
-                state.newOutputMsgText = action.text;
+                state = {...state, newOutputMsgText: action.text};
                 return state;
             } else {
-                state.newOutputMsgText = '';
+                state = {...state, newOutputMsgText: ''};
                 return state;
             }
     }
