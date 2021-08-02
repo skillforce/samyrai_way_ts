@@ -4,6 +4,11 @@ import DialogsPageReducer from './DialogsPage-reducer';
 import NavBarPageReducer from './NavBarPage-reducer';
 import SideBarReducer from './SideBar-reducer';
 
+export type StoreType= typeof store;
+
+export type StateType = ReturnType<typeof reducers>
+
+
 let reducers = combineReducers({
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,

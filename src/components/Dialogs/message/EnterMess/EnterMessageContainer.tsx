@@ -1,45 +1,35 @@
-import React, {ChangeEvent, RefObject} from 'react';
-import s from './EnterMessage.module.css';
+import React, {ChangeEvent} from 'react';
 import {AddOutputMsgActionType, UpdateNewOutputMsgActionType} from '../../../../Redux/DialogsPage-reducer';
-import {StoreType} from '../../../../Redux/store';
 import EnterMessage from './EnterMessage';
+import {StateType} from '../../../../Redux/ReduxStore';
+import {connect} from 'react-redux';
+import {Dispatch} from 'redux';
 
 
-const {inputTitle, btn, textInput} = s;
 
-
-type EnterMessagePropsType = {
-    store:StoreType
+let mapStateToProps=(state:StateType)=>{
+    return{
+        newOutputMsgText:state.dialogsPage.newOutputMsgText
+    }
 }
 
 
-const EnterMessageContainer = (pr: EnterMessagePropsType) => {
 
-    const{store}=pr;
-
-    const{dispatch}=store;
-
-    const{dialogsPage}=store.getState();
-
-    const {newOutputMsgText} = dialogsPage;
-
-
-    const OnNewOutputMsgTexts = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newMSG = e.target.value;
-        dispatch(UpdateNewOutputMsgActionType(newMSG));
-    }
-
-
-    let OnNewMSG = () => {
-        if (newOutputMsgText) {
+let mapDispatchToProps = (dispatch:Dispatch) => {
+    return {
+        OnNewMSG: () => {
             dispatch(AddOutputMsgActionType());
+        },
+        OnNewOutputMsgText: (e: ChangeEvent<HTMLTextAreaElement>) => {
+            let newMSG = e.target.value;
+            dispatch(UpdateNewOutputMsgActionType(newMSG));
         }
-
     }
-
-    return (
-        <EnterMessage OnNewMSG={OnNewMSG} OnNewOutputMsgText={OnNewOutputMsgTexts} newOutputMsgText={newOutputMsgText}/>
-    )
 }
+
+
+const EnterMessageContainer = connect(mapStateToProps, mapDispatchToProps)(EnterMessage);
+
+
 
 export default EnterMessageContainer;

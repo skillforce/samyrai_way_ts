@@ -1,5 +1,10 @@
 import {ActionsDispatchType} from './store';
-import {FriendsPropsType} from '../components/Navbar/SideBar/Friends/Friends';
+import {FriendsPropsType, FriendsType} from '../components/Navbar/SideBar/Friends/Friends';
+
+
+export type SideBarType={
+    friendsData:FriendsType[]
+}
 
 let InitialState = {
     friendsData: [
@@ -10,7 +15,6 @@ let InitialState = {
 }
 
 export const SideBarReducer = (state: FriendsPropsType = InitialState, action: ActionsDispatchType) => {
-
 
     return state;
 }

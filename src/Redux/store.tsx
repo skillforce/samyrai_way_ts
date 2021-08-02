@@ -19,7 +19,7 @@ export type ActionsDispatchType = {
     text?: string
 }
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: (_state: StateType) => void) => void
