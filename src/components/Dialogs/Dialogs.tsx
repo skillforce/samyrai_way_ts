@@ -3,19 +3,14 @@ import s from './Dialogs.module.css';
 import Message, {MessageType} from './message/message';
 import DialogItem, {DialogsNamesType} from './dialogItems/dialogItems';
 import EnterMessageContainer from './message/EnterMess/EnterMessageContainer';
+import {DialogsPropsType} from './DialogsContainer';
 
-
-export type DialogsType = {
-    dialogsData: DialogsNamesType[]
-    messagesData: MessageType
-    newOutputMsgText:string|''
-}
 
 
 const {dialogs, messages, dialogsItems, inputTitle} = s;
 
 
-const Dialogs = (pr: DialogsType) => {
+const Dialogs = (pr: DialogsPropsType) => {
 
     const {dialogsData, messagesData} = pr;
     const {inputMessage, outputMessage} = messagesData;

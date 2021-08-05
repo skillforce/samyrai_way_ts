@@ -1,16 +1,15 @@
-import {DialogsType} from '../components/Dialogs/Dialogs';
-import {NavBarPageType} from '../components/Navbar/Navbar';
 import {PostDataType} from '../components/Profile/Profile';
 import {FriendsPropsType} from '../components/Navbar/SideBar/Friends/Friends';
 import ProfilePageReducer from './ProfilePage-reducer';
 import DialogsPageReducer from './DialogsPage-reducer';
 import SideBarReducer from './SideBar-reducer';
-import NavBarPageReducer from './NavBarPage-reducer';
+import NavBarPageReducer, {InitialStateNavBarType} from './NavBarPage-reducer';
+import {mapStateToPropsDialogsType} from '../components/Dialogs/DialogsContainer';
 
 export type StateType = {
     profilePage: PostDataType
-    dialogsPage: DialogsType
-    navBarPage: NavBarPageType
+    dialogsPage: mapStateToPropsDialogsType
+    navBarPage: InitialStateNavBarType
     sideBar: FriendsPropsType
 }
 

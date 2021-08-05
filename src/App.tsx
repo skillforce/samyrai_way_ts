@@ -11,16 +11,9 @@ import React from 'react';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavBarContainer from './components/Navbar/NavBarContainer';
 
-//
-// type AppPropsType = {
-//     store: any
-// }
-
 
 const App = () => {
-    // const {store} = pr;
-    // const {sideBar, navBarPage} = store.getState();
-    //
+
 
     return (
         <div className="app-wrapper">

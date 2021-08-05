@@ -1,25 +1,18 @@
 import React, {ChangeEvent, RefObject} from 'react';
 import s from './EnterMessage.module.css';
-
+import {EnterMessagePropsType} from './EnterMessageContainer';
 
 
 const {inputTitle, btn, textInput} = s;
 
 
-type EnterMessagePropsType = {
-    OnNewOutputMsgText:(e:ChangeEvent<HTMLTextAreaElement>)=>void
-    OnNewMSG:()=>void
-    newOutputMsgText: string|''
-}
-
-
 const EnterMessage = (pr: EnterMessagePropsType) => {
 
-    const {OnNewMSG, newOutputMsgText,OnNewOutputMsgText} = pr;
+    const {OnNewMSG, newOutputMsgText, OnNewOutputMsgText} = pr;
 
 
     const NewOutputMsgTexts = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       OnNewOutputMsgText(e);
+        OnNewOutputMsgText(e);
     }
 
 

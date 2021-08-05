@@ -1,5 +1,13 @@
 import {ActionsDispatchType} from './store';
-import {NavBarPageType} from '../components/Navbar/Navbar';
+
+export type NavBarType = {
+    id: number
+    link: string
+    class: string
+    name: string
+}
+
+
 
 
 let InitialState = {
@@ -8,10 +16,13 @@ let InitialState = {
         {id: 2, link: '/dialogs', class: 'item', name: 'Сообщения'},
         {id: 3, link: '/news', class: 'item', name: 'Новости'},
         {id: 4, link: '/music', class: 'item', name: 'Музыка'},
-    ]
+    ] as NavBarType[]
 }
 
-export const NavBarPageReducer = (state: NavBarPageType=InitialState, action: ActionsDispatchType) => {
+export type InitialStateNavBarType = typeof InitialState;
+
+
+export const NavBarPageReducer = (state: InitialStateNavBarType=InitialState, action: ActionsDispatchType):InitialStateNavBarType => {
 
     return state;
 }

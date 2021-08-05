@@ -1,12 +1,13 @@
 import React from 'react';
 import {addPostActionCreator, UpdateNewPostTextActionCreator} from '../../../Redux/ProfilePage-reducer';
 import MyPosts from './MyPosts';
-import {StateType, StoreType} from '../../../Redux/ReduxStore';
+import {AppStateType, StoreType} from '../../../Redux/ReduxStore';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
+import {PostDataType} from '../Profile';
 
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: AppStateType):PostDataType => {
     return {
         postData: state.profilePage.postData,
         newPostText: state.profilePage.newPostText

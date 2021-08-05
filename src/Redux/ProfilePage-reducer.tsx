@@ -1,5 +1,6 @@
 import {ActionsDispatchType, StateType} from './store';
 import {PostDataType} from '../components/Profile/Profile';
+import {PostType} from '../components/Profile/MyPosts/Post/Post';
 
 const AddPost = 'ADD-POST';
 const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
@@ -33,11 +34,14 @@ let InitialState = {
             likes: 7,
             id: 3
         }
-    ],
+    ] as PostType[],
     newPostText: ''
 }
 
-const ProfilePageReducer = (state: PostDataType = InitialState, action: ActionsDispatchType) => {
+type InitialStateProfileType = typeof InitialState;
+
+
+const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ActionsDispatchType) => {
     switch (action.type) {
         default:
             return state;

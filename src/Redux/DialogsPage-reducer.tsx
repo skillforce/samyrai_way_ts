@@ -1,5 +1,6 @@
-import {ActionsDispatchType, StateType} from './store';
-import {DialogsType} from '../components/Dialogs/Dialogs';
+import {ActionsDispatchType} from './store';
+import {DialogsNamesType} from '../components/Dialogs/dialogItems/dialogItems';
+import {InputType, OutputType} from '../components/Dialogs/message/message';
 
 const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
 const AddOutputMsg = 'ADD-OUTPUT-MSG';
@@ -39,7 +40,7 @@ let InitialState = {
             name: 'Polina',
             photo: 'https://pp.userapi.com/c836334/v836334838/4fd0e/ROZ9MDUx9j0.jpg'
         }
-    ],
+    ] as Array<DialogsNamesType>,
     newOutputMsgText: '',
     messagesData: {
         inputMessage: [
@@ -49,7 +50,7 @@ let InitialState = {
             {id: 4, messages: 'What did you do?'},
             {id: 5, messages: 'What is you name?'},
             {id: 6, messages: 'Cool!'}
-        ],
+        ] as Array<InputType>,
         outputMessage:
             [
                 {id: 1, messages: 'Hi!'},
@@ -57,14 +58,15 @@ let InitialState = {
                 {id: 3, messages: 'and you?'},
                 {id: 4, messages: 'Thanks?'},
                 {id: 5, messages: 'wow!!!?'},
-                {id: 6, messages: 'lalalal'},
-
-            ]
+                {id: 6, messages: 'lalalal'}
+            ] as Array<OutputType>
     },
 }
 
+export type InitialStateDialogsType = typeof InitialState;
 
-const DialogsPageReducer = (state: DialogsType = InitialState, action: ActionsDispatchType) => {
+
+const DialogsPageReducer = (state: InitialStateDialogsType = InitialState, action: ActionsDispatchType): InitialStateDialogsType => {
     switch (action.type) {
         default:
             return state;

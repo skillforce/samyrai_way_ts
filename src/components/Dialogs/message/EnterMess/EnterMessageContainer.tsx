@@ -1,21 +1,29 @@
 import React, {ChangeEvent} from 'react';
 import {AddOutputMsgActionType, UpdateNewOutputMsgActionType} from '../../../../Redux/DialogsPage-reducer';
 import EnterMessage from './EnterMessage';
-import {StateType} from '../../../../Redux/ReduxStore';
+import {AppStateType} from '../../../../Redux/ReduxStore';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 
+type mapStateToPropsReturnType = {
+    newOutputMsgText: string | ''
+}
 
-let mapStateToProps=(state:StateType)=>{
-    return{
-        newOutputMsgText:state.dialogsPage.newOutputMsgText
+type mapDispatchToPropsReturnType = {
+    OnNewMSG: () => void
+    OnNewOutputMsgText: (e: ChangeEvent<HTMLTextAreaElement>) => void
+}
+
+
+let mapStateToProps = (state: AppStateType): mapStateToPropsReturnType => {
+    return {
+        newOutputMsgText: state.dialogsPage.newOutputMsgText
     }
 }
 
 
-
-let mapDispatchToProps = (dispatch:Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsReturnType => {
     return {
         OnNewMSG: () => {
             dispatch(AddOutputMsgActionType());
@@ -27,9 +35,10 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
     }
 }
 
+export type EnterMessagePropsType = mapStateToPropsReturnType & mapDispatchToPropsReturnType;
+
 
 const EnterMessageContainer = connect(mapStateToProps, mapDispatchToProps)(EnterMessage);
-
 
 
 export default EnterMessageContainer;

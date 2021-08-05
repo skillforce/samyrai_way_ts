@@ -6,10 +6,10 @@ import SideBarReducer from './SideBar-reducer';
 
 export type StoreType= typeof store;
 
-export type StateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReducer>
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,
     navBarPage: NavBarPageReducer,
@@ -17,7 +17,9 @@ let reducers = combineReducers({
 });
 
 
-let store = createStore(reducers);
+
+
+let store = createStore(rootReducer);
 
 
 export default store;

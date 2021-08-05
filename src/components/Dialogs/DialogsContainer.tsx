@@ -1,11 +1,23 @@
 import Dialogs from './Dialogs';
 import React from 'react';
 import {connect} from 'react-redux';
-import {StateType} from '../../Redux/ReduxStore';
+import {AppStateType} from '../../Redux/ReduxStore';
 import {Dispatch} from 'redux';
+import {DialogsNamesType} from './dialogItems/dialogItems';
+import {MessageType} from './message/message';
 
 
-let mapStateToProps = (state: StateType) => {
+
+
+export type mapStateToPropsDialogsType = {
+    dialogsData: DialogsNamesType[]
+    messagesData: MessageType
+    newOutputMsgText: string | ''
+}
+
+type mapDispatchToPropsType ={}
+
+let mapStateToProps = (state: AppStateType):mapStateToPropsDialogsType => {
     return {
         messagesData: state.dialogsPage.messagesData,
         dialogsData: state.dialogsPage.dialogsData,
@@ -13,10 +25,12 @@ let mapStateToProps = (state: StateType) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch)=>{
+let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType=>{
     return {}
 
 }
+
+export type DialogsPropsType = mapStateToPropsDialogsType & mapDispatchToPropsType
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
