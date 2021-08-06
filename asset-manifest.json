@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/samyrai_way_ts/static/css/main.2ee9f696.chunk.css",
+    "main.js": "/samyrai_way_ts/static/js/main.7f283aa7.chunk.js",
+    "main.js.map": "/samyrai_way_ts/static/js/main.7f283aa7.chunk.js.map",
+    "runtime-main.js": "/samyrai_way_ts/static/js/runtime-main.bb90ac4a.js",
+    "runtime-main.js.map": "/samyrai_way_ts/static/js/runtime-main.bb90ac4a.js.map",
+    "static/js/2.ca0594c5.chunk.js": "/samyrai_way_ts/static/js/2.ca0594c5.chunk.js",
+    "static/js/2.ca0594c5.chunk.js.map": "/samyrai_way_ts/static/js/2.ca0594c5.chunk.js.map",
+    "index.html": "/samyrai_way_ts/index.html",
+    "static/css/main.2ee9f696.chunk.css.map": "/samyrai_way_ts/static/css/main.2ee9f696.chunk.css.map",
+    "static/js/2.ca0594c5.chunk.js.LICENSE.txt": "/samyrai_way_ts/static/js/2.ca0594c5.chunk.js.LICENSE.txt",
+    "static/media/heart.68cd17a2.png": "/samyrai_way_ts/static/media/heart.68cd17a2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb90ac4a.js",
+    "static/js/2.ca0594c5.chunk.js",
+    "static/css/main.2ee9f696.chunk.css",
+    "static/js/main.7f283aa7.chunk.js"
+  ]
+}
