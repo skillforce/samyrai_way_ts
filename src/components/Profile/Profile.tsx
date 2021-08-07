@@ -5,12 +5,10 @@ import {PostType} from './MyPosts/Post/Post';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 
-
 export type PostDataType = {
     postData: PostType[]
     newPostText: string
 }
-
 
 
 const Profile = () => {

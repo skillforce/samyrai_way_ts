@@ -72,15 +72,15 @@ const DialogsPageReducer = (state: InitialStateDialogsType = InitialState, actio
             return state;
         case AddOutputMsg:
             if (state.newOutputMsgText) {
-                let newPost = {
-                    id: 1,
-                    messages: state.newOutputMsgText
+                return state = {
+                    ...state, messagesData: {
+                        ...state.messagesData, outputMessage:
+                            [...state.messagesData.outputMessage, {id: 1, messages: state.newOutputMsgText}]
+                    },
+                    newOutputMsgText: ''
                 }
-                let newOutputMess = [...state.messagesData.outputMessage, newPost];
-                let newMessData = {...state.messagesData, outputMessage: newOutputMess}
-                state = {...state, messagesData: newMessData, newOutputMsgText: ''}
-            }
-            return state;
+            } else
+                return state
         case UpdateNewOutputMsg:
             if (action.text) {
                 state = {...state, newOutputMsgText: action.text};

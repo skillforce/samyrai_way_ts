@@ -1,10 +1,9 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import Message, {MessageType} from './message/message';
+import Message from './message/message';
 import DialogItem, {DialogsNamesType} from './dialogItems/dialogItems';
 import EnterMessageContainer from './message/EnterMess/EnterMessageContainer';
 import {DialogsPropsType} from './DialogsContainer';
-
 
 
 const {dialogs, messages, dialogsItems, inputTitle} = s;
@@ -26,7 +25,7 @@ const Dialogs = (pr: DialogsPropsType) => {
                      outputMessage={outputMessage}/>
         </div>
         <div className={inputTitle}/>
-        <EnterMessageContainer />
+        <EnterMessageContainer/>
     </div>)
 }
 

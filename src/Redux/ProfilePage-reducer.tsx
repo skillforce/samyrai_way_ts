@@ -1,5 +1,4 @@
-import {ActionsDispatchType, StateType} from './store';
-import {PostDataType} from '../components/Profile/Profile';
+import {ActionsDispatchType} from './store';
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
 
 const AddPost = 'ADD-POST';
@@ -46,17 +45,16 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
         default:
             return state;
         case AddPost:
-            let newPost = {
-                avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
-                name: 'Indra',
-                message: state.newPostText,
-                time: '12:00',
-                likes: 0,
-                id: 3
+            return state = {
+                ...state, postData: [{
+                    avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
+                    name: 'Indra',
+                    message: state.newPostText,
+                    time: '12:00',
+                    likes: 0,
+                    id: 3
+                }, ...state.postData], newPostText: ''
             };
-            state = {...state, postData: [newPost, ...state.postData]};
-            state.newPostText = '';
-            return state;
         case UpdateNewPostText :
             if (action.text) {
                 state = {...state, newPostText: action.text};

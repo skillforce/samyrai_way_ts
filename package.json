@@ -2,7 +2,7 @@
   "name": "samyrai-way-ts",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://skillforce.github.io/samyrai_way_TS",
+  "homepage": "https://skillforce.github.io/samyrai_way_ts/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
