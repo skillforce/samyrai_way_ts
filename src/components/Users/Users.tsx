@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {UsersDataType} from '../../Redux/UsersPage-reducer';
 import avatarBlock from '../../img/avatarBlock.png';
 
 import s from './Users.module.css';
 
-const {avatar, statusMSG, location, fullUsers, btnFoll, btnUnFoll} = s;
+const {avatar, statusMSG, fullUsers, btnFoll, btnUnFoll} = s;
 
 
 type UsersPropsType = {
@@ -18,16 +18,23 @@ type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
     const {UsersData, onFollow, onUnFollow, setUsers} = props;
-    if (UsersData.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
-            setUsers(response.data.items)
-        });
+
+    let getUsers = () =>{
+        if (UsersData.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
+                setUsers(response.data.items)
+            });
+        }
     }
+
+    useEffect(() => {
+        getUsers()
+    }, [])
+
 
 
     return (<div>
         {UsersData.map(t => (<div className={fullUsers}>
-
             <div className={avatar}>
                 <img
                     src={t.photos.small ? t.photos.small : avatarBlock}
