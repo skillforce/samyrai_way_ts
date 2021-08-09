@@ -1,0 +1,78 @@
+.avatar {
+    display: flex;
+    justify-items: stretch;
+    font-family: Century;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 10px 15px;
+
+}
+
+.statusMSG {
+    font-family: "Californian FB";
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.avatar img {
+    height: 95px;
+    width: 95px;
+    margin-right: 15px;
+
+}
+
+
+.fullUsers {
+    border: 3px solid black;
+    width: 850px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #cccccc;
+}
+
+
+.btnFoll {
+    padding: 5px 25px;
+    background-color: red;
+    border-radius: 10px;
+    margin-left: 18px;
+    cursor: pointer;
+}
+
+.btnUnFoll {
+    padding: 5px 15px;
+    background-color: green;
+    border-radius: 10px;
+    margin-left: 18px;
+    cursor: pointer;
+
+}
+
+.btnGroup{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.page{
+    border: 2px solid antiquewhite;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 2px 5px;
+    background-color: #999999;
+    color:white;
+    cursor: pointer;
+}
+
+.pageSelect{
+    border: 2px solid antiquewhite;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 45px;
+    margin: 5px;
+    padding: 2px 5px;
+    background-color:#999999;
+    color: #ffbebe;
+    cursor: pointer;
+}

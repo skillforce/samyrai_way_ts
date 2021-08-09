@@ -5,11 +5,13 @@ import avatarBlock from '../../img/avatarBlock.png';
 
 import s from './Users.module.css';
 
+
 const {avatar, statusMSG, fullUsers, btnFoll, btnUnFoll} = s;
 
 
 type UsersPropsType = {
     UsersData: UsersDataType[]
+    pageSize:number
     onFollow: (userId: number) => void
     onUnFollow: (userId: number) => void
     setUsers: (users: UsersDataType[]) => void
@@ -19,7 +21,7 @@ type UsersPropsType = {
 export const Users = (props: UsersPropsType) => {
     const {UsersData, onFollow, onUnFollow, setUsers} = props;
 
-    let getUsers = () =>{
+    let getUsers = () => {
         if (UsersData.length === 0) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
                 setUsers(response.data.items)
@@ -30,7 +32,6 @@ export const Users = (props: UsersPropsType) => {
     useEffect(() => {
         getUsers()
     }, [])
-
 
 
     return (<div>
