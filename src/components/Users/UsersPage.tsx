@@ -1,40 +1,35 @@
-import axios from 'axios';
-import React, {useEffect} from 'react';
-import {UsersDataType} from '../../Redux/UsersPage-reducer';
+import React from 'react';
+import s from './UsersClass.module.css';
 import avatarBlock from '../../img/avatarBlock.png';
-
-import s from './Users.module.css';
-
-
-const {avatar, statusMSG, fullUsers, btnFoll, btnUnFoll} = s;
+import {UsersDataType} from '../../Redux/UsersPage-reducer';
 
 
-type UsersPropsType = {
+const {avatar, statusMSG, fullUsers, btnFoll, btnUnFoll, page, pageSelect, btnGroup} = s;
+type UsersPagePropsType = {
     UsersData: UsersDataType[]
-    pageSize:number
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     onFollow: (userId: number) => void
     onUnFollow: (userId: number) => void
-    setUsers: (users: UsersDataType[]) => void
+    onPageChanged: (t: number) => void
+    isFetching:boolean
 }
 
+const UsersPage = (props: UsersPagePropsType) => {
+    const {UsersData, onPageChanged, totalUsersCount, pageSize, currentPage, onFollow, onUnFollow} = props;
 
-export const Users = (props: UsersPropsType) => {
-    const {UsersData, onFollow, onUnFollow, setUsers} = props;
-
-    let getUsers = () => {
-        if (UsersData.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response: any) => {
-                setUsers(response.data.items)
-            });
-        }
+    let pagesCount = Math.ceil(totalUsersCount / pageSize);
+    let allPages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        allPages.push(i)
     }
-
-    useEffect(() => {
-        getUsers()
-    }, [])
-
-
     return (<div>
+        <div className={btnGroup}>
+            {allPages.map(t => <span onClick={() => {
+                onPageChanged(t)
+            }} className={currentPage === t ? pageSelect : page}>{t}</span>)}
+        </div>
         {UsersData.map(t => (<div className={fullUsers}>
             <div className={avatar}>
                 <img
@@ -57,3 +52,6 @@ export const Users = (props: UsersPropsType) => {
         </div>))}
     </div>)
 }
+
+
+export default UsersPage;

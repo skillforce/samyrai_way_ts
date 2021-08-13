@@ -3,12 +3,20 @@ const UnfollowUsers = 'UNFOLLOW';
 const SetUsers = 'SET-USERS'
 const SetCurrentPage = 'SET-CURRENT-PAGE'
 const setTotalUserCount = 'SET-TOTAL-USER-COUNT'
+const ToggleIsFetching = 'TOGGLE-IS-FETCHING'
 
 export const FollowActionCreator = (id: number) => ({type: FollowUsers, id: id});
 export const UnfollowActionCreator = (id: number) => ({type: UnfollowUsers, id: id});
 export const SetUsersActionCreator = (users: UsersDataType[]) => ({type: SetUsers, users: users});
 export const SetCurrentPageActionCreator = (page: number) => ({type: SetCurrentPage, page: page});
-export const SetTotalUserCountActionCreator = (totalUserCount: number) => ({type: setTotalUserCount, totalUsersCount: totalUserCount});
+export const SetTotalUserCountActionCreator = (totalUserCount: number) => ({
+    type: setTotalUserCount,
+    totalUsersCount: totalUserCount
+});
+export const ToggleIsFetchingActionCreator = (isFetching: boolean) => ({
+    type: ToggleIsFetching,
+    isFetching: isFetching
+});
 
 
 export type UsersDataType = {
@@ -25,7 +33,8 @@ export type UsersReducerActionType = {
     id?: number
     users?: UsersDataType[]
     page?: number
-    totalUsersCount?:number
+    totalUsersCount?: number
+    isFetching: boolean
 }
 
 // type InitialStateUsersType = typeof InitialState;
@@ -35,34 +44,27 @@ let InitialState = {
     UsersData: [],
     pageSize: 4,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 const UserPageReducer = (state: InitialStateUsersType = InitialState, action: UsersReducerActionType): InitialStateUsersType => {
     switch (action.type) {
         case FollowUsers :
-            if (action.id) {
-                return {
-                    ...state,
-                    UsersData: [...state.UsersData.map((t: { id: number; }) => t.id === action.id ? {
-                        ...t,
-                        followed: true
-                    } : t)]
-                }
-            } else {
-                return state;
+            return {
+                ...state,
+                UsersData: [...state.UsersData.map((t: { id: number; }) => t.id === action.id ? {
+                    ...t,
+                    followed: true
+                } : t)]
             }
         case UnfollowUsers:
-            if (action.id) {
-                return {
-                    ...state,
-                    UsersData: [...state.UsersData.map((t: { id: number }) => t.id === action.id ? {
-                        ...t,
-                        followed: false
-                    } : t)]
-                }
-            } else {
-                return state;
+            return {
+                ...state,
+                UsersData: [...state.UsersData.map((t: { id: number }) => t.id === action.id ? {
+                    ...t,
+                    followed: false
+                } : t)]
             }
         case SetUsers :
             if (action.users) {
@@ -71,18 +73,13 @@ const UserPageReducer = (state: InitialStateUsersType = InitialState, action: Us
                 return state
             }
         case SetCurrentPage:
-            if (action.page) {
-                return {...state, currentPage: action.page}
-            } else {
-                return state;
-            }
-        case setTotalUserCount:
-            if (action.totalUsersCount) {
-                return {...state, totalUsersCount: action.totalUsersCount}
-            } else {
-                return state;
-            }
+            return {...state, currentPage: action.page}
 
+        case setTotalUserCount:
+            return {...state, totalUsersCount: action.totalUsersCount}
+
+        case ToggleIsFetching:
+            return {...state, isFetching: action.isFetching}
         default:
             return state;
     }

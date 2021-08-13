@@ -8,8 +8,7 @@ import Settings from './components/Settings/Settings';
 import React from 'react';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavBarContainer from './components/Navbar/NavBarContainer';
-import ContainerUsers from './components/Users/ContainerUsers';
-import ContainerUsersClass from './components/Users/UsersClassComponent/ContainerUsersClass';
+import ContainerUsersClass from './components/Users/ContainerUsersClass';
 
 
 const App = () => {
