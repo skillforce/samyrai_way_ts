@@ -4,7 +4,7 @@ import DialogsPageReducer from './DialogsPage-reducer';
 import NavBarPageReducer from './NavBarPage-reducer';
 import SideBarReducer from './SideBar-reducer';
 import UserPageReducer from './UsersPage-reducer';
-import conRaiting from '../../../reactKabzdaKakProsto/my-app/src/components/conRaiting/conRaiting';
+
 
 export type StoreType = typeof store;
 

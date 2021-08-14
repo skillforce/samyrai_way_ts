@@ -9,6 +9,7 @@ import React from 'react';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavBarContainer from './components/Navbar/NavBarContainer';
 import ContainerUsersClass from './components/Users/ContainerUsersClass';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
             <NavBarContainer/>
             <Switch>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/profile'} render={() => <Profile/>}/>
+                    <Route path={'/profile'} render={() => <ProfileContainer/>}/>
                     <Route path={'/users'} render={() => <ContainerUsersClass />} />
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/news'} render={() => <News/>}/>

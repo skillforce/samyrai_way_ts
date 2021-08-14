@@ -1,12 +1,22 @@
-import {ActionsDispatchType} from './store';
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
-
 const AddPost = 'ADD-POST';
 const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const SetUsersProfile = 'SET-USERS-PROFILE';
+
+
+
 
 export const addPostActionCreator = () => ({type: AddPost});
 export const UpdateNewPostTextActionCreator = (text: string) => ({type: UpdateNewPostText, text: text});
+export const SetUsersProfileAC = (profile:any) => ({type: SetUsersProfile, profile:profile});
 
+
+
+export type ActionsDispatchType = {
+    type: string
+    text?: string
+    profile?:any
+}
 
 let InitialState = {
     postData: [
@@ -34,10 +44,12 @@ let InitialState = {
             id: 3
         }
     ] as PostType[],
-    newPostText: ''
+    newPostText: '',
+    profile:null
 }
 
-type InitialStateProfileType = typeof InitialState;
+export type InitialStateProfileType = typeof InitialState;
+
 
 
 const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ActionsDispatchType) => {
@@ -45,7 +57,7 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
         default:
             return state;
         case AddPost:
-            return state = {
+            return {
                 ...state, postData: [{
                     avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
                     name: 'Indra',
@@ -54,18 +66,16 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
                     likes: 0,
                     id: 3
                 }, ...state.postData], newPostText: ''
-            };
-        case UpdateNewPostText :
+            }
+        case UpdateNewPostText:
             if (action.text) {
-                state = {...state, newPostText: action.text};
-                return state;
+                return {...state, newPostText: action.text};
+            }else {
+                return {...state, newPostText: ''};
             }
-            if (action.text === '') {
-                state = {...state, newPostText: ''};
-                return state;
-            }
+        case SetUsersProfile:
+            return {...state,profile:action.profile}
     }
-    return state;
 }
 
 

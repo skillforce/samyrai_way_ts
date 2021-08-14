@@ -1,4 +1,5 @@
-import {ActionsDispatchType} from './store';
+import {ActionsDispatchType} from './ProfilePage-reducer';
+
 
 export type NavBarType = {
     id: number

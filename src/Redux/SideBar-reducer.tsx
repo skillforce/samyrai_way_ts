@@ -1,5 +1,5 @@
-import {ActionsDispatchType} from './store';
 import {FriendsType} from '../components/Navbar/SideBar/Friends/Friends';
+import {ActionsDispatchType} from './ProfilePage-reducer';
 
 
 export type SideBarType = {

@@ -1,6 +1,6 @@
-import {ActionsDispatchType} from './store';
 import {DialogsNamesType} from '../components/Dialogs/dialogItems/dialogItems';
 import {InputType, OutputType} from '../components/Dialogs/message/message';
+import {ActionsDispatchType} from './ProfilePage-reducer';
 
 const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
 const AddOutputMsg = 'ADD-OUTPUT-MSG';
