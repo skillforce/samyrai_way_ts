@@ -1,13 +1,13 @@
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
-import {Dispatch} from 'redux';
 import {
-    FollowActionCreator,
-    SetUsersActionCreator,
-    UnfollowActionCreator,
-    SetCurrentPageActionCreator,
-    SetTotalUserCountActionCreator,
-    UsersDataType, ToggleIsFetchingActionCreator
+    onFollow,
+    onUnFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
+    UsersDataType
 } from '../../Redux/UsersPage-reducer';
 import React from 'react';
 import axios from 'axios';
@@ -44,13 +44,13 @@ class UsersAPIContainer extends React.Component<UsersClassPropsType> {
         return (<>
             {this.props.isFetching ? <Preloader/> :
                 <UsersPage UsersData={this.props.UsersData}
-                onPageChanged={this.onPageChanged}
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                onFollow={this.props.onFollow}
-                onUnFollow={this.props.onUnFollow}
-                isFetching={this.props.isFetching}
+                           onPageChanged={this.onPageChanged}
+                           totalUsersCount={this.props.totalUsersCount}
+                           pageSize={this.props.pageSize}
+                           currentPage={this.props.currentPage}
+                           onFollow={this.props.onFollow}
+                           onUnFollow={this.props.onUnFollow}
+                           isFetching={this.props.isFetching}
                 />}
         </>)
     }
@@ -65,16 +65,7 @@ type mapStateToPropsUsersType = {
     isFetching: boolean
 }
 
-type mapDispatchToPropsReturnType = {
-    onFollow: (userId: number) => void
-    onUnFollow: (userId: number) => void
-    setUsers: (users: UsersDataType[]) => void
-    setCurrentPage: (page: number) => void
-    setTotalUsersCount: (totalUserCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}
-
-export type UsersClassPropsType = mapStateToPropsUsersType & mapDispatchToPropsReturnType
+export type UsersClassPropsType = mapStateToPropsUsersType & DispatchPropsType
 
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsUsersType => {
@@ -87,30 +78,18 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsUsersType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsReturnType => {
-    return {
-        onFollow: (userId: number) => {
-            dispatch(FollowActionCreator(userId));
-        },
-        onUnFollow: (userId: number) => {
-            dispatch(UnfollowActionCreator(userId));
-        },
-        setUsers: (users: UsersDataType[]) => {
-            dispatch(SetUsersActionCreator(users));
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(SetCurrentPageActionCreator(page));
-        },
-        setTotalUsersCount: (totalUserCount: number) => {
-            dispatch(SetTotalUserCountActionCreator(totalUserCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(ToggleIsFetchingActionCreator(isFetching))
-        }
-    }
+const dispatchersToProps = {
+    onFollow,
+    onUnFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching
 }
+type DispatchPropsType = typeof dispatchersToProps
 
 
-const ContainerUsersClass = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer);
+const ContainerUsersClass = connect(mapStateToProps,
+    {onFollow, onUnFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersAPIContainer);
 
 export default ContainerUsersClass;

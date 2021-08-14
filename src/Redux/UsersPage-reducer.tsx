@@ -5,19 +5,18 @@ const SetCurrentPage = 'SET-CURRENT-PAGE'
 const setTotalUserCount = 'SET-TOTAL-USER-COUNT'
 const ToggleIsFetching = 'TOGGLE-IS-FETCHING'
 
-export const FollowActionCreator = (id: number) => ({type: FollowUsers, id: id});
-export const UnfollowActionCreator = (id: number) => ({type: UnfollowUsers, id: id});
-export const SetUsersActionCreator = (users: UsersDataType[]) => ({type: SetUsers, users: users});
-export const SetCurrentPageActionCreator = (page: number) => ({type: SetCurrentPage, page: page});
-export const SetTotalUserCountActionCreator = (totalUserCount: number) => ({
+export const onFollow = (id: number) => ({type: FollowUsers, id: id});
+export const onUnFollow = (id: number) => ({type: UnfollowUsers, id: id});
+export const setUsers = (users: UsersDataType[]) => ({type: SetUsers, users: users});
+export const setCurrentPage = (page: number) => ({type: SetCurrentPage, page: page});
+export const setTotalUsersCount = (totalUserCount: number) => ({
     type: setTotalUserCount,
     totalUsersCount: totalUserCount
 });
-export const ToggleIsFetchingActionCreator = (isFetching: boolean) => ({
+export const toggleIsFetching = (isFetching: boolean) => ({
     type: ToggleIsFetching,
     isFetching: isFetching
 });
-
 
 export type UsersDataType = {
     name: string
@@ -42,7 +41,7 @@ type InitialStateUsersType = any;
 
 let InitialState = {
     UsersData: [],
-    pageSize: 4,
+    pageSize: 8,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false
