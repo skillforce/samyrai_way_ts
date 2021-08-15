@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {SetUsersProfileAC} from '../../Redux/ProfilePage-reducer';
+import {SetUsersProfile} from '../../Redux/ProfilePage-reducer';
 
 
 
@@ -13,7 +13,7 @@ class ProfileContainerAPI extends React.Component<any, any> {
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((response) => {
-                this.props.SetUsersProfileAC(response.data)
+                this.props.SetUsersProfile(response.data)
             });
     }
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state:any) => {
 
 
 
-export const ProfileContainer = connect(mapStateToProps, {SetUsersProfileAC})(ProfileContainerAPI)
+export const ProfileContainer = connect(mapStateToProps, {SetUsersProfile})(ProfileContainerAPI)
 
 
 export default ProfileContainer;

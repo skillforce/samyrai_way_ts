@@ -1,16 +1,97 @@
 .descriptionBlock {
-    padding: 10px;
+    display: flex;
+    border: 2px solid white;
+    border-radius: 8px;
+    margin: 5px;
+
+
 }
-.title_img img{
-    width:800px;
-    height:450px;
+
+.title_img img {
+    width: 800px;
+    height: 450px;
     border-radius: 5px;
     margin-left: 95px;
-    box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);
+    box-shadow: 12px 29px 81px 0px rgba(0, 0, 0, 0.75);
+}
+
+.avatar {
+    margin: 10px 25px;
+}
+
+.avatar img {
+    border: 8px groove navajowhite;
+    border-radius: 50%;
+}
+
+.contactsBlock {
+    margin: 10px;
+    padding: 10px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 3px groove white;
+    background-color: navajowhite;
+    border-radius: 13px;
+    text-shadow: #7f7f7f 5px 5px 5px;
+    font-family: "Yu Gothic Medium";
+
+}
+
+.photoBlock {
+    display: flex;
+    flex-direction: column;
+    }
+
+.fullNameUser{
+    text-align: center;
+    margin:15px;
+    font-weight: 300;
+    font-size: 35px;
+    font-family: "Berlin Sans FB";
+    color: #dddddd;
+    text-shadow: black 5px 4px 5px;
+
+}
+
+.statusProfile{
+    text-align: center;
+    margin:5px;
+    font-weight: 300;
+    font-size: 20px;
+    font-family: "Berlin Sans FB";
+    color: #dddddd;
+    text-shadow: black 5px 4px 5px;
+}
+
+.workSearchBlock{
+    height: 180px;
+    margin: 120px 10px;
+    display: inline-block;
+    border: 3px groove white;
+    background-color: navajowhite;
+    border-radius: 13px;
+}
+
+.searchWork{
+    text-align: center;
+    margin: 20px;
+    font-weight: bold;
+    font-size: 25px;
+    color: #660000;
 }
 
 
+.searchWork input{
+    margin: 10px 0 0 0;
+    width:25px;
+    height: 25px;
+}
 
+.descrSearch{
+    text-align: center;
+    font-size: 20px;
+    font-family: "Californian FB";
 
-
-
+}

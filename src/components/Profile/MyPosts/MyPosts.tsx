@@ -1,20 +1,13 @@
 import React, {RefObject} from 'react';
 import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
-
-
+import {MyPostPropsType} from './MyPostsContainer';
 
 const {postsBlock, posts} = s;
-export type MyPostsPropsType = {
-    postData: PostType[]
-    newPostText: string
-    updateNewPostText:(text:string)=>void
-    addPost:()=>void
-}
 
-const MyPosts = (pr: MyPostsPropsType) => {
+const MyPosts = (pr: MyPostPropsType) => {
 
-    const {postData, newPostText,updateNewPostText,addPost} = pr;
+    const {postData, newPostText,UpdateNewPostText,addPost} = pr;
 
 
     const postComponents = postData? postData.map((t: PostType) => (<Post avatar={t.avatar}
@@ -30,9 +23,9 @@ const MyPosts = (pr: MyPostsPropsType) => {
     let onPostChange = () => {
         if (newPostElement?.current?.value) {
             let newText = newPostElement.current.value;
-            updateNewPostText(newText);
+            UpdateNewPostText(newText);
         } else {
-            updateNewPostText('');
+            UpdateNewPostText('');
         }
 
     }

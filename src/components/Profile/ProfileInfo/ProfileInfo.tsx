@@ -2,7 +2,18 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 
-const {descriptionBlock, title_img} = s;
+const {
+    descriptionBlock,
+    title_img,
+    avatar,
+    statusProfile,
+    contactsBlock,
+    fullNameUser,
+    photoBlock,
+    workSearchBlock,
+    searchWork,
+    descrSearch
+} = s;
 
 
 type ProfileInfoPropsType = {
@@ -27,9 +38,41 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <img alt="ava" src={src}/>
             </div>
             <div className={descriptionBlock}>
-                <div>
-                    <img src={profile.photos.small} alt="avatarUser"/></div>
-                <div>{profile.aboutMe}</div>
+                <div className={photoBlock}>
+                    <div className={fullNameUser}>{profile.fullName ? profile.fullName : 'noName NoName'}</div>
+                    <div className={avatar}>
+                        <img src={profile.photos.large} alt="avatarUser"/>
+                    </div>
+                    <div className={statusProfile}>status : {profile.aboutMe}</div>
+                </div>
+                <div className={contactsBlock}>
+                    Contact information:
+                    {profile.contacts.facebook ?
+                        <div>Facebook: <a href={profile.contacts.facebook}>facebook</a></div> : ''}
+                    {profile.contacts.website ?
+                        <div>Web-site: <a href={profile.contacts.website}>{profile.contacts.website}</a></div> : ''}
+                    {profile.contacts.vk ?
+                        <div>VK : <a href={profile.contacts.vk}>{profile.contacts.vk}</a></div> : ''}
+                    {profile.contacts.twitter ?
+                        <div>Twitter : <a href={profile.contacts.twitter}>{profile.contacts.twitter}</a></div> : ''}
+                    {profile.contacts.instagram ?
+                        <div>Instagram : <a href={profile.contacts.instagram}>{profile.contacts.instagram}</a>
+                        </div> : ''}
+                    {profile.contacts.youtube ?
+                        <div>Youtube : <a href={profile.contacts.youtube}>{profile.contacts.youtube}</a></div> : ''}
+                    {profile.contacts.github ?
+                        <div> Github : <a href={profile.contacts.github}>{profile.contacts.github}</a></div>
+                        : ''}
+                    {profile.contacts.mainLink ?
+                        <div> MainLink: <a href={profile.contacts.mainLink}>{profile.contacts.mainLink}</a></div> : ''}
+                </div>
+                <div className={workSearchBlock}>
+                    {profile.lookingForAJob ?
+                        <div className={searchWork}>I am search a work:<input type="checkbox" checked={true}/></div> :
+                        <div className={searchWork}>I'm not going to search work!</div>}
+                    {profile.lookingForAJobDescription ?
+                        <div className={descrSearch}>Description : {profile.lookingForAJobDescription}</div> : ''}
+                </div>
             </div>
         </div>)
     }

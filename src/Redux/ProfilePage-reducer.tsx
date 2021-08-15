@@ -1,14 +1,14 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
 const AddPost = 'ADD-POST';
-const UpdateNewPostText = 'UPDATE-NEW-POST-TEXT';
-const SetUsersProfile = 'SET-USERS-PROFILE';
+const UpdateNewPostTextT = 'UPDATE-NEW-POST-TEXT';
+const SetUsersProfileT = 'SET-USERS-PROFILE';
 
 
 
 
-export const addPostActionCreator = () => ({type: AddPost});
-export const UpdateNewPostTextActionCreator = (text: string) => ({type: UpdateNewPostText, text: text});
-export const SetUsersProfileAC = (profile:any) => ({type: SetUsersProfile, profile:profile});
+export const addPost = () => ({type: AddPost});
+export const UpdateNewPostText = (text: string) => ({type: UpdateNewPostTextT, text: text});
+export const SetUsersProfile = (profile:any) => ({type: SetUsersProfileT, profile:profile});
 
 
 
@@ -67,13 +67,13 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
                     id: 3
                 }, ...state.postData], newPostText: ''
             }
-        case UpdateNewPostText:
+        case UpdateNewPostTextT:
             if (action.text) {
                 return {...state, newPostText: action.text};
             }else {
                 return {...state, newPostText: ''};
             }
-        case SetUsersProfile:
+        case SetUsersProfileT:
             return {...state,profile:action.profile}
     }
 }
