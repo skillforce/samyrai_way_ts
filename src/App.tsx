@@ -1,5 +1,4 @@
 import Header from './components/Header/Header';
-import Profile from './components/Profile/Profile';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
@@ -21,7 +20,7 @@ const App = () => {
             <NavBarContainer/>
             <Switch>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/profile'} render={() => <ProfileContainer/>}/>
+                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
                     <Route path={'/users'} render={() => <ContainerUsersClass />} />
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/news'} render={() => <News/>}/>

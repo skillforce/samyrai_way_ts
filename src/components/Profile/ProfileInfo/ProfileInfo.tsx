@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
+import avatarBlock from '../../../img/avatarBlock.png';
 
 const {
     descriptionBlock,
@@ -39,13 +40,21 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div className={descriptionBlock}>
                 <div className={photoBlock}>
-                    <div className={fullNameUser}>{profile.fullName ? profile.fullName : 'noName NoName'}</div>
+                    <div className={fullNameUser}>{profile.fullName ? profile.fullName : 'noName noName'}</div>
                     <div className={avatar}>
-                        <img src={profile.photos.large} alt="avatarUser"/>
+                        {profile.photos.large? <img src={profile.photos.large} alt="avatarUser"/>
+                            : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
-                    <div className={statusProfile}>status : {profile.aboutMe}</div>
+                    {profile.aboutMe?<div className={statusProfile}>status : {profile.aboutMe}</div>:''}
                 </div>
-                <div className={contactsBlock}>
+                {profile.contacts.facebook ||
+                profile.contacts.website ||
+                profile.contacts.vk ||
+                profile.contacts.twitter ||
+                profile.contacts.instagram ||
+                profile.contacts.youtube||
+                profile.contacts.github ||
+                profile.contacts.mainLink?<div className={contactsBlock}>
                     Contact information:
                     {profile.contacts.facebook ?
                         <div>Facebook: <a href={profile.contacts.facebook}>facebook</a></div> : ''}
@@ -65,7 +74,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         : ''}
                     {profile.contacts.mainLink ?
                         <div> MainLink: <a href={profile.contacts.mainLink}>{profile.contacts.mainLink}</a></div> : ''}
-                </div>
+                </div>:''}
                 <div className={workSearchBlock}>
                     {profile.lookingForAJob ?
                         <div className={searchWork}>I am search a work:<input type="checkbox" checked={true}/></div> :
