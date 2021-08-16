@@ -4,6 +4,7 @@ import DialogsPageReducer from './DialogsPage-reducer';
 import NavBarPageReducer from './NavBarPage-reducer';
 import SideBarReducer from './SideBar-reducer';
 import UserPageReducer from './UsersPage-reducer';
+import AuthReducer from './Auth-reducer';
 
 
 export type StoreType = typeof store;
@@ -16,7 +17,8 @@ let rootReducer = combineReducers({
     dialogsPage: DialogsPageReducer,
     navBarPage: NavBarPageReducer,
     sideBar: SideBarReducer,
-    UsersPage: UserPageReducer
+    UsersPage: UserPageReducer,
+    Auth: AuthReducer
 });
 
 

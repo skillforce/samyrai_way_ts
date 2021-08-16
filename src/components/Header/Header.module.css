@@ -1,12 +1,39 @@
-.header{
+.header {
     grid-area: h;
     background: linear-gradient(90deg, rgb(173, 173, 173), rgb(109, 109, 109) 98%);
     border-radius: 5px;
     margin-top: 5px;
+    display: flex;
 }
-.header img{
+
+.header img {
     width: 162px;
     margin-left: 10px;
     margin-top: 3px;
+}
+
+.loginBlock button{
+    color:white;
+    display: inline-block;
+    border: 2px groove white;
+    padding: 7px 13px;
+    border-radius: 8px;
+    background-color: #282c34;
+    cursor: pointer;
+}
+
+.loginBlock {
+    margin-left: 78%;
+    margin-top: 10px;
+}
+
+.loginBlock button:hover{
+    color:deepskyblue;
+    display: inline-block;
+    border: 4px groove white;
+    padding: 7px 14px;
+    border-radius: 8px;
+    background-color: #282c34;
+    cursor: pointer;
 }
 

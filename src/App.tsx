@@ -9,6 +9,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavBarContainer from './components/Navbar/NavBarContainer';
 import ContainerUsersClass from './components/Users/ContainerUsersClass';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 
 const App = () => {
@@ -16,7 +17,7 @@ const App = () => {
 
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <NavBarContainer/>
             <Switch>
                 <div className={'app-wrapper-content'}>
