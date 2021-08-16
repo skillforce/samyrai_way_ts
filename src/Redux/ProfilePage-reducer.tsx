@@ -1,21 +1,22 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
+import {ProfileType} from '../components/Profile/ProfileContainer';
+
 const AddPost = 'ADD-POST';
 const UpdateNewPostTextT = 'UPDATE-NEW-POST-TEXT';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
 
+export type ACProfileActionType = 'ADD-POST'|'UPDATE-NEW-POST-TEXT'|'SET-USERS-PROFILE'
 
 
-
-export const addPost = () => ({type: AddPost});
-export const UpdateNewPostText = (text: string) => ({type: UpdateNewPostTextT, text: text});
-export const SetUsersProfile = (profile:any) => ({type: SetUsersProfileT, profile:profile});
-
+export const addPost = () => ({type: 'ADD-POST' as const});
+export const UpdateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT' as const, text: text});
+export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
 
 
 export type ActionsDispatchType = {
     type: string
     text?: string
-    profile?:any
+    profile?: ProfileType
 }
 
 let InitialState = {
@@ -45,11 +46,10 @@ let InitialState = {
         }
     ] as PostType[],
     newPostText: '',
-    profile:null
+    profile: null
 }
 
 export type InitialStateProfileType = typeof InitialState;
-
 
 
 const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ActionsDispatchType) => {
@@ -70,11 +70,11 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
         case UpdateNewPostTextT:
             if (action.text) {
                 return {...state, newPostText: action.text};
-            }else {
+            } else {
                 return {...state, newPostText: ''};
             }
         case SetUsersProfileT:
-            return {...state,profile:action.profile}
+            return {...state, profile: action.profile}
     }
 }
 

@@ -2,15 +2,86 @@ import React from 'react';
 import Profile from './Profile';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {SetUsersProfile} from '../../Redux/ProfilePage-reducer';
-import {withRouter} from 'react-router-dom';
+import {ACProfileActionType, InitialStateProfileType, SetUsersProfile} from '../../Redux/ProfilePage-reducer';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 
-class ProfileContainerAPI extends React.Component<any, any> {
+//
+// userId: required(integer)
+// lookingForAJob: required(boolean)
+// lookingForAJobDescription: required(string)
+// fullName: required(string)
+// contacts: required(object)
+// github: required(string)
+// vk: required(string)
+// facebook: required(string)
+// instagram: required(string)
+// twitter: required(string)
+// website: required(string)
+// youtube: required(string)
+// mainLink: required(string)
+// photos: required(object)
+// small: (string)
+// URL address of user photo (small size) (null if photo is not uploaded to the server)
+
+type ProfileContactsType = {
+    github:string|null
+    vk:string|null
+    facebook:string|null
+    instagram:string|null
+    twitter:string|null
+    website:string|null
+    mainLink:string|null
+    youtube:string|null
+}
+
+type ProfilePhotosType = {
+        small:string|null
+        large:string|null
+}
+
+
+type ProfileResponseType={
+    userId:number
+    lookingForAJob:boolean
+    lookingForAJobDescription:string|null
+    fullName:string
+    contacts:ProfileContactsType
+    photos:ProfilePhotosType
+}
+
+ export type ProfileType ={
+    profile:ProfileResponseType | null
+}
+
+export type stateUsersType={
+    profilePage:InitialStateProfileType
+}
+
+type mapDispatchToPropsUsersType ={
+    SetUsersProfile:(profile:ProfileType)=>({type: ACProfileActionType, profile:ProfileType})
+}
+
+
+type PropsContainerProfileType = ProfileType & mapDispatchToPropsUsersType
+
+
+type UserIdType ={
+    userId:string
+}
+
+type PropsAPIContainerType = RouteComponentProps <UserIdType> & PropsContainerProfileType
+
+
+
+
+
+
+class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
 
     componentDidMount() {
-        let usersId = this.props.match.params.userId;
+        let usersId: number = +this.props.match.params.userId;
 
         if(!usersId){
             usersId=2;
@@ -27,7 +98,9 @@ class ProfileContainerAPI extends React.Component<any, any> {
     }
 }
 
-const mapStateToProps = (state: any) => {
+
+
+const mapStateToProps = (state:stateUsersType):ProfileType => {
     return {
         profile: state.profilePage.profile
     }
