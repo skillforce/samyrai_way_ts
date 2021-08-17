@@ -23,8 +23,9 @@
 }
 
 .loginBlock {
-    margin-left: 78%;
-    margin-top: 10px;
+    margin-left: 75%;
+    margin-top: 14px;
+    color: navajowhite;
 }
 
 .loginBlock button:hover{
