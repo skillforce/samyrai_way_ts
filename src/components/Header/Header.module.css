@@ -23,9 +23,9 @@
 }
 
 .loginBlock {
-    margin-left: 75%;
     margin-top: 14px;
-    color: navajowhite;
+    margin-left: 8px;
+    color: white;
 }
 
 .loginBlock button:hover{
@@ -36,5 +36,26 @@
     border-radius: 8px;
     background-color: #282c34;
     cursor: pointer;
+}
+
+.autorize{
+    margin-top: 1px;
+    height: 50px;
+    margin-left: 71%;
+    display: flex;
+    border: 1px solid white;
+    border-radius: 8px;
+    background-color:#7f7f7f;
+    flex-direction: row-reverse;
+    justify-content: flex-end ;
+    padding: 0 8px;
+}
+
+
+.autorize img{
+    width:40px;
+    height:40px;
+    border: 3px groove goldenrod;
+    border-radius: 45px;
 }
 

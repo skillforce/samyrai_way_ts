@@ -3,6 +3,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import s from './Profile.module.css';
 import {PostType} from './MyPosts/Post/Post';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
+import {ProfileType} from './ProfileContainer';
 
 
 export type PostDataType = {
@@ -11,7 +12,7 @@ export type PostDataType = {
 }
 
 
-const Profile = (props:any) => {
+const Profile = (props:ProfileType) => {
 
 
     return (

@@ -4,17 +4,19 @@ import s from './Header.module.css';
 import logo from './logo.png';
 import {mapStateToPropsHeaderType} from './HeaderContainer';
 
-const {header, loginBlock} = s;
+const {header, loginBlock, autorize} = s;
 
 
 const Header = (props: mapStateToPropsHeaderType) => {
-    const {login, isFetching,id,photo} = props;
-    debugger
+    const {login, isFetching, photo} = props;
     return (
         <header className={header}>
             <img src={logo}/>
-            {isFetching && photo===null ?
-                <div className={loginBlock}>{login}+{photo}</div> :
+            {isFetching && !photo ?
+                <div className={autorize}>
+                    <div className={loginBlock}>{login}</div>
+                    {/*<img src={photo} alt="miniAva"/>*/}
+                </div> :
                 <div className={loginBlock}>
                     <NavLink to={'/login'}>
                         <button>Login</button>

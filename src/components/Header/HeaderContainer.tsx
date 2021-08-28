@@ -8,6 +8,7 @@ import {
 } from '../../Redux/Auth-reducer';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
+import {usersAPI} from '../../API/API';
 
 
 export type mapStateToPropsHeaderType = {
@@ -30,14 +31,10 @@ class HeaderContainer extends React.Component<HeaderContainerClassType> {
 
     componentDidMount() {
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me/`, {
-            withCredentials: true
-        })
-            .then((response) => {
-                if (response.data.resultCode === 0) {
-                    this.props.setUsersHeader(response.data.data);
-                    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.id}`)
-                        .then((response) => {
+      usersAPI.authMe().then((response) => {
+                if (response.resultCode === 0) {
+                    this.props.setUsersHeader(response.data);
+                   usersAPI.getPhoto(this.props.photo).then((response) => {
                             this.props.setUsersPhotoHeader(response.data.photos.small)
                         });
                 }

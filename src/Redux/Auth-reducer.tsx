@@ -21,7 +21,7 @@ export type InitialStateHeaderType = {
     id: number | null
     login: string | null
     email: string | null
-    isFetching?: boolean
+    isFetching: boolean
     photo:string|undefined
 };
 

@@ -6,24 +6,6 @@ import {ACProfileActionType, InitialStateProfileType, SetUsersProfile} from '../
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 
-//
-// userId: required(integer)
-// lookingForAJob: required(boolean)
-// lookingForAJobDescription: required(string)
-// fullName: required(string)
-// contacts: required(object)
-// github: required(string)
-// vk: required(string)
-// facebook: required(string)
-// instagram: required(string)
-// twitter: required(string)
-// website: required(string)
-// youtube: required(string)
-// mainLink: required(string)
-// photos: required(object)
-// small: (string)
-// URL address of user photo (small size) (null if photo is not uploaded to the server)
-
 type ProfileContactsType = {
     github:string|null
     vk:string|null
