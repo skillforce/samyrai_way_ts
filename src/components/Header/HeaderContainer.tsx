@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header';
-import axios from 'axios';
 import {
     AllActionType,
     InitialStateHeaderType,
@@ -15,7 +14,7 @@ export type mapStateToPropsHeaderType = {
     login: string | null
     isFetching: boolean | undefined
     id: number | null
-    photo: string | null | undefined
+    photo: string | undefined
 }
 type mapDispatchToPropsHeaderType = {
     setUsersHeader: (user: InitialStateHeaderType) => { type: AllActionType, user: InitialStateHeaderType }

@@ -1,8 +1,9 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import s from './Header.module.css';
-import logo from './logo.png';
+import logo from '../../img/logo.png';
+import voidAva from '../../img/avatarBlock.png';
 import {mapStateToPropsHeaderType} from './HeaderContainer';
+import { NavLink } from 'react-router-dom';
 
 const {header, loginBlock, autorize} = s;
 
@@ -15,7 +16,7 @@ const Header = (props: mapStateToPropsHeaderType) => {
             {isFetching && !photo ?
                 <div className={autorize}>
                     <div className={loginBlock}>{login}</div>
-                    {/*<img src={photo} alt="miniAva"/>*/}
+                    {photo? <img src={photo} alt="miniAva"/>:<img src={voidAva} alt='voidAva'/>}
                 </div> :
                 <div className={loginBlock}>
                     <NavLink to={'/login'}>

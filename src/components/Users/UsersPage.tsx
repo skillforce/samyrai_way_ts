@@ -16,10 +16,22 @@ type UsersPagePropsType = {
     onUnFollow: (userId: number) => void
     onPageChanged: (t: number) => void
     isFetching: boolean
+    followInProgress: [] | number[]
+    toggleIsFollowingProgress: (id: number, isFetching: boolean) => { type: 'TOGGLE-IS-FOLLOWING-PROGRESS'; id: number; isFetching: boolean; }
 }
 
 const UsersPage = (props: UsersPagePropsType) => {
-    const {UsersData, onPageChanged, totalUsersCount, pageSize, currentPage, onFollow, onUnFollow} = props;
+    const {
+        UsersData,
+        onPageChanged,
+        totalUsersCount,
+        pageSize,
+        currentPage,
+        onFollow,
+        onUnFollow,
+        followInProgress,
+        toggleIsFollowingProgress
+    } = props;
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let allPages = [];
@@ -44,18 +56,26 @@ const UsersPage = (props: UsersPagePropsType) => {
                         <div className={statusMSG}>{t.status}</div>
                     </div>
                 </div>
-                <div>{t.followed && <button className={t.followed ? btnFoll : btnUnFoll} onClick={() => {
-                    usersAPI.unFollowUser(t.id).then((response) => {
-                        if (response.resultCode === 0) {
-                            onUnFollow(t.id)
-                        }
-                    });
-                }}>Unfollow</button>}
-                    {!t.followed && <button className={t.followed ? btnFoll : btnUnFoll} onClick={() => {
+                <div>{t.followed &&
+                <button disabled={followInProgress.some(id => id === t.id)} className={t.followed ? btnFoll : btnUnFoll}
+                        onClick={() => {
+                            toggleIsFollowingProgress(t.id,true)
+                            usersAPI.unFollowUser(t.id).then((response) => {
+                                if (response.resultCode === 0) {
+                                    onUnFollow(t.id)
+                                }
+                                toggleIsFollowingProgress( t.id,false)
+                            });
+                        }}>Unfollow</button>}
+                    {!t.followed &&
+                    <button disabled={followInProgress.some(id => id === t.id)}
+                            className={t.followed ? btnFoll : btnUnFoll} onClick={() => {
+                        toggleIsFollowingProgress(t.id,true)
                         usersAPI.followUser(t.id).then((response) => {
                             if (response.resultCode === 0) {
                                 onFollow(t.id)
                             }
+                            toggleIsFollowingProgress(t.id,false)
                         });
                     }}>Follow</button>}
                 </div>

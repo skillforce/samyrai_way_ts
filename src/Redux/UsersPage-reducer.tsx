@@ -1,9 +1,21 @@
-const FollowUsers = 'FOLLOW';
-const UnfollowUsers = 'UNFOLLOW';
-const SetUsers = 'SET-USERS'
-const SetCurrentPage = 'SET-CURRENT-PAGE'
-const setTotalUserCount = 'SET-TOTAL-USER-COUNT'
-const ToggleIsFetching = 'TOGGLE-IS-FETCHING'
+const FollowUsers = 'FOLLOW' as const;
+const UnfollowUsers = 'UNFOLLOW' as const;
+const SetUsers = 'SET-USERS' as const
+const SetCurrentPage = 'SET-CURRENT-PAGE' as const
+const setTotalUserCount = 'SET-TOTAL-USER-COUNT' as const
+const ToggleIsFetching = 'TOGGLE-IS-FETCHING' as const
+const ToggleIsFollowingProgress = 'TOGGLE-IS-FOLLOWING-PROGRESS' as const
+
+
+type UsersAllActionType =
+    typeof FollowUsers
+    | typeof UnfollowUsers
+    | typeof SetUsers
+    | typeof SetCurrentPage
+    | typeof setTotalUserCount
+    | typeof ToggleIsFetching
+    | typeof ToggleIsFollowingProgress
+
 
 export const onFollow = (id: number) => ({type: FollowUsers, id: id});
 export const onUnFollow = (id: number) => ({type: UnfollowUsers, id: id});
@@ -18,6 +30,13 @@ export const toggleIsFetching = (isFetching: boolean) => ({
     isFetching: isFetching
 });
 
+export const toggleIsFollowingProgress = (id: number,isFetching:boolean) => ({
+    type: ToggleIsFollowingProgress,
+    id,
+    isFetching,
+
+});
+
 export type UsersDataType = {
     name: string
     id: number
@@ -28,15 +47,16 @@ export type UsersDataType = {
 }
 
 export type UsersReducerActionType = {
-    type: string;
-    id?: number
-    users?: UsersDataType[]
-    page?: number
+    type: UsersAllActionType
+    id: number
+    users: UsersDataType[]
+    page: number
     totalUsersCount?: number
     isFetching: boolean
+    followInProgress: []
 }
 
-// type InitialStateUsersType = typeof InitialState;
+
 type InitialStateUsersType = any;
 
 let InitialState = {
@@ -44,7 +64,8 @@ let InitialState = {
     pageSize: 8,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followInProgress: []
 }
 
 const UserPageReducer = (state: InitialStateUsersType = InitialState, action: UsersReducerActionType): InitialStateUsersType => {
@@ -79,6 +100,13 @@ const UserPageReducer = (state: InitialStateUsersType = InitialState, action: Us
 
         case ToggleIsFetching:
             return {...state, isFetching: action.isFetching}
+        case ToggleIsFollowingProgress:
+            return {
+                ...state,
+                followInProgress: action.isFetching ? [...state.followInProgress,action.id]:
+                    state.followInProgress.filter((id:number) => id != action.id)
+
+            }
         default:
             return state;
     }
