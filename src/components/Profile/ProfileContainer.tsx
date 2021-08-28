@@ -4,6 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {ACProfileActionType, InitialStateProfileType, SetUsersProfile} from '../../Redux/ProfilePage-reducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {usersAPI} from '../../API/API';
 
 
 type ProfileContactsType = {
@@ -68,8 +69,8 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
         if(!usersId){
             usersId=2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${usersId}`).then((response) => {
-            this.props.SetUsersProfile(response.data)
+        usersAPI.getUser(usersId).then((response) => {
+            this.props.SetUsersProfile(response)
         });
     }
 

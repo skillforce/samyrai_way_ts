@@ -12,6 +12,9 @@ export const usersAPI = {
     getUsers: (currentPage: number = 1, pageSize: number = 10) => {
         return instanceUser.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
     },
+    getUser:(id:number) => {
+        return instanceUser.get(`profile/${id}`).then(response => response.data);
+    },
     authMe: () => {
         return instanceUser.get('auth/me/').then(response => response.data);
     },
