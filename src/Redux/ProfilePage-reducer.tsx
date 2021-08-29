@@ -1,16 +1,27 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
 import {ProfileType} from '../components/Profile/ProfileContainer';
+import {Dispatch} from 'redux';
+import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
+import {usersAPI} from '../API/API';
 
 const AddPost = 'ADD-POST';
 const UpdateNewPostTextT = 'UPDATE-NEW-POST-TEXT';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
 
-export type ACProfileActionType = 'ADD-POST'|'UPDATE-NEW-POST-TEXT'|'SET-USERS-PROFILE'
+export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USERS-PROFILE'
 
 
 export const addPost = () => ({type: 'ADD-POST' as const});
 export const UpdateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT' as const, text: text});
 export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
+
+export const getProfile = (userId: number): any => {
+    return (dispatch: Dispatch<ActionType>) => {
+        usersAPI.getUser(userId).then((response) => {
+            dispatch(SetUsersProfile(response));
+        });
+    }
+}
 
 
 export type ActionsDispatchType = {

@@ -1,13 +1,12 @@
 import React from 'react';
 import Header from './Header';
 import {
-    AllActionType,
+    AllActionType, getAuthMe,
     InitialStateHeaderType,
     setUsersHeader, setUsersPhotoHeader
 } from '../../Redux/Auth-reducer';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
-import {usersAPI} from '../../API/API';
 
 
 export type mapStateToPropsHeaderType = {
@@ -19,7 +18,7 @@ export type mapStateToPropsHeaderType = {
 type mapDispatchToPropsHeaderType = {
     setUsersHeader: (user: InitialStateHeaderType) => { type: AllActionType, user: InitialStateHeaderType }
     setUsersPhotoHeader: (photo: string | null) => ({ type: AllActionType, photo: string | null })
-
+    getAuthMe: (photo: string | undefined) => void
 }
 
 type HeaderContainerClassType = mapStateToPropsHeaderType & mapDispatchToPropsHeaderType
@@ -29,17 +28,7 @@ class HeaderContainer extends React.Component<HeaderContainerClassType> {
 
 
     componentDidMount() {
-
-      usersAPI.authMe().then((response) => {
-                if (response.resultCode === 0) {
-                    this.props.setUsersHeader(response.data);
-                   usersAPI.getPhoto(this.props.photo).then((response) => {
-                            this.props.setUsersPhotoHeader(response.data.photos.small)
-                        });
-                }
-
-            });
-
+        this.props.getAuthMe(this.props.photo);
     }
 
 
@@ -61,4 +50,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsHeaderType => {
 }
 
 
-export default connect(mapStateToProps, {setUsersHeader, setUsersPhotoHeader})(HeaderContainer);
+export default connect(mapStateToProps, {setUsersHeader, setUsersPhotoHeader, getAuthMe})(HeaderContainer);

@@ -1,3 +1,7 @@
+import {Dispatch} from 'redux';
+import {usersAPI} from '../API/API';
+import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
+
 const FollowUsers = 'FOLLOW' as const;
 const UnfollowUsers = 'UNFOLLOW' as const;
 const SetUsers = 'SET-USERS' as const
@@ -36,6 +40,44 @@ export const toggleIsFollowingProgress = (id: number,isFetching:boolean) => ({
     isFetching,
 
 });
+
+export const getUsers=(currentPage:number, pageSize:number):any=>{
+    return (dispatch:Dispatch<ActionType>)=>{
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize).then((response) => {
+            dispatch(setUsers(response.items));
+            dispatch(setTotalUsersCount(response.totalCount));
+            dispatch(toggleIsFetching(false));
+            dispatch(setCurrentPage(currentPage));
+        });
+    }
+}
+export const UnFollowUsers=(userId:number):any=>{
+    return (dispatch:Dispatch<ActionType>)=>{
+            dispatch(toggleIsFollowingProgress(userId,true));
+            usersAPI.unFollowUser(userId).then((response) => {
+                if (response.resultCode === 0) {
+                    dispatch(onUnFollow(userId));
+                }
+                dispatch(toggleIsFollowingProgress(userId,false));
+            });
+        }
+}
+
+
+export const followUsers=(userId:number):any=>{
+    return (dispatch:Dispatch<ActionType>)=>{
+            dispatch(toggleIsFollowingProgress(userId,true));
+            usersAPI.followUser(userId).then((response) => {
+                if (response.resultCode === 0) {
+                    dispatch(onFollow(userId));
+                }
+                dispatch(toggleIsFollowingProgress(userId,false));
+            });
+        }
+}
+
+
 
 export type UsersDataType = {
     name: string
