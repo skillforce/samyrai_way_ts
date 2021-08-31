@@ -27,7 +27,7 @@ export const getProfile = (userId: number): any => {
 export type ActionsDispatchType = {
     type: string
     text?: string
-    profile?: ProfileType
+    profile? : ProfileType
 }
 
 let InitialState = {
@@ -85,7 +85,7 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
                 return {...state, newPostText: ''};
             }
         case SetUsersProfileT:
-            return {...state, profile: action.profile}
+            return {...state, profile:action.profile}
     }
 }
 

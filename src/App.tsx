@@ -1,4 +1,3 @@
-import Header from './components/Header/Header';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
@@ -10,9 +9,11 @@ import NavBarContainer from './components/Navbar/NavBarContainer';
 import ContainerUsersClass from './components/Users/ContainerUsersClass';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from './components/Login/login';
 
 
-const App = () => {
+
+const App:React.FC = () => {
 
 
     return (
@@ -22,11 +23,12 @@ const App = () => {
             <Switch>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                    <Route path={'/users'} render={() => <ContainerUsersClass />} />
+                    <Route path={'/users'} render={() => <ContainerUsersClass/>}/>
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
+                    <Route path={'/login'} render={() => <Login/>}/>
                 </div>
             </Switch>
         </div>

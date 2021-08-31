@@ -1,4 +1,5 @@
 import React from 'react';
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 
 
 
@@ -8,4 +9,4 @@ const Settings=()=>{
 }
 
 
-export default Settings;
+export default withAuthRedirect(Settings);

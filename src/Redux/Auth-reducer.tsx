@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
 import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
-import {usersAPI} from '../API/API';
+import {AuthAPI, usersAPI} from '../API/API';
 
 
 const Set_User_Data = 'SET_USERS_DATA';
@@ -13,7 +13,7 @@ export const setUsersPhotoHeader = (photo: string|null) => ({type: 'SET_USERS_PH
 
 export const getAuthMe = (photo:string|undefined):any=>{
     return (dispatch:Dispatch<ActionType>)=>{
-        usersAPI.authMe().then((response) => {
+        AuthAPI.authMe().then((response) => {
             if (response.resultCode === 0) {
                 dispatch(setUsersHeader(response.data));
                 usersAPI.getPhoto(photo).then((response) => {
@@ -65,7 +65,7 @@ const AuthReducer = (state: InitialStateHeaderType = InitialState, action: AuthA
             } else {
                 return state
             }
-        case 'SET_USERS_PHOTO':
+        case Set_User_Photo:
            return{
         ...state,
           photo:action.photo

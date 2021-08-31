@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 
 
 
@@ -8,4 +8,4 @@ const Music=()=>{
 }
 
 
-export default Music;
+export default withAuthRedirect(Music);

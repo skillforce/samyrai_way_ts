@@ -2,11 +2,13 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
 import {
     setCurrentPage,
-    UsersDataType,  getUsers, followUsers, UnFollowUsers
+    UsersDataType, getUsers, followUsers, UnFollowUsers
 } from '../../Redux/UsersPage-reducer';
 import React from 'react';
 import UsersPage from './UsersPage';
 import Preloader from '../Preloader/Preloader';
+import {withAuthRedirect} from '../../HOC/withAuthRedirect';
+import {compose} from 'redux';
 
 
 class UsersAPIContainer extends React.Component<UsersClassPropsType> {
@@ -23,8 +25,9 @@ class UsersAPIContainer extends React.Component<UsersClassPropsType> {
 
 
     render() {
-        return (<>
-            {this.props.isFetching ? <Preloader/> :
+        return this.props.isFetching ?
+            <Preloader/> :
+            <>
                 <UsersPage UsersData={this.props.UsersData}
                            onPageChanged={this.onPageChanged}
                            totalUsersCount={this.props.totalUsersCount}
@@ -34,8 +37,8 @@ class UsersAPIContainer extends React.Component<UsersClassPropsType> {
                            followInProgress={this.props.followInProgress}
                            followUsers={this.props.followUsers}
                            unFollowUsers={this.props.UnFollowUsers}
-                />}
-        </>)
+                />
+            </>
     }
 }
 
@@ -59,7 +62,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsUsersType => {
         totalUsersCount: state.UsersPage.totalUsersCount,
         currentPage: state.UsersPage.currentPage,
         isFetching: state.UsersPage.isFetching,
-        followInProgress: state.UsersPage.followInProgress
+        followInProgress: state.UsersPage.followInProgress,
     }
 }
 
@@ -72,8 +75,12 @@ const dispatchersToProps = {
 type DispatchPropsType = typeof dispatchersToProps
 
 
-const ContainerUsersClass = connect(mapStateToProps,
-    {setCurrentPage, getUsers, followUsers, UnFollowUsers})(UsersAPIContainer);
 
 
-export default ContainerUsersClass;
+
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps,
+        {setCurrentPage, getUsers, followUsers, UnFollowUsers})
+)(UsersAPIContainer)

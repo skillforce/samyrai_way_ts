@@ -4,6 +4,7 @@ import Message from './message/message';
 import DialogItem, {DialogsNamesType} from './dialogItems/dialogItems';
 import EnterMessageContainer from './message/EnterMess/EnterMessageContainer';
 import {DialogsPropsType} from './DialogsContainer';
+import {Redirect} from 'react-router-dom';
 
 
 const {dialogs, messages, dialogsItems, inputTitle} = s;
@@ -11,10 +12,12 @@ const {dialogs, messages, dialogsItems, inputTitle} = s;
 
 const Dialogs = (pr: DialogsPropsType) => {
 
+
     const {dialogsData, messagesData} = pr;
     const {inputMessage, outputMessage} = messagesData;
     const dialogComponents = dialogsData.map((t: DialogsNamesType) => (
         <DialogItem photo={t.photo} id={t.id} name={t.name}/>))
+
 
     return (<div className={dialogs}>
         <div className={dialogsItems}>
@@ -27,7 +30,8 @@ const Dialogs = (pr: DialogsPropsType) => {
         <div className={inputTitle}/>
         <EnterMessageContainer/>
     </div>)
-}
 
+
+}
 
 export default Dialogs;

@@ -4,6 +4,7 @@
     border-radius: 5px;
     margin-top: 5px;
     display: flex;
+    justify-content: space-between
 }
 
 .header img {
@@ -14,12 +15,12 @@
 
 .loginBlock button{
     color:white;
-    display: inline-block;
     border: 2px groove white;
     padding: 7px 13px;
     border-radius: 8px;
     background-color: #282c34;
     cursor: pointer;
+    margin-right: 15px;
 }
 
 .loginBlock {
@@ -41,7 +42,7 @@
 .autorize{
     margin-top: 1px;
     height: 50px;
-    margin-left: 71%;
+    margin-right:1%;
     display: flex;
     border: 1px solid white;
     border-radius: 8px;

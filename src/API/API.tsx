@@ -15,9 +15,7 @@ export const usersAPI = {
     getUser:(id:number) => {
         return instanceUser.get(`profile/${id}`).then(response => response.data);
     },
-    authMe: () => {
-        return instanceUser.get('auth/me/').then(response => response.data);
-    },
+
     getPhoto: (photo: string | null | undefined) => {
         return instanceUser.get(`profile/${photo}`).then(response => response.data);
     },
@@ -29,5 +27,11 @@ export const usersAPI = {
     },
 }
 
+
+export const AuthAPI ={
+    authMe: () => {
+        return instanceUser.get('auth/me/').then(response => response.data);
+    },
+}
 
 
