@@ -2,12 +2,12 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 import avatarBlock from '../../../img/avatarBlock.png';
+import {Status} from '../Status/status';
+import {ProfileResponseType} from '../ProfileContainer';
 
 const {
     descriptionBlock,
-    title_img,
     avatar,
-    statusProfile,
     contactsBlock,
     fullNameUser,
     photoBlock,
@@ -18,43 +18,38 @@ const {
 
 
 type ProfileInfoPropsType = {
-    src: string
-    profile: any
+    profile: ProfileResponseType|null
 }
 
+
+
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    const {src, profile} = props;
+    const {profile} = props;
     if (!profile) {
         return (<div>
-            <div className={title_img}>
-                <img alt="ava" src={src}/>
-            </div>
             <div className={descriptionBlock}>
                 <Preloader/>
             </div>
         </div>)
     } else {
-        return (<div>
-            <div className={title_img}>
-                <img alt="ava" src={src}/>
-            </div>
+        return (
             <div className={descriptionBlock}>
                 <div className={photoBlock}>
                     <div className={fullNameUser}>{profile.fullName ? profile.fullName : 'noName noName'}</div>
                     <div className={avatar}>
-                        {profile.photos.large? <img src={profile.photos.large} alt="avatarUser"/>
+                        {profile.photos.large ? <img src={profile.photos.large} alt="avatarUser"/>
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
-                    {profile.aboutMe?<div className={statusProfile}>status : {profile.aboutMe}</div>:''}
+                    <Status status={profile.aboutMe} />
                 </div>
                 {profile.contacts.facebook ||
                 profile.contacts.website ||
                 profile.contacts.vk ||
                 profile.contacts.twitter ||
                 profile.contacts.instagram ||
-                profile.contacts.youtube||
+                profile.contacts.youtube ||
                 profile.contacts.github ||
-                profile.contacts.mainLink?<div className={contactsBlock}>
+                profile.contacts.mainLink ? <div className={contactsBlock}>
                     Contact information:
                     {profile.contacts.facebook ?
                         <div>Facebook: <a href={profile.contacts.facebook}>facebook</a></div> : ''}
@@ -74,7 +69,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         : ''}
                     {profile.contacts.mainLink ?
                         <div> MainLink: <a href={profile.contacts.mainLink}>{profile.contacts.mainLink}</a></div> : ''}
-                </div>:''}
+                </div> : ''}
                 <div className={workSearchBlock}>
                     {profile.lookingForAJob ?
                         <div className={searchWork}>I am search a work:<input type="checkbox" checked={true}/></div> :
@@ -83,7 +78,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         <div className={descrSearch}>Description : {profile.lookingForAJobDescription}</div> : ''}
                 </div>
             </div>
-        </div>)
+        )
     }
 
 

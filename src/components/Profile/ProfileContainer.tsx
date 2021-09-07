@@ -29,7 +29,8 @@ type ProfilePhotosType = {
 }
 
 
-type ProfileResponseType = {
+export type ProfileResponseType = {
+    aboutMe:string
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string | null
