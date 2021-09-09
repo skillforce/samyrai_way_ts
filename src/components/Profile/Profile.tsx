@@ -15,7 +15,7 @@ export type PostDataType = {
 const Profile = (props: ProfileType) => {
 
    return (<div>
-        <ProfileInfo profile={props.profile}/>
+        <ProfileInfo updateStatus={props.updateStatus}  status={props.status} profile={props.profile}/>
         <MyPostsContainer/>
     </div>)
 

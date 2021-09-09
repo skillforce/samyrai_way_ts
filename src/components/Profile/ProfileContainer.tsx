@@ -3,11 +3,11 @@ import Profile from './Profile';
 import {connect} from 'react-redux';
 import {
     ACProfileActionType,
-    getProfile,
+    getProfile, getStatus,
     InitialStateProfileType,
-    SetUsersProfile
+    SetUsersProfile, updateStatus
 } from '../../Redux/ProfilePage-reducer';
-import { RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {AppStateType} from '../../Redux/ReduxStore';
 import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 import {compose} from 'redux';
@@ -30,7 +30,7 @@ type ProfilePhotosType = {
 
 
 export type ProfileResponseType = {
-    aboutMe:string
+    aboutMe: string
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string | null
@@ -40,7 +40,9 @@ export type ProfileResponseType = {
 }
 
 export type ProfileType = {
-    profile: ProfileResponseType|null
+    profile: ProfileResponseType | null
+    status:null|string
+    updateStatus:(newMess:string)=>void
 }
 
 export type stateUsersType = {
@@ -50,6 +52,8 @@ export type stateUsersType = {
 type mapDispatchToPropsUsersType = {
     SetUsersProfile: (profile: ProfileType) => ({ type: ACProfileActionType, profile: ProfileType })
     getProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus:(newStatus: string) => void
 }
 
 
@@ -73,24 +77,29 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
             usersId = 18877;
         }
         this.props.getProfile(usersId);
+        this.props.getStatus(usersId);
+
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile}/>
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
     }
 }
 
 
-const mapStateToProps = (state: AppStateType)=> {
+const mapStateToProps = (state: AppStateType) => {
+
 
     return {
         // @ts-ignore
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        // @ts-ignore
+        status: state.profilePage.status
     }
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps,{SetUsersProfile, getProfile}),
+    connect(mapStateToProps, {SetUsersProfile, getProfile, getStatus,updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainerAPI)

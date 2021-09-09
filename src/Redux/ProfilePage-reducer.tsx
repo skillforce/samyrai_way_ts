@@ -2,23 +2,46 @@ import {PostType} from '../components/Profile/MyPosts/Post/Post';
 import {ProfileType} from '../components/Profile/ProfileContainer';
 import {Dispatch} from 'redux';
 import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
-import {usersAPI} from '../API/API';
+import {profileAPI} from '../API/API';
 
 const AddPost = 'ADD-POST';
 const UpdateNewPostTextT = 'UPDATE-NEW-POST-TEXT';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
+const SetUsersStatusT = 'SET-USERS-STATUS';
 
-export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USERS-PROFILE'
+
+export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USERS-PROFILE' | 'SET-USERS-STATUS'
 
 
 export const addPost = () => ({type: 'ADD-POST' as const});
 export const UpdateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT' as const, text: text});
 export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
+export const SetUsersStatus = (status: string) => ({type: 'SET-USERS-STATUS' as const, status});
 
 export const getProfile = (userId: number): any => {
     return (dispatch: Dispatch<ActionType>) => {
-        usersAPI.getUser(userId).then((response) => {
+        profileAPI.getProfile(userId).then((response) => {
             dispatch(SetUsersProfile(response));
+        });
+    }
+}
+
+export const getStatus = (userId: number): any => {
+    return (dispatch: Dispatch<ActionType>) => {
+        profileAPI.getStatus(userId).then((response) => {
+            if (response != null) {
+                dispatch(SetUsersStatus(response));
+            }else{
+                dispatch(SetUsersStatus(''));
+            }
+        });
+    }
+}
+
+export const updateStatus = (newStatus: string): any => {
+    return (dispatch: Dispatch<ActionType>) => {
+        profileAPI.updateStatus(newStatus).then((response) => {
+            dispatch(SetUsersStatus(newStatus));
         });
     }
 }
@@ -27,7 +50,8 @@ export const getProfile = (userId: number): any => {
 export type ActionsDispatchType = {
     type: string
     text?: string
-    profile? : ProfileType
+    profile?: ProfileType
+    status: string
 }
 
 let InitialState = {
@@ -57,7 +81,8 @@ let InitialState = {
         }
     ] as PostType[],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: null
 }
 
 export type InitialStateProfileType = typeof InitialState;
@@ -85,9 +110,10 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
                 return {...state, newPostText: ''};
             }
         case SetUsersProfileT:
-            return {...state, profile:action.profile}
+            return {...state, profile: action.profile}
+        case SetUsersStatusT:
+            return {...state, status: action.status}
     }
 }
-
 
 export default ProfilePageReducer;

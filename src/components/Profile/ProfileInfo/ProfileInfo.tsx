@@ -19,12 +19,14 @@ const {
 
 type ProfileInfoPropsType = {
     profile: ProfileResponseType|null
+    status:null|string
+    updateStatus:(newMess:string)=>void
 }
 
 
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    const {profile} = props;
+    const {profile,status} = props;
     if (!profile) {
         return (<div>
             <div className={descriptionBlock}>
@@ -40,7 +42,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         {profile.photos.large ? <img src={profile.photos.large} alt="avatarUser"/>
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
-                    <Status status={profile.aboutMe} />
+                    <Status updateStatus={props.updateStatus} status={status} />
                 </div>
                 {profile.contacts.facebook ||
                 profile.contacts.website ||

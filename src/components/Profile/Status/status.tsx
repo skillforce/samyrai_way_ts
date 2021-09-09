@@ -1,38 +1,57 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, JSXElementConstructor} from 'react';
 import s from './status.module.css';
-import {ProfileResponseType} from '../ProfileContainer';
-import {render} from '@testing-library/react';
+
 
 const {statusProfile, changeStatus} = s
 
 type StatusPropsType = {
     status: string | null
+    updateStatus: (newMess: string) => void
 }
 
 
-export class Status extends React.Component<any, any> {
+export class Status extends React.Component<StatusPropsType, JSXElementConstructor<Status>> {
+
+
 
     state = {
         editMode: false,
-        status:this.props.status
-
+        status: this.props.status
     }
 
 
-    toggleEditMode=()=> {
+    toggleEditModeOn = () => {
         this.setState({
-            editMode: !this.state.editMode
+            editMode: true
         })
     }
+
+
+    toggleEditModeOff = () => {
+        this.setState({
+            editMode: false
+        })
+        this.props.updateStatus(this.state.status ? this.state.status : 'none')
+    }
+
+    onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
 
     render() {
         return (
             <>
                 {this.state.editMode ? <div className={changeStatus}>
-                        <input onBlur={this.toggleEditMode} type="text" autoFocus={true} value={this.props.status ? this.props.status : 'none'}/>
-                        <button onClick={this.toggleEditMode}>Save</button>
+                        <input onBlur={this.toggleEditModeOff} onChange={this.onChangeStatus}
+                               type="text"
+                               autoFocus={true}
+                               value={this.state.status ? this.state.status : ''}/>
+                        <button onClick={this.toggleEditModeOff}>Save</button>
                     </div> :
-                    <div onDoubleClick={this.toggleEditMode}
+                    <div onDoubleClick={this.toggleEditModeOn}
                          className={statusProfile}>status: {this.props.status ? this.props.status : 'none'}</div>}
 
 
