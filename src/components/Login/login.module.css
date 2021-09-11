@@ -1,0 +1,52 @@
+.loginPage{
+    border: 2px solid white;
+    width:350px;
+    height:250px;
+    margin: 125px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: lightblue;
+
+}
+
+.loginPage span{
+    font-size: 25px;
+    font-family:Forte;
+    margin: 15px 0px;
+}
+
+.loginImg1 img{
+    position: absolute;
+    width: 245px;
+    height: 305px;
+    top:35%;
+    left:28%;
+}
+
+
+.loginImg2 img{
+    position: absolute;
+    width: 285px;
+    height: 255px;
+    top:51%;
+    left:72%;
+}
+
+.loginImg3 img{
+    position: absolute;
+    width: 205px;
+    height: 305px;
+    top:10%;
+    left:70%;
+}
+
+.loginImg4 img{
+    position: absolute;
+    width: 305px;
+    height: 135px;
+    top:8%;
+    left: 30%;
+}

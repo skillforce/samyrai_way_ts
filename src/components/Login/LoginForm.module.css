@@ -1,0 +1,27 @@
+.inputField input{
+    height: 25px;
+    margin: 7px 0;
+    border-radius: 8px;
+
+}
+
+.checkBox{
+    font-size: 15px;
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.btnLog{
+    margin-left: 45px;
+}
+
+.btnLog button:hover{
+    color: white;
+    background-color: indianred;
+}
+
+.btnLog button{
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #c1bfff;
+}
