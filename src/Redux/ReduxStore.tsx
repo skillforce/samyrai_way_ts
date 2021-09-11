@@ -6,6 +6,7 @@ import SideBarReducer from './SideBar-reducer';
 import UserPageReducer from './UsersPage-reducer';
 import AuthReducer from './Auth-reducer';
 import thunkMiddleWare from 'redux-thunk';
+import {reducer as formReducer} from 'redux-form'
 
 
 export type StoreType = typeof store;
@@ -19,13 +20,21 @@ let rootReducer = combineReducers({
     navBarPage: NavBarPageReducer,
     sideBar: SideBarReducer,
     UsersPage: UserPageReducer,
-    Auth: AuthReducer
+    Auth: AuthReducer,
+    form: formReducer
 });
 
 
-let store = createStore(rootReducer,applyMiddleware(thunkMiddleWare));
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare));
+
+declare global {
+    interface Window {
+        store: StoreType;
+    }
+}
 
 
+window.store = store;
 export default store;
 
 

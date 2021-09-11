@@ -41,8 +41,8 @@ export type ProfileResponseType = {
 
 export type ProfileType = {
     profile: ProfileResponseType | null
-    status:null|string
-    updateStatus:(newMess:string)=>void
+    status: null | string
+    updateStatus: (newMess: string) => void
 }
 
 export type stateUsersType = {
@@ -53,7 +53,7 @@ type mapDispatchToPropsUsersType = {
     SetUsersProfile: (profile: ProfileType) => ({ type: ACProfileActionType, profile: ProfileType })
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
-    updateStatus:(newStatus: string) => void
+    updateStatus: (newStatus: string) => void
 }
 
 
@@ -81,8 +81,17 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
     }
 
+    componentDidUpdate(prevProps: Readonly<PropsAPIContainerType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState(
+                {status: this.props.status}
+            )
+        }
+    }
+
     render() {
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                        updateStatus={this.props.updateStatus}/>
     }
 }
 
@@ -99,7 +108,7 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {SetUsersProfile, getProfile, getStatus,updateStatus}),
+    connect(mapStateToProps, {SetUsersProfile, getProfile, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainerAPI)
