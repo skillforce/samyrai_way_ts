@@ -4,8 +4,9 @@ import {Dispatch} from 'redux';
 import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
 import {profileAPI} from '../API/API';
 
+
+
 const AddPost = 'ADD-POST';
-const UpdateNewPostTextT = 'UPDATE-NEW-POST-TEXT';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
 const SetUsersStatusT = 'SET-USERS-STATUS';
 
@@ -13,8 +14,7 @@ const SetUsersStatusT = 'SET-USERS-STATUS';
 export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USERS-PROFILE' | 'SET-USERS-STATUS'
 
 
-export const addPost = () => ({type: 'ADD-POST' as const});
-export const UpdateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT' as const, text: text});
+export const addPost = (text: string) => ({type: 'ADD-POST' as const, text});
 export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
 export const SetUsersStatus = (status: string) => ({type: 'SET-USERS-STATUS' as const, status});
 
@@ -31,7 +31,7 @@ export const getStatus = (userId: number): any => {
         profileAPI.getStatus(userId).then((response) => {
             if (response != null) {
                 dispatch(SetUsersStatus(response));
-            }else{
+            } else {
                 dispatch(SetUsersStatus(''));
             }
         });
@@ -52,6 +52,7 @@ export type ActionsDispatchType = {
     text?: string
     profile?: ProfileType
     status: string
+    newOutputMsgText?: string
 }
 
 let InitialState = {
@@ -80,7 +81,6 @@ let InitialState = {
             id: 3
         }
     ] as PostType[],
-    newPostText: '',
     profile: null,
     status: null
 }
@@ -93,21 +93,19 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
         default:
             return state;
         case AddPost:
-            return {
-                ...state, postData: [{
-                    avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
-                    name: 'Indra',
-                    message: state.newPostText,
-                    time: '12:00',
-                    likes: 0,
-                    id: 3
-                }, ...state.postData], newPostText: ''
-            }
-        case UpdateNewPostTextT:
             if (action.text) {
-                return {...state, newPostText: action.text};
+                return {
+                    ...state, postData: [{
+                        avatar: 'https://wiki.jcdn.ru/w/images/thumb/a/a7/Rikudo_second_son.jpg/250px-Rikudo_second_son.jpg',
+                        name: 'Indra',
+                        message: action.text,
+                        time: '12:00',
+                        likes: 0,
+                        id:3
+                    }, ...state.postData]
+                }
             } else {
-                return {...state, newPostText: ''};
+                return state;
             }
         case SetUsersProfileT:
             return {...state, profile: action.profile}

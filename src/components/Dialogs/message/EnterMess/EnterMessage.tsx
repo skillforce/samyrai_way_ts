@@ -1,36 +1,36 @@
-import React, {ChangeEvent, RefObject} from 'react';
+import React from 'react';
 import s from './EnterMessage.module.css';
-import {EnterMessagePropsType} from './EnterMessageContainer';
+import {reduxForm, Field, InjectedFormProps} from 'redux-form';
+import {TextArea} from '../../../FormsControls/FormsControls';
+import {MaxLengthCreator, requiredField} from '../../../../utils/validators';
 
+
+export type MessageType={
+    newMessage:string
+}
 
 const {inputTitle, btn, textInput} = s;
 
+const maxLength50=MaxLengthCreator(50)
 
-const EnterMessage = (pr: EnterMessagePropsType) => {
-
-    const {OnNewMSG, newOutputMsgText, OnNewOutputMsgText} = pr;
-
-
-    const NewOutputMsgTexts = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        OnNewOutputMsgText(e);
-    }
+const EnterMessage: React.FC<InjectedFormProps<MessageType>> = (pr) => {
 
 
-    let newMSG = () => {
-        OnNewMSG();
-    }
-
-    return (
+    return (<form onSubmit={pr.handleSubmit}>
         <div className={inputTitle}>
             <div className={textInput}>
-                <textarea onChange={NewOutputMsgTexts} value={newOutputMsgText} placeholder={'Enter your message'}/>
+                <Field component={TextArea}
+                       validate={[requiredField,maxLength50]}
+                       name ={'newMessage'}
+                       placeholder={'Enter new message'}/>
             </div>
             <div className={btn}>
-                <button onClick={newMSG}>Отправить</button>
+                <button>Отправить</button>
             </div>
-
-
-        </div>)
+        </div>
+    </form>)
 }
 
-export default EnterMessage;
+
+
+export const ReduxEnterMessageForm = reduxForm<MessageType>({form:'Message form'})(EnterMessage)

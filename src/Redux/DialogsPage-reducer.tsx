@@ -2,11 +2,10 @@ import {DialogsNamesType} from '../components/Dialogs/dialogItems/dialogItems';
 import {InputType, OutputType} from '../components/Dialogs/message/message';
 import {ActionsDispatchType} from './ProfilePage-reducer';
 
-const UpdateNewOutputMsg = 'UPDATE-NEW-OUTPUT-MSG';
+
 const AddOutputMsg = 'ADD-OUTPUT-MSG';
 
-export const UpdateNewOutputMsgActionType = (text: string) => ({type: UpdateNewOutputMsg, text: text});
-export const AddOutputMsgActionType = () => ({type: AddOutputMsg});
+export const AddOutputMsgActionType = (newOutputMsgText: string) => ({type: AddOutputMsg, newOutputMsgText});
 
 let InitialState = {
     dialogsData: [
@@ -41,7 +40,6 @@ let InitialState = {
             photo: 'https://pp.userapi.com/c836334/v836334838/4fd0e/ROZ9MDUx9j0.jpg'
         }
     ] as Array<DialogsNamesType>,
-    newOutputMsgText: '',
     messagesData: {
         inputMessage: [
             {id: 1, messages: 'Hello'},
@@ -71,26 +69,17 @@ const DialogsPageReducer = (state: InitialStateDialogsType = InitialState, actio
         default:
             return state;
         case AddOutputMsg:
-            if (state.newOutputMsgText) {
+            if (action.newOutputMsgText) {
                 return state = {
                     ...state, messagesData: {
                         ...state.messagesData, outputMessage:
-                            [...state.messagesData.outputMessage, {id: 1, messages: state.newOutputMsgText}]
-                    },
-                    newOutputMsgText: ''
+                            [...state.messagesData.outputMessage, {id: 1, messages: action.newOutputMsgText}]
+                    }
                 }
-            } else
-                return state
-        case UpdateNewOutputMsg:
-            if (action.text) {
-                state = {...state, newOutputMsgText: action.text};
-                return state;
             } else {
-                state = {...state, newOutputMsgText: ''};
-                return state;
+                return state
             }
     }
-    return state;
 }
 
 export default DialogsPageReducer;

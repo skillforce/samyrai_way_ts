@@ -12,7 +12,7 @@ const Header = (props: mapStateToPropsHeaderType) => {
     const {login, isFetching, photo} = props;
     return (
         <header className={header}>
-            <img src={logo}/>
+            <img src={logo} alt={'miniLogo'}/>
             {isFetching && !photo ?
                 <div className={autorize}>
                     <div className={loginBlock}>{login}</div>

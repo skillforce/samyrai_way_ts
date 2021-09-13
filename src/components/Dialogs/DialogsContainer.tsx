@@ -11,7 +11,6 @@ import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 export type mapStateToPropsDialogsType = {
     dialogsData: DialogsNamesType[]
     messagesData: MessageType
-    newOutputMsgText: string | ''
 }
 
 type mapDispatchToPropsType = {}
@@ -20,7 +19,6 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsDialogsType => {
     return {
         messagesData: state.dialogsPage.messagesData,
         dialogsData: state.dialogsPage.dialogsData,
-        newOutputMsgText: state.dialogsPage.newOutputMsgText,
     }
 }
 
@@ -36,4 +34,4 @@ export type DialogsPropsType = mapStateToPropsDialogsType & mapDispatchToPropsTy
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
-)(Dialogs) ;
+)(Dialogs);

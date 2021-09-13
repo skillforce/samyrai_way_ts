@@ -1,6 +1,5 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import s from './Profile.module.css';
 import {PostType} from './MyPosts/Post/Post';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import {ProfileType} from './ProfileContainer';
@@ -8,7 +7,6 @@ import {ProfileType} from './ProfileContainer';
 
 export type PostDataType = {
     postData: PostType[]
-    newPostText: string
 }
 
 

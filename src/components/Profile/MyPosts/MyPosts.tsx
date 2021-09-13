@@ -1,39 +1,28 @@
-import React, {RefObject} from 'react';
+import React from 'react';
 import Post, {PostType} from './Post/Post';
 import s from './MyPosts.module.css';
 import {MyPostPropsType} from './MyPostsContainer';
+import ReduxMyPostForm, {NewPostMsgType} from './ReduxMyPostForm';
 
 const {postsBlock, posts} = s;
 
 const MyPosts = (pr: MyPostPropsType) => {
 
-    const {postData, newPostText,UpdateNewPostText,addPost} = pr;
+    const {postData, addPost} = pr;
 
 
-    const postComponents = postData? postData.map((t: PostType) => (<Post avatar={t.avatar}
-                                                                name={t.name}
-                                                                message={t.message}
-                                                                time={t.time}
-                                                                likes={t.likes}
-                                                                id={t.id}
-    />)): ''
+    const postComponents = postData ? postData.map((t: PostType) => (<Post key={t.id}
+                                                                           avatar={t.avatar}
+                                                                           name={t.name}
+                                                                           message={t.message}
+                                                                           time={t.time}
+                                                                           likes={t.likes}
+                                                                           id={t.id}
+    />)) : ''
 
-    let newPostElement: RefObject<HTMLTextAreaElement> | undefined = React.createRef();
 
-    let onPostChange = () => {
-        if (newPostElement?.current?.value) {
-            let newText = newPostElement.current.value;
-            UpdateNewPostText(newText);
-        } else {
-            UpdateNewPostText('');
-        }
-
-    }
-
-    let newPost = () => {
-        if (newPostText) {
-            addPost();
-        }
+    const onSubmit = (data: NewPostMsgType) => {
+        addPost(data.NewPost)
     }
 
 
@@ -41,12 +30,7 @@ const MyPosts = (pr: MyPostPropsType) => {
         <div className={postsBlock}>
             <h3> My post </h3>
             <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={newPostText}/>
-                </div>
-                <div>
-                    <button onClick={newPost}>New post</button>
-                </div>
+                <ReduxMyPostForm onSubmit={onSubmit}/>
             </div>
             <div className={posts}>
                 {postComponents}

@@ -30,6 +30,9 @@ export const AuthAPI ={
     authMe: () => {
         return instanceUser.get('auth/me/').then(response => response.data);
     },
+    login: (authObj:any)=>{
+        return instanceUser.post(`/auth/login`,authObj).then(response => response.data);
+    }
 }
 
 export const profileAPI = {

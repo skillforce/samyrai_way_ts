@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -10,11 +10,12 @@ import ContainerUsersClass from './components/Users/ContainerUsersClass';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import {Login} from './components/Login/login';
+import {useSelector} from 'react-redux';
+import {AppStateType} from './Redux/ReduxStore';
 
 
-
-const App:React.FC = () => {
-
+const App: React.FC = () => {
+    const isFetching = useSelector<AppStateType, boolean>(state => state.Auth.isFetching)
 
     return (
         <div className="app-wrapper">
@@ -28,7 +29,8 @@ const App:React.FC = () => {
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
-                    <Route path={'/login'} render={() => <Login/>}/>
+                    <Route path={'/login'} render={() => isFetching ?
+                        <Redirect to={'/profile/:userId?'}/>:<Login/>}/>
                 </div>
             </Switch>
         </div>

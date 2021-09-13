@@ -25,21 +25,21 @@ const Message = (props: MessageType) => {
 
     const {inputMessage, outputMessage} = props;
 
-    const allInputMess = inputMessage.map((t: InputType) => (<div className={inputMess}>
+    const allInputMess = inputMessage.map((t: InputType) => (<div key={t.id} className={inputMess}>
             <div className={inputMess_img}>
-                <img src="https://www.cartonionline.com/gif/CARTOON/naruto/Naruto-shippuden_01.jpg"/>
+                <img src="https://www.cartonionline.com/gif/CARTOON/naruto/Naruto-shippuden_01.jpg" alt={'inputMess'}/>
             </div>
             <div className={inputMess_mess}>
                 <Input messages={t.messages}/>
             </div>
         </div>
     ))
-    const allOutputMess = outputMessage.map((t: OutputType) => (<div className={outputMess}>
+    const allOutputMess = outputMessage.map((t: OutputType) => (<div key={t.id} className={outputMess}>
         <div className={outputMess_mess}>
             <Output messages={t.messages}/>
         </div>
         <div className={outputMess_img}>
-            <img src="https://klike.net/uploads/posts/2020-09/1601453229_1.jpg"/>
+            <img src="https://klike.net/uploads/posts/2020-09/1601453229_1.jpg" alt={'outputMess'}/>
         </div>
     </div>))
 

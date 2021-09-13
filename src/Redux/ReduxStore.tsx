@@ -7,6 +7,7 @@ import UserPageReducer from './UsersPage-reducer';
 import AuthReducer from './Auth-reducer';
 import thunkMiddleWare from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
+import loginPageReducer from './loginPage-reducer';
 
 
 export type StoreType = typeof store;
@@ -21,7 +22,8 @@ let rootReducer = combineReducers({
     sideBar: SideBarReducer,
     UsersPage: UserPageReducer,
     Auth: AuthReducer,
-    form: formReducer
+    form: formReducer,
+    loginPage:loginPageReducer
 });
 
 

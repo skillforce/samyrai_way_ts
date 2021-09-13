@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './output.module.css';
 
 
 export type OutputPropsType = {

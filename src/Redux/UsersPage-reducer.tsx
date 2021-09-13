@@ -146,7 +146,7 @@ const UserPageReducer = (state: InitialStateUsersType = InitialState, action: Us
             return {
                 ...state,
                 followInProgress: action.isFetching ? [...state.followInProgress,action.id]:
-                    state.followInProgress.filter((id:number) => id != action.id)
+                    state.followInProgress.filter((id:number) => id !== action.id)
 
             }
         default:

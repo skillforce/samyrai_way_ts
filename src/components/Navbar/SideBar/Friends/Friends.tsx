@@ -9,10 +9,6 @@ export type FriendsType ={
     src:string
 }
 
-export type FriendsDataType={
-    friendsData:FriendsType[]
-}
-
 export type FriendsPropsType ={
     friendsData: FriendsType[]
 }
@@ -25,9 +21,9 @@ const Friends = (pr:FriendsPropsType) => {
 
 
     const friends = friendsData? friendsData.map((t:FriendsType) => (
-        <div className={photoBlock}>
+        <div key={t.id} className={photoBlock}>
             <div className={photoBlock_photo}>
-                <img src={t.src}/>
+                <img src={t.src} alt={'friendBlockPhoto'}/>
             </div>
             <div className={photoBlock_name}>
                 {t.name}
