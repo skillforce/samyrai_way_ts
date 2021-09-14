@@ -4,18 +4,17 @@ import {NavLink} from 'react-router-dom';
 import SideBar from './SideBar/SideBar';
 import {SideBarType} from '../../Redux/SideBar-reducer';
 import {NavBarType} from '../../Redux/NavBarPage-reducer';
+import {mapStateToPropsReturnType} from './NavBarContainer';
 
 
-export type NavBarPropsType = {
-    navBarLink: NavBarType[]
-    sideBar: SideBarType
 
-}
 
 
 const {nav, item, setting, active} = s;
 
-const NavBar = (pr: NavBarPropsType) => {
+const NavBar = (pr: mapStateToPropsReturnType) => {
+
+
 
     const {navBarLink, sideBar} = pr;
 
@@ -30,7 +29,7 @@ const NavBar = (pr: NavBarPropsType) => {
                 <NavLink to={'/settings'} activeClassName={active}>Настройки</NavLink>
             </div>
             <div>
-                <SideBar sideBar={sideBar}/>
+                <SideBar isFetch={pr.isFetch} sideBar={sideBar}/>
             </div>
         </nav>
     )

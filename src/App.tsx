@@ -30,7 +30,7 @@ const App: React.FC = () => {
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
                     <Route path={'/login'} render={() => isFetching ?
-                        <Redirect to={'/profile/:userId?'}/>:<Login/>}/>
+                        <Redirect to={'/profile/:userId?'}/> : <Login/>}/>
                 </div>
             </Switch>
         </div>

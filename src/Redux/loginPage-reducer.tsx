@@ -1,5 +1,7 @@
 import {AuthAPI} from '../API/API';
 import {Dispatch} from 'redux';
+import {FormDataType} from '../components/Login/LoginForm';
+import {stopSubmit} from 'redux-form';
 
 
 const LOGIN_USER_TRUE = 'LOGIN_USER_LOGIN_PAGE_TRUE';
@@ -10,19 +12,32 @@ export const logInTrue = (userId: number) => ({type: 'LOGIN_USER_LOGIN_PAGE_TRUE
 export const logInFalse = () => ({type: 'LOGIN_USER_LOGIN_PAGE_FALSE' as const});
 
 
-export const logInThunk = (formData:any)=>{
-    return (dispatch:Dispatch)=>{
+export const logInThunk = (formData: FormDataType) => {
+    return (dispatch: Dispatch) => {
         AuthAPI.login(formData).then(response => {
             if (response.resultCode === 0) {
                 dispatch(logInTrue(response.data.userId))
                 window.location.reload();
             } else {
-                dispatch(logInFalse())
+                dispatch(stopSubmit('Login',{_error:response.messages}))
+                console.log(response.messages)
             }
         })
     }
 }
 
+
+export const logOutThunk = () => {
+    return (dispatch: Dispatch) => {
+        AuthAPI.logOut().then(response => {
+            console.log(response)
+            if (response.resultCode === 0) {
+                dispatch(logInFalse())
+                window.location.reload()
+            }
+        })
+    }
+}
 
 
 export type AllActionType = 'LOGIN_USER_LOGIN_PAGE_TRUE' | 'LOGIN_USER_LOGIN_PAGE_FALSE'

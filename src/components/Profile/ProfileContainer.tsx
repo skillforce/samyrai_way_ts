@@ -43,6 +43,7 @@ export type ProfileType = {
     profile: ProfileResponseType | null
     status: null | string
     updateStatus: (newMess: string) => void
+    userIdLog:string
 }
 
 export type stateUsersType = {
@@ -62,6 +63,7 @@ type PropsContainerProfileType = ProfileType & mapDispatchToPropsUsersType
 
 type UserIdType = {
     userId: string
+
 }
 
 type PropsAPIContainerType = RouteComponentProps<UserIdType> & PropsContainerProfileType
@@ -72,9 +74,8 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
     componentDidMount() {
         let usersId: number = +this.props.match.params.userId;
-
         if (!usersId) {
-            usersId = 18877;
+            usersId = +this.props.userIdLog ;
         }
         this.props.getProfile(usersId);
         this.props.getStatus(usersId);
@@ -103,7 +104,9 @@ const mapStateToProps = (state: AppStateType) => {
         // @ts-ignore
         profile: state.profilePage.profile,
         // @ts-ignore
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userIdLog:state.Auth.id,
+        isFetching:state.Auth.isFetching
     }
 }
 

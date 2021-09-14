@@ -6,9 +6,10 @@ import {FriendsPropsType} from './SideBar/Friends/Friends';
 import {NavBarType} from '../../Redux/NavBarPage-reducer';
 
 
-type mapStateToPropsReturnType ={
+export type mapStateToPropsReturnType ={
     navBarLink:NavBarType[]
     sideBar:FriendsPropsType
+    isFetch:boolean
 }
 
 type mapDispatchToPropsReturnType ={}
@@ -18,7 +19,8 @@ type mapDispatchToPropsReturnType ={}
 let mapStateToProps = (state: AppStateType):mapStateToPropsReturnType => {
     return {
         navBarLink: state.navBarPage.navBarLink,
-        sideBar: state.sideBar
+        sideBar: state.sideBar,
+        isFetch:state.Auth.isFetching
     }
 }
 

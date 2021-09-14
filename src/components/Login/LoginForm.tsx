@@ -7,7 +7,7 @@ import {maxLength30} from '../Profile/MyPosts/ReduxMyPostForm';
 
 
 
-const{inputField,checkBox,btnLog}=s;
+const{inputField,checkBox,btnLog,form_summary_error}=s;
 
 
 export type FormDataType = {
@@ -22,6 +22,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return (<form onSubmit={props.handleSubmit}>
             <div className={inputField}>
+
             <div >
                 <Field validate={[requiredField,maxLength30]} placeholder={'email'} name={'email'} type={'text'} component={InputValid}/>
 
@@ -33,6 +34,10 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div className={checkBox}>
                 <Field name={'rememberMe'} component={'input'} type={'checkbox'}/>remember me
             </div>
+            {props.error? <div className={form_summary_error}>
+                {props.error}
+            </div>:''}
+
             <div className={btnLog}>
                 <button>Log In</button>
             </div>
