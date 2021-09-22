@@ -28,12 +28,18 @@ let InitialState = {
 
 
 export const initializedApp = (idUser:number|null)=>(dispatch:Dispatch)=>{
+    
+    if(idUser===null){
+        dispatch(isInitializedAC(false))
+    }
     if(idUser){
         dispatch(getAuthMe(idUser.toString())).then(
             dispatch(isInitializedAC(true))
         )}else{
         dispatch(isInitializedAC(false))
     }
+
+
 
 }
 

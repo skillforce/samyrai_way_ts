@@ -33,32 +33,10 @@ const App: React.FC = () => {
             <HeaderContainer/>
             <NavBarContainer/>
             <div className={'app-wrapper-content'}>
-                {!userId? <Login/> : <Preloader/>}
+                {!!userId ? <Preloader/> : <Login/> }
             </div>
         </div>)
     }
-
-
-    if (!initialized && !userId) {
-        return ( <div className="app-wrapper">
-                <HeaderContainer/>
-                <NavBarContainer/>
-                <Switch>
-                    <div className={'app-wrapper-content'}>
-                        <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                        <Route path={'/users'} render={() => <ContainerUsersClass/>}/>
-                        <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
-                        <Route path={'/news'} render={() => <News/>}/>
-                        <Route path={'/music'} render={() => <Music/>}/>
-                        <Route path={'/settings'} render={() => <Settings/>}/>
-                        <Route path={'/login'} render={() => userId ?
-                            <Redirect to={'/profile/:userId?'}/> : <Login/>}/>
-                    </div>
-                </Switch>
-            </div>
-        )
-    }
-
 
 
 
