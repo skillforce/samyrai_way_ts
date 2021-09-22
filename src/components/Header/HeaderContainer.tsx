@@ -16,7 +16,7 @@ export type mapStateToPropsHeaderType = {
     photo: string | undefined
 }
 type mapDispatchToPropsHeaderType = {
-    setUsersHeader: (user: InitialStateHeaderType) => { type: AllActionType, user: InitialStateHeaderType }
+    setUsersHeader: (user: InitialStateHeaderType,isFetching:boolean) => { type: AllActionType, user: InitialStateHeaderType }
     setUsersPhotoHeader: (photo: string | null) => ({ type: AllActionType, photo: string | null })
     getAuthMe: (photo: string | undefined) => void
 }

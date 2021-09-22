@@ -18,3 +18,8 @@
     border-radius: 5px;
 
 }
+
+.preloadApp{
+    display: inline-block;
+    margin:0 auto;
+}

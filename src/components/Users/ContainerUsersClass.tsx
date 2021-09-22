@@ -80,7 +80,7 @@ type DispatchPropsType = typeof dispatchersToProps
 
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+
     connect(mapStateToProps,
         {setCurrentPage, getUsers, followUsers, UnFollowUsers})
 )(UsersAPIContainer)

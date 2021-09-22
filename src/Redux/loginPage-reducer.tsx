@@ -2,6 +2,7 @@ import {AuthAPI} from '../API/API';
 import {Dispatch} from 'redux';
 import {FormDataType} from '../components/Login/LoginForm';
 import {stopSubmit} from 'redux-form';
+import {getAuthMe} from './Auth-reducer';
 
 
 const LOGIN_USER_TRUE = 'LOGIN_USER_LOGIN_PAGE_TRUE';
@@ -17,10 +18,9 @@ export const logInThunk = (formData: FormDataType) => {
         AuthAPI.login(formData).then(response => {
             if (response.resultCode === 0) {
                 dispatch(logInTrue(response.data.userId))
-                window.location.reload();
+                dispatch(getAuthMe(response.data.userId))
             } else {
-                dispatch(stopSubmit('Login',{_error:response.messages}))
-                console.log(response.messages)
+                dispatch(stopSubmit('Login', {_error: response.messages}))
             }
         })
     }
@@ -30,10 +30,9 @@ export const logInThunk = (formData: FormDataType) => {
 export const logOutThunk = () => {
     return (dispatch: Dispatch) => {
         AuthAPI.logOut().then(response => {
-            console.log(response)
             if (response.resultCode === 0) {
                 dispatch(logInFalse())
-                window.location.reload()
+                dispatch(getAuthMe(response.data.userId))
             }
         })
     }
