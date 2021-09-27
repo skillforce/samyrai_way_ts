@@ -39,12 +39,6 @@ export type ProfileResponseType = {
     photos: ProfilePhotosType
 }
 
-export type ProfileType = {
-    profile: ProfileResponseType | null
-    status: null | string
-    updateStatus: (newMess: string) => void
-    userIdLog:string
-}
 
 export type stateUsersType = {
     profilePage: InitialStateProfileType
@@ -75,7 +69,7 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
     componentDidMount() {
         let usersId: number = +this.props.match.params.userId;
         if (!usersId) {
-            usersId = +this.props.userIdLog ;
+            usersId = +this.props.userIdLog;
         }
         this.props.getProfile(usersId);
         this.props.getStatus(usersId);
@@ -96,22 +90,36 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
     }
 }
 
+export type ProfileType = {
+    profile: ProfileResponseType | null
+    status: null | string
+    updateStatus: (newMess: string) => void
+    userIdLog: string
+}
+type MapStateToPropsType = {
+    profile: ProfileType | null
+    status: string | null
+    userIdLog: number | null
+    isFetching: boolean
+}
 
-const mapStateToProps = (state: AppStateType) => {
-
-
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        // @ts-ignore
         profile: state.profilePage.profile,
-        // @ts-ignore
         status: state.profilePage.status,
-        userIdLog:state.Auth.id,
-        isFetching:state.Auth.isFetching
+        userIdLog: state.Auth.id,
+        isFetching: state.Auth.isFetching
     }
 }
 
+
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {SetUsersProfile, getProfile, getStatus, updateStatus}),
+    connect<MapStateToPropsType, mapDispatchToPropsUsersType, {}, AppStateType>(mapStateToProps, {
+        SetUsersProfile,
+        getProfile,
+        getStatus,
+        updateStatus
+    }),
     withRouter,
     withAuthRedirect
 )(ProfileContainerAPI)

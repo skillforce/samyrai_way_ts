@@ -1,5 +1,5 @@
 import {FriendsType} from '../components/Navbar/SideBar/Friends/Friends';
-import {ActionsDispatchType} from './ProfilePage-reducer';
+
 
 
 export type SideBarType = {
@@ -16,7 +16,7 @@ let InitialState = {
 
 type InitialStateType = typeof InitialState;
 
-export const SideBarReducer = (state: InitialStateType = InitialState, action: ActionsDispatchType) => {
+export const SideBarReducer = (state: InitialStateType = InitialState, action: { type:string }) => {
 
     return state;
 }

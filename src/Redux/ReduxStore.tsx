@@ -11,11 +11,6 @@ import loginPageReducer from './loginPage-reducer';
 import AppReducer from './App-reducer';
 
 
-export type StoreType = typeof store;
-
-export type AppStateType = ReturnType<typeof rootReducer>
-
-
 let rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,
@@ -30,6 +25,10 @@ let rootReducer = combineReducers({
 
 
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare));
+
+export type StoreType = typeof store;
+
+export type AppStateType = ReturnType<typeof rootReducer>
 
 declare global {
     interface Window {

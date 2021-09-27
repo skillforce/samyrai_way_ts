@@ -1,11 +1,14 @@
 import {DialogsNamesType} from '../components/Dialogs/dialogItems/dialogItems';
 import {InputType, OutputType} from '../components/Dialogs/message/message';
-import {ActionsDispatchType} from './ProfilePage-reducer';
 
 
 const AddOutputMsg = 'ADD-OUTPUT-MSG';
 
 export const AddOutputMsgActionType = (newOutputMsgText: string) => ({type: AddOutputMsg, newOutputMsgText});
+
+type DialogsPageActionType = ReturnType<typeof AddOutputMsgActionType>
+
+
 
 let InitialState = {
     dialogsData: [
@@ -64,7 +67,7 @@ let InitialState = {
 export type InitialStateDialogsType = typeof InitialState;
 
 
-const DialogsPageReducer = (state: InitialStateDialogsType = InitialState, action: ActionsDispatchType): InitialStateDialogsType => {
+const DialogsPageReducer = (state: InitialStateDialogsType = InitialState, action: DialogsPageActionType): InitialStateDialogsType => {
     switch (action.type) {
         default:
             return state;

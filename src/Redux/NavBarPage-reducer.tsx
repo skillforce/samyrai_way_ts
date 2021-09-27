@@ -1,4 +1,4 @@
-import {ActionsDispatchType} from './ProfilePage-reducer';
+
 
 
 export type NavBarType = {
@@ -23,7 +23,7 @@ let InitialState = {
 export type InitialStateNavBarType = typeof InitialState;
 
 
-export const NavBarPageReducer = (state: InitialStateNavBarType = InitialState, action: ActionsDispatchType): InitialStateNavBarType => {
+export const NavBarPageReducer = (state: InitialStateNavBarType = InitialState, action: { type:string }): InitialStateNavBarType => {
 
     return state;
 }

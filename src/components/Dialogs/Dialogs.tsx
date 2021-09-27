@@ -2,16 +2,17 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import Message from './message/message';
 import DialogItem, {DialogsNamesType} from './dialogItems/dialogItems';
-import {DialogsPropsType} from './DialogsContainer';
 import {MessageType, ReduxEnterMessageForm} from './message/EnterMess/EnterMessage';
 import {useDispatch} from 'react-redux';
 import {AddOutputMsgActionType} from '../../Redux/DialogsPage-reducer';
+import {mapDispatchToPropsType, mapStateToPropsDialogsType} from './DialogsContainer';
 
 
 const {dialogs, messages, dialogsItems, inputTitle} = s;
 
+export type DialogsPropsType = mapStateToPropsDialogsType & mapDispatchToPropsType
 
-const Dialogs = (pr: DialogsPropsType) => {
+const Dialogs = (pr:DialogsPropsType) => {
 
     const dispatch = useDispatch();
 

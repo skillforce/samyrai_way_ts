@@ -1,10 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import {
-    AllActionType, getAuthMe,
-    InitialStateHeaderType,
-    setUsersHeader, setUsersPhotoHeader
-} from '../../Redux/Auth-reducer';
+import {getAuthMe} from '../../Redux/Auth-reducer';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
 
@@ -16,8 +12,6 @@ export type mapStateToPropsHeaderType = {
     photo: string | undefined
 }
 type mapDispatchToPropsHeaderType = {
-    setUsersHeader: (user: InitialStateHeaderType,isFetching:boolean) => { type: AllActionType, user: InitialStateHeaderType }
-    setUsersPhotoHeader: (photo: string | null) => ({ type: AllActionType, photo: string | null })
     getAuthMe: (photo: string | undefined) => void
 }
 
@@ -50,4 +44,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsHeaderType => {
 }
 
 
-export default connect(mapStateToProps, {setUsersHeader, setUsersPhotoHeader, getAuthMe})(HeaderContainer);
+export default connect<mapStateToPropsHeaderType, mapDispatchToPropsHeaderType, {}, AppStateType>(mapStateToProps, {
+    getAuthMe
+})(HeaderContainer);

@@ -6,9 +6,7 @@ import login2 from '../../img/log2.png';
 import login3 from '../../img/log3.png';
 import login4 from '../../img/log4.png';
 import {logInThunk} from '../../Redux/loginPage-reducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppStateType} from '../../Redux/ReduxStore';
-import {Redirect} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 const {loginPage, loginImg1, loginImg2, loginImg3, loginImg4} = s;
 

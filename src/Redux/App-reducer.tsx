@@ -1,7 +1,6 @@
 import {Dispatch} from 'redux';
 import {getAuthMe} from './Auth-reducer';
-import {useSelector} from 'react-redux';
-import {AppStateType} from './ReduxStore';
+
 
 const SET_INITIALIZED = 'SET_INITIALIZED';
 

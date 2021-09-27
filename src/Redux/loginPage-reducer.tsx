@@ -13,6 +13,12 @@ export const logInTrue = (userId: number) => ({type: 'LOGIN_USER_LOGIN_PAGE_TRUE
 export const logInFalse = () => ({type: 'LOGIN_USER_LOGIN_PAGE_FALSE' as const});
 
 
+type logInTrueType = ReturnType<typeof logInTrue>
+type logInFalseType = ReturnType<typeof logInFalse>
+
+type LoginPageActionType = logInFalseType | logInTrueType;
+
+
 export const logInThunk = (formData: FormDataType) => {
     return (dispatch: Dispatch) => {
         AuthAPI.login(formData).then(response => {
@@ -39,27 +45,14 @@ export const logOutThunk = () => {
 }
 
 
-export type AllActionType = 'LOGIN_USER_LOGIN_PAGE_TRUE' | 'LOGIN_USER_LOGIN_PAGE_FALSE'
-
-
-export type LoginActionType = {
-    type: AllActionType,
-    userId?: number
-}
-
-
-export type InitialStateHeaderType = {
-    logIn: boolean
-    userId: null | number
-};
-
-
 let InitialState = {
-    logIn: false,
-    userId: null
+    logIn: false as string | boolean,
+    userId: null as number | null
 }
 
-const loginPageReducer = (state: InitialStateHeaderType = InitialState, action: LoginActionType): InitialStateHeaderType => {
+type InitialStateLoginType = typeof InitialState
+
+const loginPageReducer = (state: InitialStateLoginType = InitialState, action: LoginPageActionType): InitialStateLoginType => {
     switch (action.type) {
         case LOGIN_USER_TRUE :
             if (action.userId) {

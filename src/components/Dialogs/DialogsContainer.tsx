@@ -13,7 +13,7 @@ export type mapStateToPropsDialogsType = {
     messagesData: MessageType
 }
 
-type mapDispatchToPropsType = {}
+export type mapDispatchToPropsType = {}
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsDialogsType => {
     return {
@@ -28,10 +28,10 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
 }
 
-export type DialogsPropsType = mapStateToPropsDialogsType & mapDispatchToPropsType
+
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect<mapStateToPropsDialogsType,{},{},AppStateType>(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(Dialogs);

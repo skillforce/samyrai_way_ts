@@ -5,7 +5,6 @@ import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/co
 import {profileAPI} from '../API/API';
 
 
-
 const AddPost = 'ADD-POST';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
 const SetUsersStatusT = 'SET-USERS-STATUS';
@@ -17,6 +16,12 @@ export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USE
 export const addPost = (text: string) => ({type: 'ADD-POST' as const, text});
 export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
 export const SetUsersStatus = (status: string) => ({type: 'SET-USERS-STATUS' as const, status});
+
+type addPostType = ReturnType<typeof addPost>
+type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
+type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
+
+export type ProfilePageActionType = addPostType|SetUsersProfileType|SetUsersStatusType;
 
 export const getProfile = (userId: number): any => {
     return (dispatch: Dispatch<ActionType>) => {
@@ -47,13 +52,6 @@ export const updateStatus = (newStatus: string): any => {
 }
 
 
-export type ActionsDispatchType = {
-    type: string
-    text?: string
-    profile?: ProfileType
-    status: string
-    newOutputMsgText?: string
-}
 
 let InitialState = {
     postData: [
@@ -81,17 +79,15 @@ let InitialState = {
             id: 3
         }
     ] as PostType[],
-    profile: null,
-    status: null
+    profile: null as ProfileType | null,
+    status: null as string | null
 }
 
 export type InitialStateProfileType = typeof InitialState;
 
 
-const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ActionsDispatchType) => {
+const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ProfilePageActionType) => {
     switch (action.type) {
-        default:
-            return state;
         case AddPost:
             if (action.text) {
                 return {
@@ -101,7 +97,7 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
                         message: action.text,
                         time: '12:00',
                         likes: 0,
-                        id:3
+                        id: 3
                     }, ...state.postData]
                 }
             } else {
@@ -111,6 +107,8 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
             return {...state, profile: action.profile}
         case SetUsersStatusT:
             return {...state, status: action.status}
+        default:
+            return state;
     }
 }
 

@@ -6,30 +6,33 @@ import {FriendsPropsType} from './SideBar/Friends/Friends';
 import {NavBarType} from '../../Redux/NavBarPage-reducer';
 
 
-export type mapStateToPropsReturnType ={
-    navBarLink:NavBarType[]
-    sideBar:FriendsPropsType
-    isFetch:boolean
+export type mapStateToPropsReturnType = {
+    navBarLink: NavBarType[]
+    sideBar: FriendsPropsType
+    isFetch: boolean
 }
 
-type mapDispatchToPropsReturnType ={}
+type mapDispatchToPropsReturnType = {}
 
 
-
-let mapStateToProps = (state: AppStateType):mapStateToPropsReturnType => {
+let mapStateToProps = (state: AppStateType): mapStateToPropsReturnType => {
     return {
         navBarLink: state.navBarPage.navBarLink,
         sideBar: state.sideBar,
-        isFetch:state.Auth.isFetching
+        isFetch: state.Auth.isFetching
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsReturnType => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsReturnType => {
     return {}
 
 }
 
 
-const NavBarContainer = connect(mapStateToProps, mapDispatchToProps)(NavBar);
+const NavBarContainer = connect<mapStateToPropsReturnType,
+    mapDispatchToPropsReturnType,
+    {},
+    AppStateType>
+(mapStateToProps, mapDispatchToProps)(NavBar);
 
 export default NavBarContainer;
