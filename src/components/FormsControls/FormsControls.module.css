@@ -3,13 +3,13 @@
 }
 
 
-.formControl.error input,
-.formControl.error textarea {
+.formControl.errorS input,
+.formControl.errorS textarea {
     border: 4px solid red;
 }
 
 
-.formControl.error span{
+.formControl.errorS span{
     color:red;
     font-size: 15px;
 }

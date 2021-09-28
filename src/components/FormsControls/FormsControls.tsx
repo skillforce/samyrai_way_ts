@@ -1,37 +1,45 @@
 import React from 'react';
 import s from './FormsControls.module.css';
+import {WrappedFieldMetaProps, WrappedFieldProps} from 'redux-form';
 
 
-const {formControl, error} = s;
+const {formControl, errorS} = s;
 
 
-export const FormControl = ({input, meta, child, ...props}:any) => {
+type FormControlPropsType = {
+    meta: WrappedFieldMetaProps
+}
 
-    const showErr = meta.error && meta.touched
-    return (<div className={showErr ? formControl + ' ' + error : formControl}>
+
+type FormControlType = (params: FormControlPropsType) => React.ReactNode
+
+
+export const FormControl: React.FC<FormControlType> = ({meta: {touched, error}, children}: any) => {
+
+    const showErr = error && touched
+    return (<div className={showErr ? formControl + ' ' + errorS : formControl}>
             <div>
-                {props.children}
+                {children}
             </div>
             <div>
-                {showErr ? <span>{meta.error}</span> : ''}
+                {showErr ? <span>{error}</span> : ''}
             </div>
         </div>
     )
 }
 
 
-export const TextArea = (pr: any) => {
+export const TextArea: React.FC<WrappedFieldProps> = (pr: any) => {
 
 
     const {input, meta, ...restProps} = pr;
 
-    return (<FormControl{...pr}><textarea{...input}{...pr}/></FormControl>)
+    return (<FormControl{...pr}><textarea{...input}{...restProps}/></FormControl>)
 }
 
-export const InputValid = (pr: any) => {
-
+export const InputValid: React.FC<WrappedFieldProps> = (pr: any) => {
 
     const {input, meta, ...restProps} = pr;
 
-    return (<FormControl{...pr}><input{...input}{...pr}/></FormControl>)
+    return (<FormControl{...pr}><input{...input}{...restProps}/></FormControl>)
 }

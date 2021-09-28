@@ -25,7 +25,6 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
             <div >
                 <Field validate={[requiredField,maxLength30]} placeholder={'email'} name={'email'} type={'text'} component={InputValid}/>
-
             </div>
             <div>
                 <Field validate={[requiredField,maxLength30]} placeholder={'password'} name={'password'} component={InputValid} type={'text'}/>
