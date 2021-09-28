@@ -10,7 +10,7 @@ type StatusPropsType = {
 }
 
 
-export class Status extends React.Component<StatusPropsType, JSXElementConstructor<Status>> {
+export class Status extends React.Component<StatusPropsType> {
 
 
 

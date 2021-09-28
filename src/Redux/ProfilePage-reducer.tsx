@@ -3,6 +3,9 @@ import {ProfileType} from '../components/Profile/ProfileContainer';
 import {Dispatch} from 'redux';
 import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
 import {profileAPI} from '../API/API';
+import {AppStateType} from './ReduxStore';
+import {GetStateType} from './UsersPage-reducer';
+import {ThunkAction} from 'redux-thunk';
 
 
 const AddPost = 'ADD-POST';
@@ -21,18 +24,18 @@ type addPostType = ReturnType<typeof addPost>
 type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
 type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
 
-export type ProfilePageActionType = addPostType|SetUsersProfileType|SetUsersStatusType;
+export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType;
 
-export const getProfile = (userId: number): any => {
-    return (dispatch: Dispatch<ActionType>) => {
+export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
+    return (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
         profileAPI.getProfile(userId).then((response) => {
             dispatch(SetUsersProfile(response));
         });
     }
 }
 
-export const getStatus = (userId: number): any => {
-    return (dispatch: Dispatch<ActionType>) => {
+export const getStatus = (userId: number) => {
+    return (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
         profileAPI.getStatus(userId).then((response) => {
             if (response != null) {
                 dispatch(SetUsersStatus(response));
@@ -44,13 +47,12 @@ export const getStatus = (userId: number): any => {
 }
 
 export const updateStatus = (newStatus: string): any => {
-    return (dispatch: Dispatch<ActionType>) => {
+    return (dispatch: Dispatch<ActionType>, getState: () => AppStateType) => {
         profileAPI.updateStatus(newStatus).then((response) => {
             dispatch(SetUsersStatus(newStatus));
         });
     }
 }
-
 
 
 let InitialState = {

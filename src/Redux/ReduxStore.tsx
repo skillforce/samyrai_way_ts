@@ -11,6 +11,9 @@ import loginPageReducer from './loginPage-reducer';
 import AppReducer from './App-reducer';
 
 
+
+
+
 let rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,

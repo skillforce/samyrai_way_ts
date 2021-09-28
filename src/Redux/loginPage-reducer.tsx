@@ -3,6 +3,9 @@ import {Dispatch} from 'redux';
 import {FormDataType} from '../components/Login/LoginForm';
 import {stopSubmit} from 'redux-form';
 import {getAuthMe} from './Auth-reducer';
+import {AppStateType} from './ReduxStore';
+import {GetStateType} from './UsersPage-reducer';
+import {ThunkAction} from 'redux-thunk';
 
 
 const LOGIN_USER_TRUE = 'LOGIN_USER_LOGIN_PAGE_TRUE';
@@ -19,8 +22,8 @@ type logInFalseType = ReturnType<typeof logInFalse>
 type LoginPageActionType = logInFalseType | logInTrueType;
 
 
-export const logInThunk = (formData: FormDataType) => {
-    return (dispatch: Dispatch) => {
+export const logInThunk = (formData: FormDataType):ThunkAction<void, AppStateType, unknown,LoginPageActionType > => {
+    return (dispatch,getState) => {
         AuthAPI.login(formData).then(response => {
             if (response.resultCode === 0) {
                 dispatch(logInTrue(response.data.userId))
@@ -34,11 +37,11 @@ export const logInThunk = (formData: FormDataType) => {
 
 
 export const logOutThunk = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch<LoginPageActionType>,getState:GetStateType) => {
         AuthAPI.logOut().then(response => {
             if (response.resultCode === 0) {
                 dispatch(logInFalse())
-                dispatch(getAuthMe(response.data.userId))
+                dispatch(getAuthMe())
             }
         })
     }

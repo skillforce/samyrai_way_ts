@@ -32,7 +32,7 @@ export const initializedApp = (idUser:number|null)=>(dispatch:Dispatch)=>{
         dispatch(isInitializedAC(false))
     }
     if(idUser){
-        dispatch(getAuthMe(idUser.toString())).then(
+        dispatch(getAuthMe(idUser)).then(
             dispatch(isInitializedAC(true))
         )}else{
         dispatch(isInitializedAC(false))

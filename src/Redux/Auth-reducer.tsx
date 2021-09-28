@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
+
 import {AuthAPI, usersAPI} from '../API/API';
 
 
@@ -7,7 +7,15 @@ const Set_User_Data = 'SET_USERS_DATA';
 const Set_User_Photo = 'SET_USERS_PHOTO';
 
 
-export const setUsersHeader = (user: InitialStateHeaderType, isFetching: boolean) => ({
+type UserType = {
+    id: null|number
+    email: string|null
+    login: string|null
+
+}
+
+
+export const setUsersHeader = (user: UserType, isFetching: boolean) => ({
     type: 'SET_USERS_DATA' as const,
     user,
     isFetching
@@ -18,21 +26,20 @@ type SetUsersHeaderType = ReturnType<typeof setUsersHeader>
 type setUsersPhotoHeaderType = ReturnType<typeof setUsersPhotoHeader>
 
 
-export const getAuthMe = (photo: string | undefined): any => {
-    return (dispatch: Dispatch<ActionType>) => {
-       return AuthAPI.authMe().then((response) => {
+export const getAuthMe = (id: number | null =null): any => {
+    debugger
+    return (dispatch: Dispatch<AuthACType>) => {
+        return AuthAPI.authMe().then((response) => {
             if (response.resultCode === 0) {
                 dispatch(setUsersHeader(response.data, true));
-                usersAPI.getPhoto(photo).then((response) => {
+                usersAPI.getPhoto(id).then((response) => {
                     dispatch(setUsersPhotoHeader(response.photos.small));
                 });
             } else {
                 dispatch(setUsersHeader({
-                    id: null,
-                    login: null,
-                    email: null,
-                    photo: undefined,
-                    isFetching: false
+                    id: null as null|number,
+                    login: null as null|string,
+                    email: null as null|string,
                 }, false));
             }
         });
@@ -65,7 +72,7 @@ let InitialState = {
     id: null,
     login: null,
     email: null,
-    photo: undefined,
+    photo: undefined as string | undefined,
     isFetching: false
 }
 

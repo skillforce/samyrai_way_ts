@@ -12,7 +12,7 @@ export type mapStateToPropsHeaderType = {
     photo: string | undefined
 }
 type mapDispatchToPropsHeaderType = {
-    getAuthMe: (photo: string | undefined) => void
+    getAuthMe: (id: number | null) => void
 }
 
 type HeaderContainerClassType = mapStateToPropsHeaderType & mapDispatchToPropsHeaderType
@@ -22,7 +22,7 @@ class HeaderContainer extends React.Component<HeaderContainerClassType> {
 
 
     componentDidMount() {
-        this.props.getAuthMe(this.props.photo);
+        this.props.getAuthMe(this.props.id);
     }
 
 
