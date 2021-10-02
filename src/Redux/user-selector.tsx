@@ -1,6 +1,6 @@
 import {AppStateType} from './ReduxStore';
 import {UsersDataType} from './UsersPage-reducer';
-import {createSelector, Selector} from 'reselect';
+import {createSelector} from 'reselect';
 
 
 type getUsersReturnType = (state: AppStateType) => UsersDataType[]

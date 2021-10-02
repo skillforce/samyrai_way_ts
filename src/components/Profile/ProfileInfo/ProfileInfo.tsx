@@ -4,6 +4,7 @@ import Preloader from '../../Preloader/Preloader';
 import avatarBlock from '../../../img/avatarBlock.png';
 import {Status} from '../Status/status';
 import {ProfileResponseType} from '../ProfileContainer';
+import {StatusWithHooks} from '../Status/StatusWithHooks';
 
 const {
     descriptionBlock,
@@ -42,7 +43,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         {profile.photos.large ? <img src={profile.photos.large} alt="avatarUser"/>
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
-                    <Status updateStatus={props.updateStatus} status={status} />
+                    {/*<Status updateStatus={props.updateStatus} status={status} />*/}
+                    <StatusWithHooks status={status} updateStatus={props.updateStatus}/>
                 </div>
                 {profile.contacts.facebook ||
                 profile.contacts.website ||

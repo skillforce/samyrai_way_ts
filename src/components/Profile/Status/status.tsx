@@ -9,12 +9,17 @@ type StatusPropsType = {
     updateStatus: (newMess: string) => void
 }
 
+type StateType={
+    editMode:boolean
+    status:string|null
+}
+
 
 export class Status extends React.Component<StatusPropsType> {
 
 
 
-    state = {
+    state:StateType = {
         editMode: false,
         status: this.props.status
     }
@@ -40,6 +45,13 @@ export class Status extends React.Component<StatusPropsType> {
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<StatusPropsType>, prevState: Readonly<StateType>) {
+        if (prevProps.status !== this.props.status) {
+            this.setState(
+                {status: this.props.status}
+            )
+        }
+    }
 
     render() {
         return (

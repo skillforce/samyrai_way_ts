@@ -76,13 +76,6 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
     }
 
-    componentDidUpdate(prevProps: Readonly<PropsAPIContainerType>, prevState: Readonly<{}>, snapshot?: any) {
-        if (prevProps.status !== this.props.status) {
-            this.setState(
-                {status: this.props.status}
-            )
-        }
-    }
 
     render() {
         return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
