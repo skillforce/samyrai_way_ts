@@ -6,12 +6,14 @@ import ReduxMyPostForm, {NewPostMsgType} from './ReduxMyPostForm';
 
 const {postsBlock, posts} = s;
 
-const MyPosts = (pr: MyPostPropsType) => {
+const MyPosts = React.memo((props: MyPostPropsType) => {
+    console.log('you')
 
-    const {postData, addPost} = pr;
+    const {postData, addPost} = props;
 
 
-    const postComponents = postData ? postData.map((t: PostType) => (<Post key={t.id}
+    const postComponents = postData ? [...postData].reverse()
+        .map((t: PostType) => (<Post key={t.id}
                                                                            avatar={t.avatar}
                                                                            name={t.name}
                                                                            message={t.message}
@@ -37,6 +39,6 @@ const MyPosts = (pr: MyPostPropsType) => {
             </div>
         </div>
     )
-}
+});
 
 export default MyPosts;

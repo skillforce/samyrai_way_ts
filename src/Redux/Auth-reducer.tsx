@@ -27,7 +27,6 @@ type setUsersPhotoHeaderType = ReturnType<typeof setUsersPhotoHeader>
 
 
 export const getAuthMe = (id: number | null =null): any => {
-    debugger
     return (dispatch: Dispatch<AuthACType>) => {
         return AuthAPI.authMe().then((response) => {
             if (response.resultCode === 0) {

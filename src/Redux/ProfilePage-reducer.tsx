@@ -11,20 +11,28 @@ import {ThunkAction} from 'redux-thunk';
 const AddPost = 'ADD-POST';
 const SetUsersProfileT = 'SET-USERS-PROFILE';
 const SetUsersStatusT = 'SET-USERS-STATUS';
+const DeletePost = 'DELETE-POST';
 
 
-export type ACProfileActionType = 'ADD-POST' | 'UPDATE-NEW-POST-TEXT' | 'SET-USERS-PROFILE' | 'SET-USERS-STATUS'
+export type ACProfileActionType =
+    'ADD-POST'
+    | 'UPDATE-NEW-POST-TEXT'
+    | 'SET-USERS-PROFILE'
+    | 'SET-USERS-STATUS'
+    | 'DELETE-POST'
 
 
 export const addPost = (text: string) => ({type: 'ADD-POST' as const, text});
+export const deletePost = (postId: number) => ({type: 'DELETE-POST' as const, postId});
 export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
 export const SetUsersStatus = (status: string) => ({type: 'SET-USERS-STATUS' as const, status});
 
 type addPostType = ReturnType<typeof addPost>
 type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
 type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
+type DeletePostType = ReturnType<typeof deletePost>
 
-export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType;
+export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType | DeletePostType;
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
     return (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
@@ -88,7 +96,7 @@ let InitialState = {
 export type InitialStateProfileType = typeof InitialState;
 
 
-const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ProfilePageActionType) => {
+export const ProfilePageReducer = (state: InitialStateProfileType = InitialState, action: ProfilePageActionType) => {
     switch (action.type) {
         case AddPost:
             if (action.text) {
@@ -109,6 +117,8 @@ const ProfilePageReducer = (state: InitialStateProfileType = InitialState, actio
             return {...state, profile: action.profile}
         case SetUsersStatusT:
             return {...state, status: action.status}
+        case DeletePost:
+            return {...state, postData: state.postData.filter(t => t.id !== action.postId)}
         default:
             return state;
     }
