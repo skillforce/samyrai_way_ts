@@ -2,7 +2,6 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 import avatarBlock from '../../../img/avatarBlock.png';
-import {Status} from '../Status/status';
 import {ProfileResponseType} from '../ProfileContainer';
 import {StatusWithHooks} from '../Status/StatusWithHooks';
 
@@ -19,15 +18,14 @@ const {
 
 
 type ProfileInfoPropsType = {
-    profile: ProfileResponseType|null
-    status:null|string
-    updateStatus:(newMess:string)=>void
+    profile: ProfileResponseType | null
+    status: null | string
+    updateStatus: (newMess: string) => void
 }
 
 
-
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    const {profile,status} = props;
+    const {profile, status, updateStatus} = props;
     if (!profile) {
         return (<div>
             <div className={descriptionBlock}>
@@ -43,8 +41,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         {profile.photos.large ? <img src={profile.photos.large} alt="avatarUser"/>
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
-                    {/*<Status updateStatus={props.updateStatus} status={status} />*/}
-                    <StatusWithHooks status={status} updateStatus={props.updateStatus}/>
+                    <StatusWithHooks status={status} updateStatus={updateStatus}/>
                 </div>
                 {profile.contacts.facebook ||
                 profile.contacts.website ||

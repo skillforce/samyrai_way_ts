@@ -12,7 +12,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUserCount,
-    getUsersSelector, getUsersSuper
+    getUsersSuper
 } from '../../Redux/user-selector';
 
 type PropsUserClassType = mapDispatchToPropsUsersType & mapStateToPropsUsersType
@@ -21,13 +21,17 @@ type PropsUserClassType = mapDispatchToPropsUsersType & mapStateToPropsUsersType
 class UsersAPIContainer extends React.Component<PropsUserClassType> {
 
 
+
+
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const{pageSize,currentPage}=this.props;
+        this.props.getUsers(currentPage,pageSize)
     }
 
 
     onPageChanged = (p: number) => {
-        this.props.getUsers(p, this.props.pageSize)
+        const{getUsers,pageSize}=this.props;
+        getUsers(p,pageSize)
     }
 
 
@@ -53,7 +57,6 @@ class UsersAPIContainer extends React.Component<PropsUserClassType> {
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsUsersType => {
     return {
-        // UsersData: getUsersSelector(state),
         UsersData: getUsersSuper(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUserCount(state),
