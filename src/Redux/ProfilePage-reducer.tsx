@@ -8,57 +8,56 @@ import {GetStateType} from './UsersPage-reducer';
 import {ThunkAction} from 'redux-thunk';
 
 
-const AddPost = 'ADD-POST';
-const SetUsersProfileT = 'SET-USERS-PROFILE';
-const SetUsersStatusT = 'SET-USERS-STATUS';
-const DeletePost = 'DELETE-POST';
+const AddPost = 'ProfilePageReducer/ADD-POST';
+const SetUsersProfileT = 'ProfilePageReducer/SET-USERS-PROFILE';
+const SetUsersStatusT = 'ProfilePageReducer/SET-USERS-STATUS';
+const DeletePost = 'ProfilePageReducer/DELETE-POST';
 
 
-export type ACProfileActionType =
-    'ADD-POST'
-    | 'UPDATE-NEW-POST-TEXT'
-    | 'SET-USERS-PROFILE'
-    | 'SET-USERS-STATUS'
-    | 'DELETE-POST'
+export const addPost = (text: string) => ({type: 'ProfilePageReducer/ADD-POST' as const, text});
+export const deletePost = (postId: number) => ({type: 'ProfilePageReducer/DELETE-POST' as const, postId});
+export const SetUsersProfile = (profile: ProfileType) => ({
+    type: 'ProfilePageReducer/SET-USERS-PROFILE' as const,
+    profile: profile
+});
+export const SetUsersStatus = (status: string) => ({type: 'ProfilePageReducer/SET-USERS-STATUS' as const, status});
 
 
-export const addPost = (text: string) => ({type: 'ADD-POST' as const, text});
-export const deletePost = (postId: number) => ({type: 'DELETE-POST' as const, postId});
-export const SetUsersProfile = (profile: ProfileType) => ({type: 'SET-USERS-PROFILE' as const, profile: profile});
-export const SetUsersStatus = (status: string) => ({type: 'SET-USERS-STATUS' as const, status});
-
-type addPostType = ReturnType<typeof addPost>
-type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
+export type addPostType = ReturnType<typeof addPost>
+export type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
 type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
 type DeletePostType = ReturnType<typeof deletePost>
+
+
+export type SetUsersForProfileType = typeof SetUsersProfile
+export type addPostTypeForMyPostContainer = typeof addPost
+
 
 export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType | DeletePostType;
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
-    return (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
-        profileAPI.getProfile(userId).then((response) => {
-            dispatch(SetUsersProfile(response));
-        });
-    }
+    return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
+        let resGetProfile = await profileAPI.getProfile(userId);
+        dispatch(SetUsersProfile(resGetProfile));
+    };
 }
 
 export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
-        profileAPI.getStatus(userId).then((response) => {
-            if (response != null) {
-                dispatch(SetUsersStatus(response));
-            } else {
-                dispatch(SetUsersStatus(''));
-            }
-        });
-    }
+    return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
+        let reGetStatus = await profileAPI.getStatus(userId);
+        if (reGetStatus != null) {
+            dispatch(SetUsersStatus(reGetStatus));
+        } else {
+            dispatch(SetUsersStatus(''));
+        }
+    };
 }
 
-export const updateStatus = (newStatus: string): any => {
-    return (dispatch: Dispatch<ActionType>, getState: () => AppStateType) => {
-        profileAPI.updateStatus(newStatus).then((response) => {
-            dispatch(SetUsersStatus(newStatus));
-        });
+export const updateStatus = (newStatus: string) => {
+    return async (dispatch: Dispatch<ActionType>, getState: () => AppStateType) => {
+        let resUpStatus = await profileAPI.updateStatus(newStatus);
+        dispatch(SetUsersStatus(newStatus));
+
     }
 }
 

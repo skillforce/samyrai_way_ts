@@ -8,12 +8,15 @@ import {GetStateType} from './UsersPage-reducer';
 import {ThunkAction} from 'redux-thunk';
 
 
-const LOGIN_USER_TRUE = 'LOGIN_USER_LOGIN_PAGE_TRUE';
-const LOGIN_USER_FALSE = 'LOGIN_USER_LOGIN_PAGE_FALSE';
+const LOGIN_USER_TRUE = 'LoginPageReducer/LOGIN_USER_LOGIN_PAGE_TRUE';
+const LOGIN_USER_FALSE = 'LoginPageReducer/LOGIN_USER_LOGIN_PAGE_FALSE';
 
 
-export const logInTrue = (userId: number) => ({type: 'LOGIN_USER_LOGIN_PAGE_TRUE' as const, userId: userId});
-export const logInFalse = () => ({type: 'LOGIN_USER_LOGIN_PAGE_FALSE' as const});
+export const logInTrue = (userId: number) => ({
+    type: 'LoginPageReducer/LOGIN_USER_LOGIN_PAGE_TRUE' as const,
+    userId: userId
+});
+export const logInFalse = () => ({type: 'LoginPageReducer/LOGIN_USER_LOGIN_PAGE_FALSE' as const});
 
 
 type logInTrueType = ReturnType<typeof logInTrue>
@@ -22,28 +25,26 @@ type logInFalseType = ReturnType<typeof logInFalse>
 type LoginPageActionType = logInFalseType | logInTrueType;
 
 
-export const logInThunk = (formData: FormDataType):ThunkAction<void, AppStateType, unknown,LoginPageActionType > => {
-    return (dispatch,getState) => {
-        AuthAPI.login(formData).then(response => {
-            if (response.resultCode === 0) {
-                dispatch(logInTrue(response.data.userId))
-                dispatch(getAuthMe(response.data.userId))
-            } else {
-                dispatch(stopSubmit('Login', {_error: response.messages}))
-            }
-        })
+export const logInThunk = (formData: FormDataType): ThunkAction<void, AppStateType, unknown, LoginPageActionType> => {
+    return async (dispatch, getState) => {
+        let logInRes = await AuthAPI.login(formData)
+        if (logInRes.resultCode === 0) {
+            dispatch(logInTrue(logInRes.data.userId))
+            dispatch(getAuthMe(logInRes.data.userId))
+        } else {
+            dispatch(stopSubmit('Login', {_error: logInRes.messages}))
+        }
     }
 }
 
 
 export const logOutThunk = () => {
-    return (dispatch: Dispatch<LoginPageActionType>,getState:GetStateType) => {
-        AuthAPI.logOut().then(response => {
-            if (response.resultCode === 0) {
-                dispatch(logInFalse())
-                dispatch(getAuthMe())
-            }
-        })
+    return async (dispatch: Dispatch<LoginPageActionType>, getState: GetStateType) => {
+        let logOutRes = await AuthAPI.logOut();
+        if (logOutRes.resultCode === 0) {
+            dispatch(logInFalse())
+            dispatch(getAuthMe())
+        }
     }
 }
 

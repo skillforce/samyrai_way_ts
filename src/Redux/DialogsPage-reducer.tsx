@@ -2,7 +2,7 @@ import {DialogsNamesType} from '../components/Dialogs/dialogItems/dialogItems';
 import {InputType, OutputType} from '../components/Dialogs/message/message';
 
 
-const AddOutputMsg = 'ADD-OUTPUT-MSG';
+const AddOutputMsg = 'DialogsPageReduce/ADD-OUTPUT-MSG';
 
 export const AddOutputMsgActionType = (newOutputMsgText: string) => ({type: AddOutputMsg, newOutputMsgText});
 

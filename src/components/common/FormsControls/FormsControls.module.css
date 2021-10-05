@@ -14,4 +14,15 @@
     font-size: 15px;
 }
 
+.checkbox{
+    margin-bottom: 25px;
+}
+
+.checkboxBlock{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 

@@ -3,6 +3,7 @@ import s from './UsersClass.module.css';
 import avatarBlock from '../../img/avatarBlock.png';
 import {UsersDataType} from '../../Redux/UsersPage-reducer';
 import {NavLink} from 'react-router-dom';
+import Paginator from '../common/Paginator/Paginator';
 
 
 const {avatar, statusMSG, fullUsers, btnFoll, btnUnFoll, page, pageSelect, btnGroup} = s;
@@ -30,17 +31,10 @@ const UsersPage = (props: UsersPagePropsType) => {
         unFollowUsers
     } = props;
 
-    let pagesCount = Math.ceil(totalUsersCount / pageSize);
-    let allPages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        allPages.push(i)
-    }
+
     return (<div>
-            <div className={btnGroup}>
-                {allPages.map(t => <span onClick={() => {
-                    onPageChanged(t)
-                }} className={currentPage === t ? pageSelect : page}>{t}</span>)}
-            </div>
+            <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
+                       onPageChanged={onPageChanged}/>
             {UsersData.map(t => (<div className={fullUsers}>
                 <div className={avatar}>
                     <NavLink to={'/profile/' + t.id}>

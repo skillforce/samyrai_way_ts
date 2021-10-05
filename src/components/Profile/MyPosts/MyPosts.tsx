@@ -12,7 +12,7 @@ const MyPosts = React.memo((props: MyPostPropsType) => {
     const {postData, addPost} = props;
 
 
-    const postComponents = postData ? [...postData].reverse()
+    const postComponents = postData ? [...postData]
         .map((t: PostType) => (<Post key={t.id}
                                                                            avatar={t.avatar}
                                                                            name={t.name}

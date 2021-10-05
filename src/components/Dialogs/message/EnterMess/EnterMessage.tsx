@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './EnterMessage.module.css';
 import {reduxForm, Field, InjectedFormProps} from 'redux-form';
-import {TextArea} from '../../../FormsControls/FormsControls';
+import {TextArea} from '../../../common/FormsControls/FormsControls';
 import {MaxLengthCreator, requiredField} from '../../../../utils/validators';
 
 

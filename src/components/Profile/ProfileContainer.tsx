@@ -2,10 +2,9 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {
-    ACProfileActionType,
     getProfile, getStatus,
     InitialStateProfileType,
-    SetUsersProfile, updateStatus
+    SetUsersProfile, updateStatus, SetUsersForProfileType
 } from '../../Redux/ProfilePage-reducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {AppStateType} from '../../Redux/ReduxStore';
@@ -45,7 +44,7 @@ export type stateUsersType = {
 }
 
 type mapDispatchToPropsUsersType = {
-    SetUsersProfile: (profile: ProfileType) => ({ type: ACProfileActionType, profile: ProfileType })
+    SetUsersProfile: SetUsersForProfileType
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (newStatus: string) => void

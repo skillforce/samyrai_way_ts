@@ -1,11 +1,14 @@
-import {ACProfileActionType, addPost} from '../../../Redux/ProfilePage-reducer';
+import {
+    addPost,
+    addPostTypeForMyPostContainer,
+} from '../../../Redux/ProfilePage-reducer';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {PostDataType} from '../Profile';
 import {stateUsersType} from '../ProfileContainer';
 
 type DispatchPropsMyPostsType = {
-    addPost: (text: string) => ({ type: ACProfileActionType, text: string })
+    addPost: addPostTypeForMyPostContainer
 }
 
 
