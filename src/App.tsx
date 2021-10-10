@@ -1,5 +1,5 @@
 import './App.css';
-import {Redirect, Route, Switch} from 'react-router-dom'
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -10,8 +10,8 @@ import ContainerUsersClass from './components/Users/ContainerUsersClass';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import {Login} from './components/Login/login';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppStateType} from './Redux/ReduxStore';
+import {Provider, useDispatch, useSelector} from 'react-redux';
+import store, {AppStateType} from './Redux/ReduxStore';
 import {initializedApp} from './Redux/App-reducer';
 import Preloader from './components/Preloader/Preloader';
 
@@ -27,17 +27,15 @@ const App: React.FC = () => {
     }, [userId])
 
 
-
     if (!initialized) {
         return (<div className="app-wrapper">
             <HeaderContainer/>
             <NavBarContainer/>
             <div className={'app-wrapper-content'}>
-                {!!userId ? <Preloader/> : <Login/> }
+                {!!userId ? <Preloader/> : <Login/>}
             </div>
         </div>)
     }
-
 
 
     return (
@@ -46,7 +44,7 @@ const App: React.FC = () => {
             <NavBarContainer/>
             <Switch>
                 <div className={'app-wrapper-content'}>
-                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer  />}/>
+                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
                     <Route path={'/users'} render={() => <ContainerUsersClass/>}/>
                     <Route path={'/dialogs'} render={() => <DialogsContainer/>}/>
                     <Route path={'/news'} render={() => <News/>}/>
@@ -62,3 +60,14 @@ const App: React.FC = () => {
 
 
 export default App;
+
+
+export const SamuraiJSApp: React.FC = () => {
+
+    return (<HashRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </HashRouter>
+    )
+}

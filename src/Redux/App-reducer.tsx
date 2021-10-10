@@ -10,6 +10,7 @@ export const isInitializedAC = (isInit: boolean) => ({
     isInit
 });
 
+
 type isInitialACType = ReturnType<typeof isInitializedAC>
 
 
@@ -18,11 +19,13 @@ export type AppACType = isInitialACType
 
 export type InitialStateHeaderType = {
     initialized: boolean
+    isInitialized:boolean
 };
 
 
 let InitialState = {
-    initialized: false
+    initialized: false,
+    isInitialized:false
 }
 
 

@@ -1,12 +1,12 @@
 import React, {ChangeEvent, JSXElementConstructor} from 'react';
 import s from './status.module.css';
-
+import TestRenderer from 'react-test-renderer';
 
 const {statusProfile, changeStatus} = s
 
-type StatusPropsType = {
+export type StatusPropsType = {
     status: string | null
-    updateStatus: (newMess: string) => void
+    updateStatus?: (newMess: string) => void
 }
 
 type StateType={
@@ -36,7 +36,9 @@ export class Status extends React.Component<StatusPropsType> {
         this.setState({
             editMode: false
         })
-        this.props.updateStatus(this.state.status ? this.state.status : 'none')
+        if(this.props.updateStatus) {
+            this.props.updateStatus(this.state.status ? this.state.status : 'none')
+        }
     }
 
     onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {

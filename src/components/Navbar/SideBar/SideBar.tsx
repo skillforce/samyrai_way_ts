@@ -12,6 +12,8 @@ const SideBar = (pr: SideBarPropsType) => {
 
     const {friendsData} = pr.sideBar;
     const {isFetch} = pr;
+
+
     if(!isFetch){
         return <div> </div>
     }
