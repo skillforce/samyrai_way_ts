@@ -2,6 +2,7 @@ import {Dispatch} from 'redux';
 
 import {AuthAPI, usersAPI} from '../API/API';
 import {GetStateType} from './UsersPage-reducer';
+import {isInitialACType, isInitializedAC} from './App-reducer';
 
 
 const Set_User_Data = 'Auth-reducer/SET_USERS_DATA';
@@ -28,18 +29,21 @@ type setUsersPhotoHeaderType = ReturnType<typeof setUsersPhotoHeader>
 
 
 export const getAuthMe = (id: number | null = null):any => {
-    return async (dispatch: Dispatch<AuthACType>, getState: GetStateType) => {
+    return async (dispatch: Dispatch<AuthACType|isInitialACType>, getState: GetStateType) => {
         let resAuthMe = await AuthAPI.authMe();
         if (resAuthMe.resultCode === 0) {
             dispatch(setUsersHeader(resAuthMe.data, true));
             let resGetPhoto = await usersAPI.getPhoto(id);
             dispatch(setUsersPhotoHeader(resGetPhoto.photos.small));
+            dispatch(isInitializedAC(true))
         } else {
             dispatch(setUsersHeader({
                 id: null as null | number,
                 login: null as null | string,
                 email: null as null | string,
-            }, false));
+            }, false))
+            dispatch(isInitializedAC(true));
+
         }
     }
 }

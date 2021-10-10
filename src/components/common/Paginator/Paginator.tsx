@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Paginator.module.css';
 
 
-const { page, pageSelect, btnGroup} = s;
+const {page, pageSelect, btnGroup} = s;
 
 
 type PaginatorPropsType = {
@@ -15,7 +15,7 @@ type PaginatorPropsType = {
 
 const Paginator = (props: PaginatorPropsType) => {
 
-    const {totalUsersCount,pageSize,currentPage,onPageChanged}=props;
+    const {totalUsersCount, pageSize, currentPage, onPageChanged} = props;
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let allPages = [];
@@ -24,13 +24,12 @@ const Paginator = (props: PaginatorPropsType) => {
     }
 
 
-
     return (
-            <div className={btnGroup}>
-                {allPages.map(t => <span onClick={() => {
-                    onPageChanged(t)
-                }} className={currentPage === t ? pageSelect : page}>{t}</span>)}
-            </div>
+        <div className={btnGroup}>
+            {allPages.map(t => <span onClick={() => {
+                onPageChanged(t)
+            }} className={currentPage === t ? pageSelect : page}>{t}</span>)}
+        </div>
 
     )
 }

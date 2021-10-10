@@ -1,5 +1,4 @@
-import {Dispatch} from 'redux';
-import {AuthACType, getAuthMe} from './Auth-reducer';
+
 
 
 const SET_INITIALIZED = 'App-reducer/SET_INITIALIZED';
@@ -11,7 +10,7 @@ export const isInitializedAC = (isInit: boolean) => ({
 });
 
 
-type isInitialACType = ReturnType<typeof isInitializedAC>
+export type isInitialACType = ReturnType<typeof isInitializedAC>
 
 
 export type AppACType = isInitialACType
@@ -29,21 +28,6 @@ let InitialState = {
 }
 
 
-export const initializedApp = (idUser: number | null) => (dispatch: Dispatch) => {
-
-    if (idUser === null) {
-        dispatch(isInitializedAC(false))
-    }
-    if (idUser) {
-        dispatch(getAuthMe(idUser)).then(
-            dispatch(isInitializedAC(true))
-        )
-    } else {
-        dispatch(isInitializedAC(false))
-    }
-
-
-}
 
 
 const AppReducer = (state: InitialStateHeaderType = InitialState, action: AppACType): InitialStateHeaderType => {

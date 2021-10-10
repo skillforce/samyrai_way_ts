@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './message.module.css';
-import Input from './input/input';
-import Output from './output/output';
+import Input from './input_output_msg/input';
+import Output from './input_output_msg/output';
 
 
 const {message, inputMess, outputMess, inputMess_mess, outputMess_mess, inputMess_img, outputMess_img, allMess} = s;

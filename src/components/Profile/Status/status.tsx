@@ -1,6 +1,6 @@
-import React, {ChangeEvent, JSXElementConstructor} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './status.module.css';
-import TestRenderer from 'react-test-renderer';
+
 
 const {statusProfile, changeStatus} = s
 

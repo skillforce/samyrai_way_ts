@@ -1,8 +1,4 @@
 import {
-    InitialStateUsersType,
-    onFollowACType,
-    onUnFollowACType,
-    UserPageActionType,
     UsersDataType
 } from '../Redux/UsersPage-reducer';
 

@@ -57,7 +57,7 @@ export const profileAPI = {
         return instanceUser.get<ProfileType>(`profile/${id}`).then(response => response.data);
     },
     getStatus: (id: number) => {
-        return instanceUser.get<any>(`profile/status/${id}`).then(response => response.data);
+        return instanceUser.get<string>(`profile/status/${id}`).then(response => response.data);
     },
     updateStatus: (status: string) => {
         return instanceUser.put<AuthMeAPIType>(`profile/status`, {status}).then(response => response.data);

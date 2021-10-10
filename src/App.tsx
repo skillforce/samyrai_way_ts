@@ -12,27 +12,27 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import {Login} from './components/Login/login';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import store, {AppStateType} from './Redux/ReduxStore';
-import {initializedApp} from './Redux/App-reducer';
 import Preloader from './components/Preloader/Preloader';
+import {getAuthMe} from './Redux/Auth-reducer';
 
 
 const App: React.FC = () => {
-    const userId = useSelector<AppStateType, number | null>(state => state.Auth.id)
     const initialized = useSelector<AppStateType, boolean>(state => state.AppPage.initialized)
+    const userId = useSelector<AppStateType, null|number>(state => state.Auth.id)
     const dispatch = useDispatch();
 
 
     useEffect(() => {
-        dispatch(initializedApp(userId))
+       dispatch(getAuthMe(userId))
     }, [userId])
 
 
-    if (!initialized) {
+    if (!initialized ) {
         return (<div className="app-wrapper">
             <HeaderContainer/>
             <NavBarContainer/>
             <div className={'app-wrapper-content'}>
-                {!!userId ? <Preloader/> : <Login/>}
+                 <Preloader/>
             </div>
         </div>)
     }

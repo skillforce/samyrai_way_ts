@@ -2,9 +2,7 @@ import {Dispatch} from 'redux';
 import {usersAPI} from '../API/API';
 import {AppStateType} from './ReduxStore';
 import {ThunkAction} from 'redux-thunk';
-import {on} from 'cluster';
 import {updateObjectInArray} from '../utils/Object-helpers';
-import {stat} from 'fs';
 
 const FollowUsers = 'UsersPageReducer/FOLLOW' as const;
 const UnfollowUsers = 'UsersPageReducer/UNFOLLOW' as const;

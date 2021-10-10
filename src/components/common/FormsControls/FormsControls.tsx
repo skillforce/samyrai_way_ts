@@ -3,7 +3,7 @@ import s from './FormsControls.module.css';
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from 'redux-form';
 
 
-const {formControl, errorS,checkboxBlock} = s;
+const {formControl, errorS, checkboxBlock} = s;
 
 
 type FormControlPropsType = {
@@ -35,19 +35,16 @@ export const TextArea: React.FC<WrappedFieldProps> = (pr: any) => {
 }
 
 
-
 export const InputValid: React.FC<WrappedFieldProps> = (pr: any) => {
     const {input, meta, ...restProps} = pr;
     return (<FormControl{...pr}><input{...input}{...restProps}/></FormControl>)
 }
 
 
-
-
-export const createField = (name: string, component: any, props: { type: string }, placeholder: string|null, validators: any, text: string | '' = '') =>
+export const createField = (name: string, component: any, props: { type: string }, placeholder: string | null, validators: any, text: string | '' = '') =>
     (
-    <div className={text!==''? checkboxBlock:''}>
-        <Field validate={validators} placeholder={placeholder} name={name}
-               component={component} {...props}/>
-        {text}
-    </div>)
+        <div className={text !== '' ? checkboxBlock : ''}>
+            <Field validate={validators} placeholder={placeholder} name={name}
+                   component={component} {...props}/>
+            {text}
+        </div>)

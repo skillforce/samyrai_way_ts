@@ -1,7 +1,6 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
 import {ProfileType} from '../components/Profile/ProfileContainer';
 import {Dispatch} from 'redux';
-import {ActionType} from '../../../reactKabzdaKakProsto/my-app/src/components/conAcc/newacc';
 import {profileAPI} from '../API/API';
 import {AppStateType} from './ReduxStore';
 import {GetStateType} from './UsersPage-reducer';
@@ -54,10 +53,9 @@ export const getStatus = (userId: number) => {
 }
 
 export const updateStatus = (newStatus: string) => {
-    return async (dispatch: Dispatch<ActionType>, getState: () => AppStateType) => {
-        let resUpStatus = await profileAPI.updateStatus(newStatus);
+    return async (dispatch: Dispatch<SetUsersStatusType>, getState: () => AppStateType) => {
+        await profileAPI.updateStatus(newStatus)
         dispatch(SetUsersStatus(newStatus));
-
     }
 }
 
