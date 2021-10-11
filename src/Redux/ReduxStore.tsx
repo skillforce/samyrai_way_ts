@@ -9,6 +9,7 @@ import thunkMiddleWare from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import loginPageReducer from './loginPage-reducer';
 import AppReducer from './App-reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 
@@ -27,7 +28,7 @@ let rootReducer = combineReducers({
 });
 
 
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare));
+let store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleWare),));
 
 export type StoreType = typeof store;
 

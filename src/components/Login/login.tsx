@@ -6,14 +6,16 @@ import login2 from '../../img/log2.png';
 import login3 from '../../img/log3.png';
 import login4 from '../../img/log4.png';
 import {logInThunk} from '../../Redux/loginPage-reducer';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStateType} from '../../Redux/ReduxStore';
+import {Redirect} from 'react-router-dom';
 
 const {loginPage, loginImg1, loginImg2, loginImg3, loginImg4} = s;
 
 
 export const Login = () => {
 
-
+    const userId = useSelector<AppStateType, null | number>(state => state.Auth.id)
     const dispatch = useDispatch();
 
 
@@ -22,6 +24,11 @@ export const Login = () => {
         dispatch(logInThunk(formData))
     }
 
+
+
+    if(userId){
+        return <Redirect to={'/profile/:userId?'}/>
+    }
 
     return (
 
