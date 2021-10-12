@@ -1,16 +1,28 @@
 {
   "files": {
-    "main.css": "/samyrai_way_ts/static/css/main.5414eedd.chunk.css",
-    "main.js": "/samyrai_way_ts/static/js/main.d868f0d1.chunk.js",
-    "main.js.map": "/samyrai_way_ts/static/js/main.d868f0d1.chunk.js.map",
-    "runtime-main.js": "/samyrai_way_ts/static/js/runtime-main.bb90ac4a.js",
-    "runtime-main.js.map": "/samyrai_way_ts/static/js/runtime-main.bb90ac4a.js.map",
-    "static/js/2.37ecb0ff.chunk.js": "/samyrai_way_ts/static/js/2.37ecb0ff.chunk.js",
-    "static/js/2.37ecb0ff.chunk.js.map": "/samyrai_way_ts/static/js/2.37ecb0ff.chunk.js.map",
+    "main.css": "/samyrai_way_ts/static/css/main.d6b086dc.chunk.css",
+    "main.js": "/samyrai_way_ts/static/js/main.4665881d.chunk.js",
+    "main.js.map": "/samyrai_way_ts/static/js/main.4665881d.chunk.js.map",
+    "runtime-main.js": "/samyrai_way_ts/static/js/runtime-main.e6a44501.js",
+    "runtime-main.js.map": "/samyrai_way_ts/static/js/runtime-main.e6a44501.js.map",
+    "static/js/2.24188563.chunk.js": "/samyrai_way_ts/static/js/2.24188563.chunk.js",
+    "static/js/2.24188563.chunk.js.map": "/samyrai_way_ts/static/js/2.24188563.chunk.js.map",
+    "static/css/3.eb0326c6.chunk.css": "/samyrai_way_ts/static/css/3.eb0326c6.chunk.css",
+    "static/js/3.f294f1f0.chunk.js": "/samyrai_way_ts/static/js/3.f294f1f0.chunk.js",
+    "static/js/3.f294f1f0.chunk.js.map": "/samyrai_way_ts/static/js/3.f294f1f0.chunk.js.map",
+    "static/css/4.0421da10.chunk.css": "/samyrai_way_ts/static/css/4.0421da10.chunk.css",
+    "static/js/4.bfdac454.chunk.js": "/samyrai_way_ts/static/js/4.bfdac454.chunk.js",
+    "static/js/4.bfdac454.chunk.js.map": "/samyrai_way_ts/static/js/4.bfdac454.chunk.js.map",
+    "static/css/5.8bb6af44.chunk.css": "/samyrai_way_ts/static/css/5.8bb6af44.chunk.css",
+    "static/js/5.333b0185.chunk.js": "/samyrai_way_ts/static/js/5.333b0185.chunk.js",
+    "static/js/5.333b0185.chunk.js.map": "/samyrai_way_ts/static/js/5.333b0185.chunk.js.map",
     "index.html": "/samyrai_way_ts/index.html",
-    "static/css/main.5414eedd.chunk.css.map": "/samyrai_way_ts/static/css/main.5414eedd.chunk.css.map",
-    "static/js/2.37ecb0ff.chunk.js.LICENSE.txt": "/samyrai_way_ts/static/js/2.37ecb0ff.chunk.js.LICENSE.txt",
-    "static/media/avatarBlock.cbebdb47.png": "/samyrai_way_ts/static/media/avatarBlock.cbebdb47.png",
+    "static/css/3.eb0326c6.chunk.css.map": "/samyrai_way_ts/static/css/3.eb0326c6.chunk.css.map",
+    "static/css/4.0421da10.chunk.css.map": "/samyrai_way_ts/static/css/4.0421da10.chunk.css.map",
+    "static/css/5.8bb6af44.chunk.css.map": "/samyrai_way_ts/static/css/5.8bb6af44.chunk.css.map",
+    "static/css/main.d6b086dc.chunk.css.map": "/samyrai_way_ts/static/css/main.d6b086dc.chunk.css.map",
+    "static/js/2.24188563.chunk.js.LICENSE.txt": "/samyrai_way_ts/static/js/2.24188563.chunk.js.LICENSE.txt",
+    "static/media/avatarBlock.png": "/samyrai_way_ts/static/media/avatarBlock.cbebdb47.png",
     "static/media/heart.68cd17a2.png": "/samyrai_way_ts/static/media/heart.68cd17a2.png",
     "static/media/log1.89e7b38a.png": "/samyrai_way_ts/static/media/log1.89e7b38a.png",
     "static/media/log2.fa13fa2c.png": "/samyrai_way_ts/static/media/log2.fa13fa2c.png",
@@ -19,9 +31,9 @@
     "static/media/preloader.3c368123.png": "/samyrai_way_ts/static/media/preloader.3c368123.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.bb90ac4a.js",
-    "static/js/2.37ecb0ff.chunk.js",
-    "static/css/main.5414eedd.chunk.css",
-    "static/js/main.d868f0d1.chunk.js"
+    "static/js/runtime-main.e6a44501.js",
+    "static/js/2.24188563.chunk.js",
+    "static/css/main.d6b086dc.chunk.css",
+    "static/js/main.4665881d.chunk.js"
   ]
 }
