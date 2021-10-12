@@ -25,7 +25,6 @@ const App: React.FC = () => {
 
 
     useEffect(() => {
-        debugger
         dispatch(getAuthMe(userId))
     }, [userId])
 

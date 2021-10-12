@@ -53,7 +53,7 @@ export const AuthAPI = {
 
 export const profileAPI = {
     getProfile: (id: number) => {
-        return instanceUser.get<ProfileType>(`profile/${id}`).then(response => response.data);
+        return instanceUser.get<ProfileResponseType>(`profile/${id}`).then(response => response.data);
     },
     getStatus: (id: number) => {
         return instanceUser.get<string>(`profile/status/${id}`).then(response => response.data);

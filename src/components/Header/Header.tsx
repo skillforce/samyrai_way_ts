@@ -1,17 +1,13 @@
 import React from 'react';
 import s from './Header.module.css';
 import logo from '../../img/logo.png';
-
 import {mapStateToPropsHeaderType} from './HeaderContainer';
-
 import {MiniAvaBlock} from './miniAvaBlock';
 import {useSelector} from 'react-redux';
 import {AppStateType} from '../../Redux/ReduxStore';
-import Preloader from '../Preloader/Preloader';
+
 
 const {header} = s;
-
-
 
 
 const Header = (props: mapStateToPropsHeaderType) => {
@@ -21,7 +17,7 @@ const Header = (props: mapStateToPropsHeaderType) => {
     return (
         <header className={header}>
             <img src={logo} alt={'miniLogo'}/>
-            {!initialized? <Preloader/>:<MiniAvaBlock fetching={isFetching} photo={photo} login={login}/>}
+            {!initialized ? '' : <MiniAvaBlock fetching={isFetching} photo={photo} login={login}/>}
         </header>);
 }
 

@@ -105,7 +105,7 @@ export type ProfileType = {
 
 
 type MapStateToPropsType = {
-    profile: ProfileType | null
+    profile: ProfileResponseType | null
     status: string | null
     userIdLog: number | null
     isFetching: boolean
