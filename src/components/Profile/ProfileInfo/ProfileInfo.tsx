@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEventHandler} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 import avatarBlock from '../../../img/avatarBlock.png';
@@ -13,7 +13,8 @@ const {
     photoBlock,
     workSearchBlock,
     searchWork,
-    descrSearch
+    descrSearch,
+    reInstall_ava
 } = s;
 
 
@@ -21,11 +22,23 @@ type ProfileInfoPropsType = {
     profile: ProfileResponseType | null
     status: null | string
     updateStatus: (newMess: string) => void
+    savePhoto: (newPhoto: File) => void
+    isOwner: boolean
 }
 
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    const {profile, status, updateStatus} = props;
+
+    const {profile, status, updateStatus, isOwner, savePhoto} = props;
+
+    const onMainPhotoSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
+        if (e.target.files?.length) {
+            savePhoto(e.target.files[0]);
+        }
+
+    }
+
+
     if (!profile) {
         return (<div>
             <div className={descriptionBlock}>
@@ -42,6 +55,9 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
                     <StatusWithHooks status={status} updateStatus={updateStatus}/>
+                    {isOwner && <div className={reInstall_ava}>
+                        <input type="file" onChange={onMainPhotoSelected}/>
+                    </div>}
                 </div>
                 {profile.contacts.facebook ||
                 profile.contacts.website ||

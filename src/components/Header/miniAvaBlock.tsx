@@ -25,7 +25,7 @@ export const MiniAvaBlock = (props: { fetching: boolean | undefined, photo: stri
 
 
     return <>
-        {props.fetching && !props.photo ?
+        {props.fetching ?
             <div onClick={isLogOut} className={autorize}>
                 <div className={loginBlock}>{props.login}</div>
                 {props.photo ? <img src={props.photo} alt="miniAva"/> : <img src={voidAva} alt="voidAva"/>}

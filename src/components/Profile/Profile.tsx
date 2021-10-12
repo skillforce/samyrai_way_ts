@@ -5,19 +5,18 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 import {ProfileType} from './ProfileContainer';
 
 
+
 export type PostDataType = {
     postData: PostType[]
 }
 
 
-const Profile = (props: ProfileType) => {
-
+const Profile = (props:ProfileType) => {
+    const {updateStatus, status, profile, isOwner,savePhoto} = props
     return (<div>
-        <ProfileInfo updateStatus={props.updateStatus} status={props.status} profile={props.profile}/>
+        <ProfileInfo savePhoto={savePhoto} isOwner={isOwner} updateStatus={updateStatus} status={status} profile={profile}/>
         <MyPostsContainer/>
     </div>)
-
-
 }
 
 export default Profile;

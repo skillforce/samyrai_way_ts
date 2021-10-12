@@ -1,5 +1,5 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
-import {ProfileType} from '../components/Profile/ProfileContainer';
+import {ProfilePhotosType, ProfileType} from '../components/Profile/ProfileContainer';
 import {Dispatch} from 'redux';
 import {profileAPI} from '../API/API';
 import {AppStateType} from './ReduxStore';
@@ -11,6 +11,7 @@ const AddPost = 'ProfilePageReducer/ADD-POST';
 const SetUsersProfileT = 'ProfilePageReducer/SET-USERS-PROFILE';
 const SetUsersStatusT = 'ProfilePageReducer/SET-USERS-STATUS';
 const DeletePost = 'ProfilePageReducer/DELETE-POST';
+const SavePhoto = 'ProfilePageReducer/SET-USER-NEW-PHOTO';
 
 
 export const addPost = (text: string) => ({type: 'ProfilePageReducer/ADD-POST' as const, text});
@@ -20,19 +21,21 @@ export const SetUsersProfile = (profile: ProfileType) => ({
     profile: profile
 });
 export const SetUsersStatus = (status: string) => ({type: 'ProfilePageReducer/SET-USERS-STATUS' as const, status});
+export const savePhotoSuccess = (photoFromServer: ProfilePhotosType) => ({type: 'ProfilePageReducer/SET-USER-NEW-PHOTO' as const, photoFromServer});
 
 
 export type addPostType = ReturnType<typeof addPost>
 export type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
 type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
 type DeletePostType = ReturnType<typeof deletePost>
+type savePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
 
 
 export type SetUsersForProfileType = typeof SetUsersProfile
 export type addPostTypeForMyPostContainer = typeof addPost
 
 
-export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType | DeletePostType;
+export type ProfilePageActionType = addPostType | SetUsersProfileType | SetUsersStatusType | DeletePostType|savePhotoSuccessType;
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
@@ -56,6 +59,16 @@ export const updateStatus = (newStatus: string) => {
     return async (dispatch: Dispatch<SetUsersStatusType>, getState: () => AppStateType) => {
         await profileAPI.updateStatus(newStatus)
         dispatch(SetUsersStatus(newStatus));
+    }
+}
+
+export const savePhoto = (photo: File) => {
+    return async (dispatch: Dispatch<ProfilePageActionType>, getState: () => AppStateType) => {
+        let response = await profileAPI.savePhoto(photo)
+        if(response.data.resultCode===0){
+           dispatch(savePhotoSuccess(response.data))
+        }
+
     }
 }
 
@@ -116,6 +129,8 @@ export const ProfilePageReducer = (state: InitialStateProfileType = InitialState
             return {...state, status: action.status}
         case DeletePost:
             return {...state, postData: state.postData.filter(t => t.id !== action.postId)}
+        // case SavePhoto:
+        //     return {...state,profile:{...state.profile,profile:{...state.profile?.profile,photos:action.photoFromServer}}}
         default:
             return state;
     }

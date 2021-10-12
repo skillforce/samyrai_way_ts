@@ -4,13 +4,12 @@ import {connect} from 'react-redux';
 import {
     getProfile, getStatus,
     InitialStateProfileType,
-    SetUsersProfile, updateStatus, SetUsersForProfileType
+    SetUsersProfile, updateStatus, SetUsersForProfileType, savePhoto
 } from '../../Redux/ProfilePage-reducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {AppStateType} from '../../Redux/ReduxStore';
 import {withAuthRedirect} from '../../HOC/withAuthRedirect';
 import {compose} from 'redux';
-
 
 
 type ProfileContactsType = {
@@ -24,7 +23,7 @@ type ProfileContactsType = {
     youtube: string | null
 }
 
-type ProfilePhotosType = {
+export type ProfilePhotosType = {
     small: string | null
     large: string | null
 }
@@ -50,6 +49,7 @@ type mapDispatchToPropsUsersType = {
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (newStatus: string) => void
+    savePhoto:(photo: File)=>void
 }
 
 
@@ -66,20 +66,28 @@ type PropsAPIContainerType = RouteComponentProps<UserIdType> & PropsContainerPro
 
 class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
-
-    componentDidMount() {
+    refreshProfile() {
         let usersId: number = +this.props.match.params.userId;
         if (!usersId) {
             usersId = +this.props.userIdLog;
         }
         this.props.getProfile(usersId);
         this.props.getStatus(usersId);
+    }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsAPIContainerType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId !==prevProps.match.params.userId  ) {
+            this.refreshProfile()
+        }
     }
 
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+        return <Profile {...this.props}  isOwner={!this.props.match.params.userId} profile={this.props.profile} status={this.props.status}
                         updateStatus={this.props.updateStatus}/>
     }
 }
@@ -89,12 +97,19 @@ export type ProfileType = {
     status: null | string
     updateStatus: (newMess: string) => void
     userIdLog: string
+    isOwner:boolean
+    savePhoto: (newPhoto: File) => void
+
 }
+
+
+
 type MapStateToPropsType = {
     profile: ProfileType | null
     status: string | null
     userIdLog: number | null
     isFetching: boolean
+
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -112,7 +127,8 @@ export default compose<React.ComponentType>(
         SetUsersProfile,
         getProfile,
         getStatus,
-        updateStatus
+        updateStatus,
+        savePhoto
     }),
     withRouter,
     withAuthRedirect

@@ -12,7 +12,7 @@
 }
 
 .avatar img {
-    width:250px;
+    width: 250px;
     height: 250px;
     border: 8px groove navajowhite;
     border-radius: 50%;
@@ -36,11 +36,11 @@
 .photoBlock {
     display: flex;
     flex-direction: column;
-    }
+}
 
-.fullNameUser{
+.fullNameUser {
     text-align: center;
-    margin:15px;
+    margin: 15px;
     font-weight: 300;
     font-size: 35px;
     font-family: "Berlin Sans FB";
@@ -49,9 +49,9 @@
 
 }
 
-.statusProfile{
+.statusProfile {
     text-align: center;
-    margin:5px;
+    margin: 5px;
     font-weight: 300;
     font-size: 20px;
     font-family: "Berlin Sans FB";
@@ -59,7 +59,7 @@
     text-shadow: black 5px 4px 5px;
 }
 
-.workSearchBlock{
+.workSearchBlock {
     height: 180px;
     margin: 120px 10px;
     display: inline-block;
@@ -68,7 +68,7 @@
     border-radius: 13px;
 }
 
-.searchWork{
+.searchWork {
     text-align: center;
     margin: 20px;
     font-weight: bold;
@@ -77,15 +77,27 @@
 }
 
 
-.searchWork input{
+.searchWork input {
     margin: 10px 0 0 0;
-    width:25px;
+    width: 25px;
     height: 25px;
 }
 
-.descrSearch{
+.descrSearch {
     text-align: center;
     font-size: 20px;
     font-family: "Californian FB";
+
+}
+
+.reInstall_ava {
+    border: 2px solid honeydew;
+    border-radius: 8px;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 5px 25px;
 
 }
