@@ -4,6 +4,9 @@ import Preloader from '../../Preloader/Preloader';
 import {ProfileResponseType} from '../ProfileContainer';
 import PresentProfile from './Experemental/PresentProfile';
 import EditProfile from './Experemental/EditProfile';
+import {FormDataType} from '../../Login/LoginForm';
+import {logInThunk} from '../../../Redux/loginPage-reducer';
+import ProfileEditReduxForm from './Experemental/EditProfile';
 
 
 const {
@@ -51,6 +54,12 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         SetIsProfileSetMode(newStatus)
     }
 
+
+    const onSubmit = (formData: FormDataType) => {
+        console.log(formData)
+        btnHandler(true)
+    }
+
     if (!profile) {
         return (<div>
             <div className={descriptionBlock}>
@@ -58,6 +67,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
         </div>)
     } else {
+
         return (
             <div>
                 {!isProfileSetMode ?
@@ -69,13 +79,15 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                                     onMainPhotoSelected={onMainPhotoSelected}
                                     btnHandler={btnHandler}/>
                     :
-                    <EditProfile profile={profile}
-                                 status={status}
-                                 updateStatus={updateStatus}
-                                 isOwner={isOwner}
-                                 initializedNewPhotoProfile={initializedNewPhotoProfile}
-                                 onMainPhotoSelected={onMainPhotoSelected}
-                                 btnHandler={btnHandler}/>}
+                    <ProfileEditReduxForm onSubmit={onSubmit}
+                                          profile={profile}
+                                          status={status}
+                                          updateStatus={updateStatus}
+                                          isOwner={isOwner}
+                                          initializedNewPhotoProfile={initializedNewPhotoProfile}
+                                          onMainPhotoSelected={onMainPhotoSelected}
+                                          btnHandler={btnHandler}
+                    />}
 
             </div>
 

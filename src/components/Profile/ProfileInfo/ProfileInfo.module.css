@@ -82,6 +82,15 @@
     border-radius: 13px;
 }
 
+.workSearchBlockEdit{
+    height: 240px;
+    margin: 120px 10px;
+    display: inline-block;
+    border: 3px groove white;
+    background-color: navajowhite;
+    border-radius: 13px;
+}
+
 .searchWork {
     text-align: center;
     margin: 20px;
