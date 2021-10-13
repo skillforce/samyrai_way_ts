@@ -4,7 +4,6 @@
     border-radius: 8px;
     margin: 5px;
 
-
 }
 
 .avatar {
@@ -31,6 +30,21 @@
     text-shadow: #7f7f7f 5px 5px 5px;
     font-family: "Yu Gothic Medium";
 
+}
+
+.contactsBlock_Edit{
+    margin: 10px;
+    padding: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: 3px groove white;
+    background-color: navajowhite;
+    border-radius: 13px;
+    text-shadow: #7f7f7f 5px 5px 5px;
+    font-family: "Yu Gothic Medium";
 }
 
 .photoBlock {

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {
     getProfile, getStatus,
     InitialStateProfileType,
-    SetUsersProfile, updateStatus, SetUsersForProfileType, savePhoto
+    SetUsersProfile, updateStatus, SetUsersForProfileType, savePhoto, SetIsProfileSetMode
 } from '../../Redux/ProfilePage-reducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {AppStateType} from '../../Redux/ReduxStore';
@@ -50,6 +50,7 @@ type mapDispatchToPropsUsersType = {
     getStatus: (userId: number) => void
     updateStatus: (newStatus: string) => void
     savePhoto:(photo: File)=>void
+    SetIsProfileSetMode:(newStatus: boolean) => void
 }
 
 
@@ -87,7 +88,7 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
 
     render() {
-        return <Profile {...this.props} initializedNewPhotoProfile={this.props.initializedNewPhotoProfile}  isOwner={isNaN(+this.props.match.params.userId)} profile={this.props.profile} status={this.props.status}
+        return <Profile {...this.props} SetIsProfileSetMode={this.props.SetIsProfileSetMode} isProfileSetMode={this.props.isProfileSetMode} initializedNewPhotoProfile={this.props.initializedNewPhotoProfile}  isOwner={isNaN(+this.props.match.params.userId)} profile={this.props.profile} status={this.props.status}
                         updateStatus={this.props.updateStatus}/>
     }
 }
@@ -100,6 +101,8 @@ export type ProfileType = {
     isOwner:boolean
     savePhoto: (newPhoto: File) => void
     initializedNewPhotoProfile:boolean
+    isProfileSetMode:boolean
+    SetIsProfileSetMode:(newStatus: boolean) => void
 }
 
 
@@ -110,6 +113,7 @@ type MapStateToPropsType = {
     userIdLog: number | null
     isFetching: boolean
     initializedNewPhotoProfile:boolean
+    isProfileSetMode:boolean
 
 }
 
@@ -119,7 +123,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         status: state.profilePage.status,
         userIdLog: state.Auth.id,
         isFetching: state.Auth.isFetching,
-        initializedNewPhotoProfile:state.profilePage.initializedNewPhotoProfile
+        initializedNewPhotoProfile:state.profilePage.initializedNewPhotoProfile,
+        isProfileSetMode:state.profilePage.isProfileSetMode
     }
 }
 
@@ -130,7 +135,8 @@ export default compose<React.ComponentType>(
         getProfile,
         getStatus,
         updateStatus,
-        savePhoto
+        savePhoto,
+        SetIsProfileSetMode
     }),
     withRouter,
     withAuthRedirect

@@ -14,6 +14,7 @@ const SetUsersStatusT = 'ProfilePageReducer/SET-USERS-STATUS';
 const DeletePost = 'ProfilePageReducer/DELETE-POST';
 const SavePhoto = 'ProfilePageReducer/SET-USER-NEW-PHOTO';
 const SetInitStatus = 'ProfilePageReducer/SET-INIT-STATUS-NEW-PHOTO';
+const SetProfileEditMode = 'ProfilePageReducer/SET-PROFILE-SET-MODE';
 
 
 export const addPost = (text: string) => ({type: 'ProfilePageReducer/ADD-POST' as const, text});
@@ -32,6 +33,11 @@ export const SetInitializedNewPhotoProfile = (newStatus: boolean) => ({
     newStatus
 });
 
+export const SetIsProfileSetMode = (newStatus: boolean) => ({
+    type: 'ProfilePageReducer/SET-PROFILE-SET-MODE' as const,
+    newStatus
+});
+
 
 export type addPostType = ReturnType<typeof addPost>
 export type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
@@ -39,6 +45,7 @@ type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
 type DeletePostType = ReturnType<typeof deletePost>
 type savePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
 type SetInitializedNewPhotoProfileType = ReturnType<typeof SetInitializedNewPhotoProfile>
+type SetIsProfileSetModeType = ReturnType<typeof SetIsProfileSetMode>
 
 
 export type SetUsersForProfileType = typeof SetUsersProfile
@@ -53,6 +60,7 @@ export type ProfilePageActionType =
     | savePhotoSuccessType
     | setUsersPhotoHeaderType
     | SetInitializedNewPhotoProfileType
+    | SetIsProfileSetModeType
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
@@ -81,7 +89,7 @@ export const updateStatus = (newStatus: string) => {
 
 export const savePhoto = (photo: File) => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: () => AppStateType) => {
-          dispatch(SetInitializedNewPhotoProfile(false))
+        dispatch(SetInitializedNewPhotoProfile(false))
         let response = await profileAPI.savePhoto(photo)
         if (response.data.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.data.photos))
@@ -121,7 +129,8 @@ let InitialState = {
     ] as PostType[],
     profile: null as ProfileResponseType | null,
     status: null as string | null,
-    initializedNewPhotoProfile: true
+    initializedNewPhotoProfile: true,
+    isProfileSetMode: false
 }
 
 export type InitialStateProfileType = typeof InitialState;
@@ -159,7 +168,9 @@ export const ProfilePageReducer = (state: InitialStateProfileType = InitialState
                 }
             }
         case SetInitStatus:
-            return {...state,initializedNewPhotoProfile: action.newStatus}
+            return {...state, initializedNewPhotoProfile: action.newStatus}
+            case SetProfileEditMode:
+            return {...state, isProfileSetMode: action.newStatus}
         default:
             return state;
     }
