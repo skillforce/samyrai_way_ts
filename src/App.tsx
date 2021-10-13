@@ -9,9 +9,9 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import {Login} from './components/Login/login';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import store, {AppStateType} from './Redux/ReduxStore';
-import Preloader from './components/Preloader/Preloader';
 import {getAuthMe} from './Redux/Auth-reducer';
 import {withSuspense} from './HOC/withSuspense';
+import Preloader from './components/Preloader/Preloader';
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));

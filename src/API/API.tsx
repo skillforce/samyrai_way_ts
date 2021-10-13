@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {UsersDataType} from '../Redux/UsersPage-reducer';
-import { ProfileResponseType, ProfileType} from '../components/Profile/ProfileContainer';
+import {ProfilePhotosType, ProfileResponseType, ProfileType} from '../components/Profile/ProfileContainer';
 
 const instanceUser = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -64,7 +64,7 @@ export const profileAPI = {
     savePhoto:(photo:File)=>{
         const formData = new FormData();
         formData.append('NewAva',photo)
-        return instanceUser.put('/profile/photo',formData,{
+        return instanceUser.put<AuthMeAPIType<{photos:ProfilePhotosType}>>('/profile/photo',formData,{
             headers:{
                 'Content-Type':'multipart/form-data'
             }

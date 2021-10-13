@@ -4,6 +4,8 @@ import Preloader from '../../Preloader/Preloader';
 import avatarBlock from '../../../img/avatarBlock.png';
 import {ProfileResponseType} from '../ProfileContainer';
 import {StatusWithHooks} from '../Status/StatusWithHooks';
+import NewAvaPreloader from '../../../img/NewAvaPreloader.gif'
+
 
 const {
     descriptionBlock,
@@ -14,7 +16,8 @@ const {
     workSearchBlock,
     searchWork,
     descrSearch,
-    reInstall_ava
+    reInstall_ava,
+    preloaderNewAva
 } = s;
 
 
@@ -24,18 +27,19 @@ type ProfileInfoPropsType = {
     updateStatus: (newMess: string) => void
     savePhoto: (newPhoto: File) => void
     isOwner: boolean
+    initializedNewPhotoProfile:boolean
 }
 
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
-    const {profile, status, updateStatus, isOwner, savePhoto} = props;
+    const {profile, status, updateStatus, isOwner, savePhoto,initializedNewPhotoProfile} = props;
 
     const onMainPhotoSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
         if (e.target.files?.length) {
             savePhoto(e.target.files[0]);
         }
-
+        e.target.value='';
     }
 
 
@@ -51,22 +55,22 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div className={photoBlock}>
                     <div className={fullNameUser}>{profile.fullName ? profile.fullName : 'noName noName'}</div>
                     <div className={avatar}>
-                        {profile.photos.large ? <img src={profile.photos.large} alt="avatarUser"/>
+                        {profile.photos?.large ? <img src={profile.photos.large} alt="avatarUser"/>
                             : <img src={avatarBlock} alt="avatarUserNone"/>}
                     </div>
                     <StatusWithHooks status={status} updateStatus={updateStatus}/>
-                    {isOwner && <div className={reInstall_ava}>
+                    {isOwner && initializedNewPhotoProfile? <form className={reInstall_ava}>
                         <input type="file" onChange={onMainPhotoSelected}/>
-                    </div>}
+                    </form>:<div className={preloaderNewAva}><img src={NewAvaPreloader}/></div>}
                 </div>
-                {profile.contacts.facebook ||
-                profile.contacts.website ||
-                profile.contacts.vk ||
-                profile.contacts.twitter ||
-                profile.contacts.instagram ||
-                profile.contacts.youtube ||
-                profile.contacts.github ||
-                profile.contacts.mainLink ? <div className={contactsBlock}>
+                {profile.contacts?.facebook ||
+                profile.contacts?.website ||
+                profile.contacts?.vk ||
+                profile.contacts?.twitter ||
+                profile.contacts?.instagram ||
+                profile.contacts?.youtube ||
+                profile.contacts?.github ||
+                profile.contacts?.mainLink ? <div className={contactsBlock}>
                     Contact information:
                     {profile.contacts.facebook ?
                         <div>Facebook: <a href={profile.contacts.facebook}>facebook</a></div> : ''}

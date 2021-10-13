@@ -25,7 +25,7 @@ export const setUsersHeader = (user: UserType, isFetching: boolean) => ({
 export const setUsersPhotoHeader = (photo: string | null) => ({type: 'Auth-reducer/SET_USERS_PHOTO' as const, photo});
 
 type SetUsersHeaderType = ReturnType<typeof setUsersHeader>
-type setUsersPhotoHeaderType = ReturnType<typeof setUsersPhotoHeader>
+export type setUsersPhotoHeaderType = ReturnType<typeof setUsersPhotoHeader>
 
 
 export const getAuthMe = (id: number | null = null):any => {

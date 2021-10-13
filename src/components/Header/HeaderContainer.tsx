@@ -26,6 +26,7 @@ class HeaderContainer extends React.Component<HeaderContainerClassType> {
     }
 
 
+
     render() {
         return (
             <Header photo={this.props.photo} id={this.props.id} login={this.props.login}

@@ -1,10 +1,11 @@
 import {PostType} from '../components/Profile/MyPosts/Post/Post';
-import {ProfilePhotosType, ProfileResponseType, ProfileType} from '../components/Profile/ProfileContainer';
+import {ProfileResponseType} from '../components/Profile/ProfileContainer';
 import {Dispatch} from 'redux';
 import {profileAPI} from '../API/API';
 import {AppStateType} from './ReduxStore';
 import {GetStateType} from './UsersPage-reducer';
 import {ThunkAction} from 'redux-thunk';
+import {setUsersPhotoHeader, setUsersPhotoHeaderType} from './Auth-reducer';
 
 
 const AddPost = 'ProfilePageReducer/ADD-POST';
@@ -12,6 +13,7 @@ const SetUsersProfileT = 'ProfilePageReducer/SET-USERS-PROFILE';
 const SetUsersStatusT = 'ProfilePageReducer/SET-USERS-STATUS';
 const DeletePost = 'ProfilePageReducer/DELETE-POST';
 const SavePhoto = 'ProfilePageReducer/SET-USER-NEW-PHOTO';
+const SetInitStatus = 'ProfilePageReducer/SET-INIT-STATUS-NEW-PHOTO';
 
 
 export const addPost = (text: string) => ({type: 'ProfilePageReducer/ADD-POST' as const, text});
@@ -21,9 +23,13 @@ export const SetUsersProfile = (profile: ProfileResponseType) => ({
     profile
 });
 export const SetUsersStatus = (status: string) => ({type: 'ProfilePageReducer/SET-USERS-STATUS' as const, status});
-export const savePhotoSuccess = (photoFromServer: ProfilePhotosType) => ({
+export const savePhotoSuccess = (photoFromServer: { small: string | null, large: string | null }) => ({
     type: 'ProfilePageReducer/SET-USER-NEW-PHOTO' as const,
     photoFromServer
+});
+export const SetInitializedNewPhotoProfile = (newStatus: boolean) => ({
+    type: 'ProfilePageReducer/SET-INIT-STATUS-NEW-PHOTO' as const,
+    newStatus
 });
 
 
@@ -32,6 +38,7 @@ export type SetUsersProfileType = ReturnType<typeof SetUsersProfile>
 type SetUsersStatusType = ReturnType<typeof SetUsersStatus>
 type DeletePostType = ReturnType<typeof deletePost>
 type savePhotoSuccessType = ReturnType<typeof savePhotoSuccess>
+type SetInitializedNewPhotoProfileType = ReturnType<typeof SetInitializedNewPhotoProfile>
 
 
 export type SetUsersForProfileType = typeof SetUsersProfile
@@ -43,7 +50,9 @@ export type ProfilePageActionType =
     | SetUsersProfileType
     | SetUsersStatusType
     | DeletePostType
-    | savePhotoSuccessType;
+    | savePhotoSuccessType
+    | setUsersPhotoHeaderType
+    | SetInitializedNewPhotoProfileType
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
@@ -72,9 +81,12 @@ export const updateStatus = (newStatus: string) => {
 
 export const savePhoto = (photo: File) => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: () => AppStateType) => {
+          dispatch(SetInitializedNewPhotoProfile(false))
         let response = await profileAPI.savePhoto(photo)
         if (response.data.resultCode === 0) {
-            dispatch(savePhotoSuccess(response.data.photos))
+            dispatch(savePhotoSuccess(response.data.data.photos))
+            dispatch(setUsersPhotoHeader(response.data.data.photos.small))
+            dispatch(SetInitializedNewPhotoProfile(true))
         }
 
     }
@@ -108,7 +120,8 @@ let InitialState = {
         }
     ] as PostType[],
     profile: null as ProfileResponseType | null,
-    status: null as string | null
+    status: null as string | null,
+    initializedNewPhotoProfile: true
 }
 
 export type InitialStateProfileType = typeof InitialState;
@@ -138,12 +151,15 @@ export const ProfilePageReducer = (state: InitialStateProfileType = InitialState
         case DeletePost:
             return {...state, postData: state.postData.filter(t => t.id !== action.postId)}
         case SavePhoto:
-            return {...state,
+            return {
+                ...state,
                 profile: {
                     ...state.profile,
-                    photos: {...state.profile?.photos, large: action.photoFromServer.large, small: action.photoFromServer.small}
+                    photos: action.photoFromServer
                 }
             }
+        case SetInitStatus:
+            return {...state,initializedNewPhotoProfile: action.newStatus}
         default:
             return state;
     }

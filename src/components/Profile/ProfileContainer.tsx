@@ -30,12 +30,12 @@ export type ProfilePhotosType = {
 
 
 export type ProfileResponseType = {
-    aboutMe: string
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string | null
-    fullName: string
-    contacts: ProfileContactsType
+    aboutMe?: string
+    userId?: number
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string | null
+    fullName?: string
+    contacts?: ProfileContactsType
     photos: ProfilePhotosType
 }
 
@@ -87,7 +87,7 @@ class ProfileContainerAPI extends React.Component<PropsAPIContainerType> {
 
 
     render() {
-        return <Profile {...this.props}  isOwner={!this.props.match.params.userId} profile={this.props.profile} status={this.props.status}
+        return <Profile {...this.props} initializedNewPhotoProfile={this.props.initializedNewPhotoProfile}  isOwner={isNaN(+this.props.match.params.userId)} profile={this.props.profile} status={this.props.status}
                         updateStatus={this.props.updateStatus}/>
     }
 }
@@ -99,7 +99,7 @@ export type ProfileType = {
     userIdLog: string
     isOwner:boolean
     savePhoto: (newPhoto: File) => void
-
+    initializedNewPhotoProfile:boolean
 }
 
 
@@ -109,6 +109,7 @@ type MapStateToPropsType = {
     status: string | null
     userIdLog: number | null
     isFetching: boolean
+    initializedNewPhotoProfile:boolean
 
 }
 
@@ -117,7 +118,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         userIdLog: state.Auth.id,
-        isFetching: state.Auth.isFetching
+        isFetching: state.Auth.isFetching,
+        initializedNewPhotoProfile:state.profilePage.initializedNewPhotoProfile
     }
 }
 
