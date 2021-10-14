@@ -12,9 +12,9 @@ export type PostDataType = {
 
 
 const Profile = (props:ProfileType) => {
-    const {updateStatus, status, profile, isOwner,savePhoto,initializedNewPhotoProfile,isProfileSetMode,SetIsProfileSetMode} = props
+    const {updateStatus, status, profile, isOwner,savePhoto,initializedNewPhotoProfile,isProfileSetMode,SetIsProfileSetMode,saveProfile} = props
     return (<div>
-        <ProfileInfo SetIsProfileSetMode={SetIsProfileSetMode} isProfileSetMode={isProfileSetMode} initializedNewPhotoProfile={initializedNewPhotoProfile} savePhoto={savePhoto} isOwner={isOwner} updateStatus={updateStatus} status={status} profile={profile}/>
+        <ProfileInfo saveProfile={saveProfile} SetIsProfileSetMode={SetIsProfileSetMode} isProfileSetMode={isProfileSetMode} initializedNewPhotoProfile={initializedNewPhotoProfile} savePhoto={savePhoto} isOwner={isOwner} updateStatus={updateStatus} status={status} profile={profile}/>
         <MyPostsContainer/>
     </div>)
 }

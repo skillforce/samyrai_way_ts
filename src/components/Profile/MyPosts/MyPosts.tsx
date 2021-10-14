@@ -7,7 +7,6 @@ import ReduxMyPostForm, {NewPostMsgType} from './ReduxMyPostForm';
 const {postsBlock, posts} = s;
 
 const MyPosts = React.memo((props: MyPostPropsType) => {
-    console.log('you')
 
     const {postData, addPost} = props;
 

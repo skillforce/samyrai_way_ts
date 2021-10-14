@@ -19,8 +19,11 @@ const {
     preloaderNewAva,
     contactsBlock_Edit,
     searchWork,
-    descrSearch
+    descrSearch,
+    form_summary_error
 } = s;
+
+
 
 
 const EditProfile = (props: any) => {
@@ -32,7 +35,7 @@ const EditProfile = (props: any) => {
         isOwner,
         initializedNewPhotoProfile,
         onMainPhotoSelected,
-        btnHandler,
+        error,
     } = props;
 
 
@@ -53,14 +56,17 @@ const EditProfile = (props: any) => {
             <div className={contactsBlock_Edit}>
                 Contact information:
                 <button>Save</button>
-                <div>Facebook:{createField('facebook', InputValid, {type: 'text'}, profile.contacts.facebook, [requiredField, maxLength30])}</div>
-                <div>Web-site : {createField('website', InputValid, {type: 'text'}, profile.contacts.website, [requiredField, maxLength30])}</div>
-                <div>VK: {createField('vk', InputValid, {type: 'text'}, profile.contacts.vk, [requiredField, maxLength30])}</div>
-                <div>Twitter : {createField('twitter', InputValid, {type: 'text'}, profile.contacts.twitter, [requiredField, maxLength30])}</div>
-                <div>Instagram : {createField('instagram', InputValid, {type: 'text'}, profile.contacts.instagram, [requiredField, maxLength30])}</div>
-                <div>YouTube : {createField('youtube', InputValid, {type: 'text'}, profile.contacts.youtube, [requiredField, maxLength30])}</div>
-                <div>GitHub : {createField('github', InputValid, {type: 'text'}, profile.contacts.github, [requiredField, maxLength30])}</div>
-                <div>MainLink : {createField('mainLink', InputValid, {type: 'text'}, profile.contacts.mainLink, [requiredField, maxLength30])}</div>
+                {error ? <div className={form_summary_error}>
+                    {error}
+                </div> : ''}
+                <div>Facebook:{createField('contacts.facebook', InputValid, {type: 'text'}, profile.contacts.facebook, [requiredField, maxLength30])}</div>
+                <div>Web-site : {createField('contacts.website', InputValid, {type: 'text'}, profile.contacts.website, [requiredField, maxLength30])}</div>
+                <div>VK: {createField('contacts.vk', InputValid, {type: 'text'}, profile.contacts.vk, [requiredField, maxLength30])}</div>
+                <div>Twitter : {createField('contacts.twitter', InputValid, {type: 'text'}, profile.contacts.twitter, [requiredField, maxLength30])}</div>
+                <div>Instagram : {createField('contacts.instagram', InputValid, {type: 'text'}, profile.contacts.instagram, [requiredField, maxLength30])}</div>
+                <div>YouTube : {createField('contacts.youtube', InputValid, {type: 'text'}, profile.contacts.youtube, [requiredField, maxLength30])}</div>
+                <div>GitHub : {createField('contacts.github', InputValid, {type: 'text'}, profile.contacts.github, [requiredField, maxLength30])}</div>
+                <div>MainLink : {createField('contacts.mainLink', InputValid, {type: 'text'}, profile.contacts.mainLink, [requiredField, maxLength30])}</div>
             </div>
             <div className={workSearchBlockEdit}>
                 <div className={searchWork}>Do you search a work?:{createField('lookingForAJob', 'input', {type: 'checkbox'}, null, null)}</div>

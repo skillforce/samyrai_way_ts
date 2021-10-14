@@ -6,6 +6,8 @@ import {AppStateType} from './ReduxStore';
 import {GetStateType} from './UsersPage-reducer';
 import {ThunkAction} from 'redux-thunk';
 import {setUsersPhotoHeader, setUsersPhotoHeaderType} from './Auth-reducer';
+import {stopSubmit} from 'redux-form';
+import Profile from '../components/Profile/Profile';
 
 
 const AddPost = 'ProfilePageReducer/ADD-POST';
@@ -15,6 +17,7 @@ const DeletePost = 'ProfilePageReducer/DELETE-POST';
 const SavePhoto = 'ProfilePageReducer/SET-USER-NEW-PHOTO';
 const SetInitStatus = 'ProfilePageReducer/SET-INIT-STATUS-NEW-PHOTO';
 const SetProfileEditMode = 'ProfilePageReducer/SET-PROFILE-SET-MODE';
+
 
 
 export const addPost = (text: string) => ({type: 'ProfilePageReducer/ADD-POST' as const, text});
@@ -36,7 +39,7 @@ export const SetInitializedNewPhotoProfile = (newStatus: boolean) => ({
 export const SetIsProfileSetMode = (newStatus: boolean) => ({
     type: 'ProfilePageReducer/SET-PROFILE-SET-MODE' as const,
     newStatus
-});
+})
 
 
 export type addPostType = ReturnType<typeof addPost>
@@ -48,8 +51,28 @@ type SetInitializedNewPhotoProfileType = ReturnType<typeof SetInitializedNewPhot
 type SetIsProfileSetModeType = ReturnType<typeof SetIsProfileSetMode>
 
 
+
 export type SetUsersForProfileType = typeof SetUsersProfile
 export type addPostTypeForMyPostContainer = typeof addPost
+
+type ContactsType = {
+    facebook: string,
+    github: string,
+    instagram: string
+    mainLink: string
+    twitter: string
+    vk: string
+    website: string
+    youtube: string
+}
+
+export type TrueFormDataProfileType = { //with aboutMe property
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    AboutMe: string
+    contacts: ContactsType
+}
 
 
 export type ProfilePageActionType =
@@ -61,6 +84,7 @@ export type ProfilePageActionType =
     | setUsersPhotoHeaderType
     | SetInitializedNewPhotoProfileType
     | SetIsProfileSetModeType
+
 
 export const getProfile = (userId: number): ThunkAction<void, AppStateType, unknown, ProfilePageActionType> => {
     return async (dispatch: Dispatch<ProfilePageActionType>, getState: GetStateType) => {
@@ -88,7 +112,7 @@ export const updateStatus = (newStatus: string) => {
 }
 
 export const savePhoto = (photo: File) => {
-    return async (dispatch: Dispatch<ProfilePageActionType>, getState: () => AppStateType) => {
+    return async (dispatch: Dispatch<ProfilePageActionType >, getState: () => AppStateType) => {
         dispatch(SetInitializedNewPhotoProfile(false))
         let response = await profileAPI.savePhoto(photo)
         if (response.data.resultCode === 0) {
@@ -96,6 +120,50 @@ export const savePhoto = (photo: File) => {
             dispatch(setUsersPhotoHeader(response.data.data.photos.small))
             dispatch(SetInitializedNewPhotoProfile(true))
         }
+
+    }
+}
+export const saveProfile = (profile: TrueFormDataProfileType) => {
+    return async (dispatch: Dispatch<ProfilePageActionType & any>, getState: () => AppStateType) => {
+        let response = await profileAPI.saveProfile(profile)
+        if (response.data.resultCode === 0) {
+            const userId=getState().Auth.id
+            if(userId!==null) {
+                dispatch(getProfile(userId))
+            }
+         } else {
+            const fieldWithError = response.data.messages[0]? response.data.messages[0].slice(30,-1).toLowerCase():null
+
+             switch (fieldWithError){
+                 case 'facebook':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'facebook':  'incorrect input in facebook-field'} }))
+                     return Promise.reject()
+                 case 'vk':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'vk':  'incorrect input in vk-field'} }))
+                     return Promise.reject()
+                 case 'twitter':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'twitter':  'incorrect input in twitter-field'} }))
+                     return Promise.reject()
+                 case 'website':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'website':  'incorrect input in website-field'} }))
+                     return Promise.reject()
+                 case 'youtube':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'youtube':  'incorrect input in youtube-field'} }))
+                     return Promise.reject()
+                 case 'github':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'github':  'incorrect input in github-field'} }))
+                     return Promise.reject()
+                 case 'mainLink':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'mainLink':  'incorrect input in mainLink-field'} }))
+                     return Promise.reject()
+                 case 'instagram':
+                       dispatch(stopSubmit('edit_profile', {'contacts':{'instagram':  'incorrect input in instagram-field'} }))
+                     return Promise.reject()
+                 default :
+                     return  dispatch(stopSubmit('edit_profile', {_error: response.data.messages[0]}))
+             }
+
+    }
 
     }
 }
@@ -169,11 +237,12 @@ export const ProfilePageReducer = (state: InitialStateProfileType = InitialState
             }
         case SetInitStatus:
             return {...state, initializedNewPhotoProfile: action.newStatus}
-            case SetProfileEditMode:
+        case SetProfileEditMode:
             return {...state, isProfileSetMode: action.newStatus}
         default:
             return state;
     }
 }
+
 
 export default ProfilePageReducer;

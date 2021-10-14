@@ -3,17 +3,12 @@ import s from './ProfileInfo.module.css';
 import Preloader from '../../Preloader/Preloader';
 import {ProfileResponseType} from '../ProfileContainer';
 import PresentProfile from './Experemental/PresentProfile';
-import EditProfile from './Experemental/EditProfile';
-import {FormDataType} from '../../Login/LoginForm';
-import {logInThunk} from '../../../Redux/loginPage-reducer';
 import ProfileEditReduxForm from './Experemental/EditProfile';
+import {TrueFormDataProfileType} from '../../../Redux/ProfilePage-reducer';
 
 
 const {
     descriptionBlock,
-    workSearchBlock,
-    searchWork,
-    descrSearch,
 } = s;
 
 
@@ -26,6 +21,7 @@ type ProfileInfoPropsType = {
     initializedNewPhotoProfile: boolean
     isProfileSetMode: boolean
     SetIsProfileSetMode: (newStatus: boolean) => void
+    saveProfile: (profile: TrueFormDataProfileType) => any // if unCorrect input saveProfile returned Promise.reject
 }
 
 
@@ -39,7 +35,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         savePhoto,
         initializedNewPhotoProfile,
         isProfileSetMode,
-        SetIsProfileSetMode
+        SetIsProfileSetMode,
+        saveProfile
     } = props;
 
     const onMainPhotoSelected: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -55,9 +52,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
 
-    const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
-        btnHandler(true)
+    const onSubmit = (formData: TrueFormDataProfileType) => {
+        saveProfile(formData).then(() => btnHandler(false))
     }
 
     if (!profile) {
@@ -79,7 +75,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                                     onMainPhotoSelected={onMainPhotoSelected}
                                     btnHandler={btnHandler}/>
                     :
-                    <ProfileEditReduxForm onSubmit={onSubmit}
+                    <ProfileEditReduxForm initialValues={profile}
+                                          onSubmit={onSubmit}
                                           profile={profile}
                                           status={status}
                                           updateStatus={updateStatus}

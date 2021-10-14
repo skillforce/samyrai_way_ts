@@ -34,7 +34,7 @@ export const getAuthMe = (id: number | null = null):any => {
         if (resAuthMe.resultCode === 0) {
             dispatch(setUsersHeader(resAuthMe.data, true));
             let resGetPhoto = await usersAPI.getPhoto(id);
-            dispatch(setUsersPhotoHeader(resGetPhoto.photos.small));
+            dispatch(setUsersPhotoHeader(resGetPhoto.photos!.small));
             dispatch(isInitializedAC(true))
         } else {
             dispatch(setUsersHeader({
