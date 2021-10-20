@@ -9,10 +9,7 @@ import thunkMiddleWare from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import loginPageReducer from './loginPage-reducer';
 import AppReducer from './App-reducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-
-
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 
 let rootReducer = combineReducers({
@@ -23,8 +20,8 @@ let rootReducer = combineReducers({
     UsersPage: UserPageReducer,
     Auth: AuthReducer,
     form: formReducer,
-    loginPage:loginPageReducer,
-    AppPage:AppReducer
+    loginPage: loginPageReducer,
+    AppPage: AppReducer
 });
 
 

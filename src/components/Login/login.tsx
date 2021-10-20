@@ -16,6 +16,7 @@ const {loginPage, loginImg1, loginImg2, loginImg3, loginImg4} = s;
 export const Login = () => {
 
     const userId = useSelector<AppStateType, null | number>(state => state.Auth.id)
+
     const dispatch = useDispatch();
 
 

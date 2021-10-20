@@ -7,7 +7,7 @@ import {TrueFormDataProfileType} from '../Redux/ProfilePage-reducer';
 const instanceUser = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
-    headers: {'API-KEY': '34b03fd8-87c3-4bad-b887-a316051adfc3'}
+    headers: {'API-KEY': '7362c714-faca-43a0-aa83-e9f720b339a1'}
 })
 
 type GetUsersAPIType = {
@@ -74,6 +74,13 @@ export const profileAPI = {
     },
     saveProfile: (profile: TrueFormDataProfileType) => {
         return instanceUser.put<AuthMeAPIType<{ photos: ProfilePhotosType }>>('/profile', profile)
+    }
+}
+
+
+export const securityAPI = {
+    getCaptchaUrl(){
+        return instanceUser.get('security/get-captcha-url')
     }
 }
 
