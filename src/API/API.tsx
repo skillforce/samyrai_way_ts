@@ -7,7 +7,7 @@ import {TrueFormDataProfileType} from '../Redux/ProfilePage-reducer';
 const instanceUser = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
-    headers: {'API-KEY': '7362c714-faca-43a0-aa83-e9f720b339a1'}
+    headers: {'API-KEY': '7951e440-30ed-406d-a910-3ae4f159b3e0'}
 })
 
 type GetUsersAPIType = {

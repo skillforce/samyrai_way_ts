@@ -1,9 +1,9 @@
 import './App.css';
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom'
+import { HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import React, {useEffect, Suspense} from 'react';
+import React, {useEffect} from 'react';
 import NavBarContainer from './components/Navbar/NavBarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import {Login} from './components/Login/login';
@@ -12,6 +12,7 @@ import store, {AppStateType} from './Redux/ReduxStore';
 import {getAuthMe} from './Redux/Auth-reducer';
 import {withSuspense} from './HOC/withSuspense';
 import Preloader from './components/Preloader/Preloader';
+import Error404 from './components/common/Error404/Error404';
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -44,9 +45,11 @@ const App: React.FC = () => {
         <div className="app-wrapper">
             <HeaderContainer/>
             <NavBarContainer/>
+            <div className={'app-wrapper-content'}>
             <Switch>
-                <div className={'app-wrapper-content'}>
-                    <Route render={() => <Redirect to={'/login'}/>}/>
+
+
+                    <Route exact path={'/'} render={()=><Redirect to={'/profile'}/>}/>
                     <Route path={'/profile/:userId?'} render={withSuspense(ProfileContainer)}/>
                     <Route path={'/dialogs'} render={withSuspense(DialogsContainer)}/>
                     <Route path={'/users'} render={withSuspense(ContainerUsersClass)}/>
@@ -54,8 +57,12 @@ const App: React.FC = () => {
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
                     <Route path={'/login'} render={() => <Login/>}/>
-                </div>
+
+                    <Route path={'*'}  render={() => <Error404/>}/>
+
+
             </Switch>
+            </div>
         </div>
     );
 }

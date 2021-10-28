@@ -4,7 +4,7 @@ import {ProfileType} from '../components/Profile/ProfileContainer';
 
 
 test('length of post data(initial state) should be incremented',()=>{
-    // 1.test data
+    // 1.tablet-cards data
     let action = addPost('some text')
     let InitialState = {
         postData: [
@@ -42,7 +42,7 @@ test('length of post data(initial state) should be incremented',()=>{
 })
 
 test('length of post data(initial state) should be decrease',()=>{
-    // 1.test data
+    // 1.tablet-cards data
     let action = deletePost(1)
     let InitialState = {
         postData: [
@@ -81,7 +81,7 @@ test('length of post data(initial state) should be decrease',()=>{
 })
 
 test('after deleting length of postData shouldn\'t be decrement',()=>{
-    // 1.test data
+    // 1.tablet-cards data
     let action = deletePost(7)
     let InitialState = {
         postData: [

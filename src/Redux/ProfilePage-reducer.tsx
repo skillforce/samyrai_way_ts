@@ -106,8 +106,16 @@ export const getStatus = (userId: number) => {
 
 export const updateStatus = (newStatus: string) => {
     return async (dispatch: Dispatch<SetUsersStatusType>, getState: () => AppStateType) => {
-        await profileAPI.updateStatus(newStatus)
-        dispatch(SetUsersStatus(newStatus));
+        try {
+            let response = await profileAPI.updateStatus(newStatus)
+            if (response.resultCode === 0) {
+                dispatch(SetUsersStatus(newStatus));
+            }if (response.resultCode === 1) {
+               alert(response.messages[0])
+            }
+        }catch(error){
+            alert(error) //error сервер не возвращает(такая АПИшка)
+        }
     }
 }
 
