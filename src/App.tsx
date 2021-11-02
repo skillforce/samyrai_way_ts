@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -73,10 +73,10 @@ export default App;
 
 export const SamuraiJSApp: React.FC = () => {
 
-    return (<HashRouter>
+    return (<BrowserRouter>
             <Provider store={store}>
                 <App/>
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     )
 }
