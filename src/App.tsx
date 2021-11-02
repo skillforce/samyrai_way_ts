@@ -71,7 +71,7 @@ const App: React.FC = () => {
 export default App;
 
 
-export const SamuraiJSApp: React.FC = () => {
+export const SamuraiJSApp:React.FC = () => {
 
     return (<HashRouter>
             <Provider store={store}>
