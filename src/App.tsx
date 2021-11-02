@@ -78,5 +78,5 @@ export const SamuraiJSApp:React.FC = () => {
                 <App/>
             </Provider>
         </HashRouter>
-    )
+           )
 }
