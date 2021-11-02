@@ -68,7 +68,7 @@ const App: React.FC = () => {
 }
 
 
-export default App;
+export default App ;
 
 
 export const SamuraiJSApp:React.FC = () => {
