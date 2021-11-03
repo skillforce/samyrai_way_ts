@@ -29,7 +29,7 @@ const App: React.FC = () => {
         dispatch(getAuthMe(userId))
     }, [userId])
 
-
+//=+=
     if (!initialized) {
         return (<div className="app-wrapper">
             <HeaderContainer/>
